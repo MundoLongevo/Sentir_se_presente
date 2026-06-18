@@ -758,7 +758,7 @@
 
       <div style="font-weight:600; margin-bottom:12px;" id="fqSelectedDate">Hoje</div>
 
-      <!-- Grid dos 12 verbos -->
+      <!-- Grid dos 12 verbos (com perguntas corrigidas) -->
       <div class="fq-grid" id="fqGrid"></div>
 
       <button class="btn-primary" id="saveFqBtn" style="margin-top:16px;">Salvar Diário de Hoje</button>
@@ -945,7 +945,7 @@
 
 <script>
 // =====================================================================
-// DIÁRIO FQ10C – APLICAÇÃO COMPLETA (12 VERBOS)
+// DIÁRIO FQ10C – APLICAÇÃO COMPLETA (12 VERBOS COM PERGUNTAS CORRIGIDAS)
 // =====================================================================
 
 const STORAGE_KEY = 'fq10c_v1';
@@ -966,21 +966,21 @@ let appState = {
 };
 
 // =====================================================================
-// 12 VERBOS DO FQ10C (agora completos)
+// 12 VERBOS DO FQ10C
 // =====================================================================
 const FQ_VERBS = [
-  { key: "fazer", label: "FAZER", icon: "🔨" },
-  { key: "querer", label: "QUERER", icon: "💭" },
-  { key: "compartilhar", label: "COMPARTILHAR", icon: "🤝" },
-  { key: "curtir", label: "CURTIR", icon: "😊" },
-  { key: "comparecer", label: "COMPARECER", icon: "🚶" },
-  { key: "conversar", label: "CONVERSAR", icon: "🗣️" },
-  { key: "cuidar", label: "CUIDAR", icon: "🌱" },
-  { key: "conhecer", label: "CONHECER", icon: "🔍" },
-  { key: "criar", label: "CRIAR", icon: "🎨" },
-  { key: "conviver", label: "CONVIVER", icon: "👥" },
-  { key: "contemplar", label: "CONTEMPLAR", icon: "🌅" },
-  { key: "celebrar", label: "CELEBRAR", icon: "🎉" }
+  { key: "fazer", label: "FAZER", icon: "🔨", pergunta: "O que você vai fazer hoje?" },
+  { key: "querer", label: "QUERER", icon: "💭", pergunta: "O que você vai querer hoje?" },
+  { key: "compartilhar", label: "COMPARTILHAR", icon: "🤝", pergunta: "O que você vai compartilhar hoje?" },
+  { key: "curtir", label: "CURTIR", icon: "😊", pergunta: "O que você vai curtir hoje?" },
+  { key: "comparecer", label: "COMPARECER", icon: "🚶", pergunta: "Onde você vai comparecer hoje?" },
+  { key: "conversar", label: "CONVERSAR", icon: "🗣️", pergunta: "Com quem você vai conversar hoje?" },
+  { key: "cuidar", label: "CUIDAR", icon: "🌱", pergunta: "Do que ou de quem você vai cuidar hoje?" },
+  { key: "conhecer", label: "CONHECER", icon: "🔍", pergunta: "O que você vai conhecer hoje?" },
+  { key: "criar", label: "CRIAR", icon: "🎨", pergunta: "O que você vai criar hoje?" },
+  { key: "conviver", label: "CONVIVER", icon: "👥", pergunta: "Com quem você vai conviver hoje?" },
+  { key: "contemplar", label: "CONTEMPLAR", icon: "🌅", pergunta: "O que você vai contemplar hoje?" },
+  { key: "celebrar", label: "CELEBRAR", icon: "🎉", pergunta: "O que você vai celebrar hoje?" }
 ];
 
 // =====================================================================
@@ -1285,7 +1285,7 @@ function renderFqDiary() {
   container.innerHTML = FQ_VERBS.map(v => `
     <div class="fq-item">
       <label>${v.icon} ${v.label}</label>
-      <textarea rows="2" data-key="${v.key}" placeholder="O que você ${v.label.toLowerCase()} hoje...">${todayData[v.key] || ''}</textarea>
+      <textarea rows="2" data-key="${v.key}" placeholder="${v.pergunta}">${todayData[v.key] || ''}</textarea>
     </div>
   `).join('');
 }
