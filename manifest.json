@@ -1,15 +1,11 @@
 {
-  "name": "Diário FQ10C – Presença",
-  "short_name": "LongeViver",
-  "description": "12 verbos para ancorar o agora. Diário de presença e mindfulness.",
+  "name": "Diário FQ10C",
+  "short_name": "FQ10C",
+  "description": "Diário da Presença - Mentoria 70+ ANABB",
   "start_url": "./index.html",
-  "scope": "./",
   "display": "standalone",
-  "orientation": "portrait",
-  "background_color": "#8B0000",
-  "theme_color": "#DC143C",
-  "lang": "pt-BR",
-  "categories": ["health", "lifestyle", "productivity"],
+  "background_color": "#f4f6f9",
+  "theme_color": "#2c3e50",
   "icons": [
     {
       "src": "icon-192.png",
@@ -22,18 +18,6 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
-    },
-    {
-      "src": "icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
     }
   ]
 }
