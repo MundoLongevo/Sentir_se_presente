@@ -1,1856 +1,409 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=yes" />
-  <meta name="theme-color" content="#2c3e50" />
-  <meta name="description" content="Diário FQ10C - Mentoria Sentir-Se Presente - Projeto 70+ ANABB" />
-  <meta name="author" content="Ricardo de Faria Barros - Psicólogo" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Diário FQ10C" />
-  <link rel="manifest" href="./manifest.webmanifest" />
-  
-  <!-- ÍCONE PNG (substitua pelo seu) -->
-  <link rel="apple-touch-icon" href="icon.png" />
-  <link rel="icon" type="image/png" href="icon.png" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diário FQ10C – Presença</title>
 
-  <title>Diário FQ10C – Presença</title>
-  <style>
-    /* ===== RESET & BASE ===== */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: #f4f6f9;
-      color: #1e2a3a;
-      padding: 0 0 80px 0;
-      min-height: 100vh;
-      font-size: 18px;
-      line-height: 1.5;
-    }
-    button, input, textarea, select {
-      font-size: 18px;
-      font-family: inherit;
-    }
-    .container { max-width: 600px; margin: 0 auto; padding: 16px; }
-    .hidden { display: none !important; }
+<!-- PWA - LongeViver -->
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#DC143C">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="LongeViver">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png">
 
-    /* ===== BANNER ===== */
-    .banner {
-      background: linear-gradient(145deg, #2c3e50, #1a252f);
-      color: #fff;
-      padding: 24px 20px;
-      border-radius: 24px;
-      margin-bottom: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      text-align: center;
-    }
-    .banner h1 {
-      font-size: 32px;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-    .banner h1 span { color: #f1c40f; }
-    .banner .subtitle {
-      margin-top: 6px;
-      font-size: 18px;
-      font-weight: 300;
-    }
-    .banner p {
-      margin-top: 8px;
-      font-size: 16px;
-      opacity: 0.9;
-    }
-    .banner .tag {
-      display: inline-block;
-      background: #f1c40f;
-      color: #1a252f;
-      padding: 4px 16px;
-      border-radius: 30px;
-      font-weight: 600;
-      font-size: 14px;
-      margin-top: 8px;
-    }
-    .banner .privacy-note {
-      margin-top: 10px;
-      font-size: 13px;
-      opacity: 0.8;
-      border-top: 1px solid rgba(255,255,255,0.15);
-      padding-top: 10px;
-    }
-    .banner .privacy-note strong { color: #f1c40f; }
-    .banner .author-credit {
-      margin-top: 12px;
-      font-size: 14px;
-      opacity: 0.8;
-      border-top: 1px solid rgba(255,255,255,0.2);
-      padding-top: 10px;
-    }
-    .banner .author-credit a {
-      color: #f1c40f;
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    /* ===== MODAIS DE LOGIN/PIN ===== */
-    .modal-overlay {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      padding: 20px;
-    }
-    .modal-box {
-      background: white;
-      border-radius: 32px;
-      padding: 32px 24px;
-      max-width: 400px;
-      width: 100%;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    }
-    .modal-box h2 {
-      font-size: 24px;
-      margin-bottom: 8px;
-      color: #2c3e50;
-      text-align: center;
-    }
-    .modal-box .sub {
-      text-align: center;
-      color: #5d6d7e;
-      font-size: 15px;
-      margin-bottom: 24px;
-    }
-    .modal-box input[type="text"],
-    .modal-box input[type="password"] {
-      width: 100%;
-      padding: 14px;
-      border: 2px solid #dfe6e9;
-      border-radius: 16px;
-      font-size: 18px;
-      margin-bottom: 16px;
-    }
-    .modal-box input:focus { border-color: #2c3e50; outline: none; }
-    .pin-group {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
-    .pin-group input {
-      width: 56px;
-      height: 64px;
-      text-align: center;
-      font-size: 28px;
-      font-weight: 700;
-      border: 2px solid #dfe6e9;
-      border-radius: 16px;
-      background: #f8f9fa;
-      letter-spacing: 4px;
-    }
-    .pin-group input:focus { border-color: #2c3e50; background: white; }
-    .btn-modal {
-      width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 40px;
-      font-weight: 700;
-      font-size: 18px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    .btn-modal.primary { background: #2c3e50; color: white; }
-    .btn-modal.primary:active { transform: scale(0.97); background: #1a252f; }
-    .btn-modal.secondary { background: transparent; color: #2c3e50; border: 2px solid #dfe6e9; margin-top: 10px; }
-    .btn-modal.danger { background: #e74c3c; color: white; margin-top: 10px; }
-    .modal-box .error-msg {
-      color: #e74c3c;
-      font-size: 14px;
-      text-align: center;
-      margin-top: 8px;
-      min-height: 24px;
-    }
-    .modal-box .hint {
-      font-size: 13px;
-      color: #95a5a6;
-      text-align: center;
-      margin-top: 12px;
-    }
-
-    /* ===== HEADER ===== */
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: white;
-      padding: 12px 16px;
-      border-radius: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-      margin-bottom: 20px;
-    }
-    .user-name { font-weight: 600; color: #2c3e50; }
-    .btn-logout {
-      background: #e74c3c;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 30px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    /* ===== NAVEGAÇÃO (TABS) ===== */
-    .tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      background: white;
-      padding: 10px 8px;
-      border-radius: 24px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-      margin-bottom: 20px;
-    }
-    .tab-btn {
-      flex: 1 0 auto;
-      padding: 10px 12px;
-      border: none;
-      background: transparent;
-      border-radius: 40px;
-      font-weight: 600;
-      font-size: 15px;
-      color: #5d6d7e;
-      cursor: pointer;
-      transition: all 0.2s;
-      white-space: nowrap;
-      min-width: 50px;
-    }
-    .tab-btn.active {
-      background: #2c3e50;
-      color: white;
-      box-shadow: 0 4px 10px rgba(44,62,80,0.3);
-    }
-    .tab-btn:active { transform: scale(0.96); }
-
-    /* ===== CONTEÚDO DAS TABS ===== */
-    .tab-content { display: none; animation: fade 0.25s ease; }
-    .tab-content.active { display: block; }
-    @keyframes fade { from { opacity: 0.3; } to { opacity: 1; } }
-
-    /* ===== CARTÕES ===== */
-    .card {
-      background: white;
-      border-radius: 20px;
-      padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    }
-    .card h2 { font-size: 22px; margin-bottom: 12px; color: #2c3e50; }
-    .card h3 { font-size: 18px; margin-bottom: 8px; color: #2c3e50; }
-    .card .highlight {
-      background: #fef9e7;
-      border-left: 4px solid #f1c40f;
-      padding: 12px 16px;
-      border-radius: 12px;
-      margin: 12px 0;
-      font-style: italic;
-    }
-
-    /* ===== DIÁRIO FQ10C ===== */
-    .fq-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-    .fq-item {
-      background: #f8f9fa;
-      border-radius: 14px;
-      padding: 12px;
-      border-left: 4px solid #2c3e50;
-    }
-    .fq-item label {
-      font-weight: 700;
-      font-size: 15px;
-      color: #2c3e50;
-      display: block;
-      margin-bottom: 4px;
-    }
-    .fq-item textarea {
-      width: 100%;
-      border: 2px solid #dfe6e9;
-      border-radius: 10px;
-      padding: 8px;
-      font-size: 16px;
-      font-family: inherit;
-      min-height: 50px;
-      resize: vertical;
-    }
-    .fq-item textarea:focus { border-color: #2c3e50; outline: none; }
-
-    /* ===== CALENDÁRIO ===== */
-    .cal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-    .cal-title { font-weight: 700; font-size: 18px; color: #2c3e50; }
-    .cal-nav button {
-      background: none;
-      border: none;
-      font-size: 22px;
-      cursor: pointer;
-      padding: 4px 12px;
-      border-radius: 30px;
-      transition: 0.2s;
-    }
-    .cal-nav button:hover { background: #ecf0f1; }
-    .cal-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 4px;
-    }
-    .cal-day-name {
-      text-align: center;
-      font-weight: 600;
-      font-size: 13px;
-      color: #5d6d7e;
-      padding: 6px 0;
-    }
-    .cal-day {
-      aspect-ratio: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 40px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: 0.2s;
-      background: white;
-      border: 2px solid transparent;
-    }
-    .cal-day:hover { background: #ecf0f1; }
-    .cal-day.today { border-color: #2c3e50; font-weight: 700; }
-    .cal-day.has-entry { background: #fef9e7; border-color: #f1c40f; }
-    .cal-day.selected { background: #2c3e50; color: white; }
-    .cal-day.empty { background: transparent; cursor: default; }
-    .cal-day.empty:hover { background: transparent; }
-
-    .export-btn {
-      background: #27ae60;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 40px;
-      font-weight: 600;
-      font-size: 16px;
-      cursor: pointer;
-      margin-top: 12px;
-      width: 100%;
-      transition: 0.2s;
-    }
-    .export-btn:active { transform: scale(0.97); background: #1e8449; }
-
-    /* ===== EXERCÍCIOS DE PRESENÇA ===== */
-    .sense-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-    .sense-grid input {
-      padding: 12px;
-      border: 2px solid #dfe6e9;
-      border-radius: 14px;
-      background: #f8f9fa;
-      font-size: 16px;
-      width: 100%;
-    }
-    .sense-grid input:focus { border-color: #2c3e50; outline: none; }
-    .sense-grid .full { grid-column: span 2; }
-
-    .btn-primary {
-      background: #2c3e50;
-      color: white;
-      border: none;
-      padding: 14px 24px;
-      border-radius: 40px;
-      font-weight: 600;
-      font-size: 18px;
-      cursor: pointer;
-      width: 100%;
-      transition: 0.2s;
-    }
-    .btn-primary:active { transform: scale(0.97); background: #1a252f; }
-
-    /* ===== CÍRCULO DA RESPIRAÇÃO ===== */
-    .breath-wrap {
-      text-align: center;
-      margin: 20px 0;
-    }
-    .breath-circle {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      background: #2c3e50;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: 700;
-      font-size: 22px;
-      transition: transform 1.5s ease-in-out;
-      box-shadow: 0 8px 30px rgba(44,62,80,0.3);
-    }
-    .breath-timer {
-      font-size: 28px;
-      font-weight: 700;
-      margin-top: 10px;
-      color: #2c3e50;
-    }
-
-    /* ===== EMOÇIÔMETRO ===== */
-    .mood-grid {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin: 16px 0;
-    }
-    .mood-item {
-      background: white;
-      padding: 12px 10px;
-      border-radius: 16px;
-      border: 2px solid #dfe6e9;
-      text-align: center;
-      cursor: pointer;
-      min-width: 70px;
-      transition: 0.2s;
-    }
-    .mood-item.selected { border-color: #2c3e50; background: #eaf2f8; }
-    .mood-item .emoji { font-size: 32px; }
-    .mood-item .label { font-size: 14px; font-weight: 500; }
-
-    .presence-scale {
-      display: flex;
-      gap: 8px;
-      margin: 12px 0;
-    }
-    .presence-scale button {
-      flex: 1;
-      padding: 12px;
-      border: 2px solid #dfe6e9;
-      background: white;
-      border-radius: 30px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    .presence-scale button.active { border-color: #2c3e50; background: #d5e8f0; }
-
-    /* ===== HÁBITOS ===== */
-    .habit-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 14px;
-      background: #f8f9fa;
-      border-radius: 16px;
-      margin-bottom: 10px;
-      border-left: 6px solid #2c3e50;
-    }
-    .habit-item .info { flex: 1; }
-    .habit-item .info h4 { font-size: 17px; }
-    .habit-item .info p { font-size: 14px; color: #5d6d7e; }
-    .habit-check {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      border: 2px solid #bdc3c7;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      font-weight: 700;
-      cursor: pointer;
-      background: white;
-    }
-    .habit-check.done { background: #27ae60; border-color: #27ae60; color: white; }
-    .habit-badge {
-      background: #f1c40f;
-      color: #1a252f;
-      padding: 2px 10px;
-      border-radius: 30px;
-      font-size: 12px;
-      font-weight: 600;
-      margin-left: 8px;
-    }
-
-    /* ===== DESAFIO ===== */
-    .challenge-progress {
-      background: #ecf0f1;
-      height: 12px;
-      border-radius: 30px;
-      margin: 12px 0;
-    }
-    .challenge-progress .bar {
-      height: 100%;
-      background: #2c3e50;
-      border-radius: 30px;
-      width: 0%;
-    }
-
-    /* ===== FINANÇAS ===== */
-    .expense-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 12px 0;
-      border-bottom: 1px solid #ecf0f1;
-    }
-    .expense-item .amount { font-weight: 700; color: #2c3e50; }
-
-    /* ===== SOCIAL ===== */
-    .social-stat {
-      display: flex;
-      gap: 12px;
-      margin: 8px 0;
-    }
-    .social-stat .num { font-weight: 700; font-size: 24px; color: #2c3e50; }
-
-    /* ===== LEMBRETES ===== */
-    .reminder-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 12px;
-      background: #f8f9fa;
-      border-radius: 14px;
-      margin-bottom: 8px;
-    }
-    .reminder-item .text { font-weight: 500; }
-    .reminder-item .done { text-decoration: line-through; opacity: 0.6; }
-
-    /* ===== RODAPÉ ===== */
-    .footer {
-      margin-top: 40px;
-      padding: 20px 16px;
-      background: white;
-      border-radius: 24px 24px 0 0;
-      box-shadow: 0 -4px 12px rgba(0,0,0,0.04);
-      text-align: center;
-      font-size: 14px;
-      color: #5d6d7e;
-    }
-    .footer .author-name {
-      font-weight: 700;
-      font-size: 18px;
-      color: #2c3e50;
-    }
-    .footer .author-profession {
-      margin: 4px 0 12px 0;
-      font-size: 15px;
-    }
-    .footer .links {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin: 12px 0;
-    }
-    .footer .links a {
-      background: #eaf2f8;
-      padding: 8px 16px;
-      border-radius: 30px;
-      color: #2c3e50;
-      text-decoration: none;
-      font-weight: 600;
-      transition: 0.2s;
-    }
-    .footer .links a:hover { background: #2c3e50; color: white; }
-    .footer .copy {
-      margin-top: 12px;
-      font-size: 12px;
-      color: #95a5a6;
-    }
-
-    /* ===== BOTÃO GERAR ÍCONES (fallback) ===== */
-    .hidden-tools {
-      margin-top: 12px;
-      padding: 10px;
-      background: #ecf0f1;
-      border-radius: 12px;
-    }
-    .hidden-tools button {
-      background: #2c3e50;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 30px;
-      font-size: 14px;
-      cursor: pointer;
-    }
-
-    /* ===== RESPONSIVO ===== */
-    @media (max-width: 480px) {
-      .tabs { gap: 4px; }
-      .tab-btn { font-size: 13px; padding: 8px 10px; }
-      .sense-grid { grid-template-columns: 1fr; }
-      .sense-grid .full { grid-column: span 1; }
-      .pin-group input { width: 48px; height: 56px; font-size: 24px; }
-      .fq-grid { grid-template-columns: 1fr; }
-    }
-    @supports (padding: max(0px)) {
-      body { padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); }
-    }
-    #installBtn {
-      background: #f1c40f;
-      color: #1a252f;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 30px;
-      font-weight: 700;
-      cursor: pointer;
-      display: none;
-    }
-  </style>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: linear-gradient(135deg, #8B0000 0%, #DC143C 100%); min-height: 100vh; color: #333; }
+.container { max-width: 800px; margin: 0 auto; padding: 20px; }
+.card { background: white; border-radius: 20px; padding: 25px; margin: 15px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+h1, h2, h3 { color: #DC143C; margin-bottom: 15px; }
+.btn { background: #DC143C; color: white; border: none; padding: 12px 25px; border-radius: 10px; cursor: pointer; font-size: 16px; margin: 5px; transition: all 0.3s; }
+.btn:hover { background: #8B0000; transform: translateY(-2px); }
+.input { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 10px; font-size: 16px; margin: 10px 0; }
+.input:focus { outline: none; border-color: #DC143C; }
+.header { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); padding: 20px; border-radius: 0 0 30px 30px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); margin-bottom: 20px; }
+.nav { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin: 15px 0; }
+.nav button { background: #DC143C; color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-size: 14px; }
+.nav button:hover { background: #8B0000; }
+.section { display: none; }
+.section.active { display: block; animation: fadeIn 0.3s; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.emoji { font-size: 24px; margin-right: 8px; }
+.badge { background: #DC143C; color: white; padding: 3px 10px; border-radius: 15px; font-size: 12px; margin-left: 10px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin: 15px 0; }
+.stat-card { background: linear-gradient(135deg, #DC143C, #8B0000); color: white; padding: 20px; border-radius: 15px; text-align: center; }
+.stat-number { font-size: 32px; font-weight: bold; margin: 10px 0; }
+.timer { font-size: 48px; text-align: center; margin: 20px 0; font-family: monospace; color: #DC143C; }
+.progress-bar { width: 100%; height: 10px; background: #f0f0f0; border-radius: 5px; overflow: hidden; margin: 10px 0; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #DC143C, #8B0000); transition: width 0.3s; }
+textarea { width: 100%; min-height: 150px; padding: 15px; border: 2px solid #ddd; border-radius: 10px; font-size: 16px; resize: vertical; font-family: inherit; }
+.calendar { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin: 15px 0; }
+.calendar-day { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border-radius: 10px; background: #f5f5f5; cursor: pointer; transition: all 0.3s; }
+.calendar-day:hover { background: #ffe0e0; }
+.calendar-day.has-entry { background: #DC143C; color: white; }
+.calendar-day.today { border: 3px solid #8B0000; font-weight: bold; }
+.footer { text-align: center; padding: 30px 20px; color: white; font-size: 14px; }
+.footer a { color: white; text-decoration: underline; }
+.install-banner { background: rgba(255,255,255,0.95); padding: 15px; border-radius: 15px; margin: 15px 0; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+.hidden { display: none !important; }
+</style>
 </head>
 <body>
 
-<!-- ===== MODAIS ===== -->
-<div id="signupModal" class="modal-overlay">
-  <div class="modal-box">
-    <h2>🧘 Diário FQ10C</h2>
-    <p class="sub">Comece sua jornada de presença</p>
-    <input type="text" id="signupName" placeholder="Seu nome" autocomplete="off" />
-    <p class="sub" style="font-size:14px; margin-top: -8px;">Crie um PIN de 4 dígitos</p>
-    <div class="pin-group" id="signupPinGroup">
-      <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" class="pin-input" data-idx="0" />
-      <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" class="pin-input" data-idx="1" />
-      <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" class="pin-input" data-idx="2" />
-      <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" class="pin-input" data-idx="3" />
-    </div>
-    <div id="signupError" class="error-msg"></div>
-    <button class="btn-modal primary" id="signupBtn">Criar conta</button>
-    <div class="hint">Anote seu PIN em um lugar seguro.</div>
-  </div>
+<div class="header">
+<div class="container">
+<h1><span class="emoji">🧘</span>Diário FQ10C</h1>
+<p>12 verbos para ancorar o agora</p>
+<div class="install-banner" id="installBanner">
+<strong>📲 Instale como app nativo:</strong> Toque em "Adicionar à Tela de Início" no menu do navegador
+</div>
+</div>
 </div>
 
-<div id="loginModal" class="modal-overlay hidden">
-  <div class="modal-box">
-    <h2>🔐 Bem-vindo de volta</h2>
-    <p class="sub" id="loginUserName">Usuário</p>
-    <p class="sub" style="font-size:14px;">Digite seu PIN de 4 dígitos</p>
-    <div class="pin-group" id="loginPinGroup">
-      <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" class="pin-input" data-idx="0" />
-      <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" class="pin-input" data-idx="1" />
-      <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" class="pin-input" data-idx="2" />
-      <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" class="pin-input" data-idx="3" />
-    </div>
-    <div id="loginError" class="error-msg"></div>
-    <button class="btn-modal primary" id="loginBtn">Acessar</button>
-    <button class="btn-modal secondary" id="resetPinBtn">Esqueci meu PIN</button>
-    <div class="hint">Resetar apagará todos os seus dados.</div>
-  </div>
+<div class="container">
+<nav class="nav">
+<button onclick="showSection('agora')"><span class="emoji">🧘</span>Agora</button>
+<button onclick="showSection('fq10c')"><span class="emoji">📝</span>FQ10C</button>
+<button onclick="showSection('porque')"><span class="emoji">🧠</span>Por que Presença?</button>
+<button onclick="showSection('habitos')"><span class="emoji">📋</span>Hábitos</button>
+<button onclick="showSection('desafio')"><span class="emoji">🏆</span>Desafio</button>
+<button onclick="showSection('social')"><span class="emoji">👥</span>Social</button>
+<button onclick="showSection('financas')"><span class="emoji">💰</span>Finanças</button>
+<button onclick="showSection('lembretes')"><span class="emoji">🔔</span>Lembretes</button>
+<button onclick="showSection('emocimetro')"><span class="emoji">😊</span>Emociômetro</button>
+<button onclick="logout()"><span class="emoji">🚪</span>Sair</button>
+</nav>
+
+<!-- SEÇÃO: AGORA -->
+<div id="agora" class="section active">
+<div class="card">
+<h2><span class="emoji">👁️</span>Ancoragem dos 5 Sentidos</h2>
+<p>Observe ao redor e nomeie:</p>
+<textarea id="ancoragem" placeholder="O que você vê? O que você ouve? O que você sente?"></textarea>
+<button class="btn" onclick="saveAncoragem()">Salvar essa ancoragem</button>
 </div>
 
-<!-- ===== CONTEÚDO PRINCIPAL ===== -->
-<div class="container" id="appContent" style="display:none;">
+<div class="card">
+<h2><span class="emoji">🌬️</span>Respiração Consciente (1 min)</h2>
+<div class="timer" id="timer">00:00</div>
+<button class="btn" onclick="startBreathing()">Iniciar</button>
+</div>
 
-  <!-- BANNER -->
-  <div class="banner">
-    <h1>🧘 <span>Diário FQ10C</span></h1>
-    <div class="subtitle">12 verbos para ancorar o agora</div>
-    <p>Mentoria 70+ ANABB – Sentir-Se Presente</p>
-    <div class="tag">FQ10C</div>
-    <div class="privacy-note">
-      🔒 <strong>Seus dados ficam apenas neste dispositivo.</strong> Não vão para a nuvem.<br>
-      Instale como app nativo: "Adicionar à Tela de Início"
-    </div>
-    <div class="author-credit">
-      Desenvolvido por <strong>Ricardo de Faria Barros</strong> – Psicólogo<br />
-      <a href="https://a.co/d/g4s6fZ6" target="_blank">📚 Meu livro na Amazon</a> •
-      <a href="https://www.plenalongevidade.com.br/" target="_blank">🌐 Plena Longevidade</a>
-    </div>
-  </div>
+<div class="card">
+<h2><span class="emoji">❓</span>A pergunta do dia</h2>
+<p>"O que hoje só existiu por um instante, e quase passou despercebido?"</p>
+<textarea id="perguntaDia" placeholder="Sua reflexão..."></textarea>
+<button class="btn" onclick="savePergunta()">Guardar essa percepção</button>
+</div>
+</div>
 
-  <!-- HEADER -->
-  <div class="header">
-    <span class="user-name">👤 <span id="displayName">Usuário</span></span>
-    <div>
-      <button id="installBtn">📲 Instalar</button>
-      <button class="btn-logout" id="logoutBtn">Sair</button>
-    </div>
-  </div>
+<!-- SEÇÃO: FQ10C -->
+<div id="fq10c" class="section">
+<div class="card">
+<h2><span class="emoji">📝</span>Diário FQ10C</h2>
+<p>Registre como os 12 verbos se manifestaram em você hoje.</p>
+<div id="calendar"></div>
+<textarea id="diario" placeholder="Como os 12 verbos se manifestaram hoje?"></textarea>
+<button class="btn" onclick="saveDiario()">Salvar Diário de Hoje</button>
+<button class="btn" onclick="exportPDF()">📄 Exportar Diário (PDF)</button>
+</div>
+</div>
 
-  <!-- TABS -->
-  <div class="tabs" id="tabsContainer">
-    <button class="tab-btn active" data-tab="agora">🧘 Agora</button>
-    <button class="tab-btn" data-tab="diario">📝 FQ10C</button>
-    <button class="tab-btn" data-tab="presence-why">🧠 Por que Presença?</button>
-    <button class="tab-btn" data-tab="habits">📋 Hábitos</button>
-    <button class="tab-btn" data-tab="challenge">🏆 Desafio</button>
-    <button class="tab-btn" data-tab="social">👥 Social</button>
-    <button class="tab-btn" data-tab="finances">💰 Finanças</button>
-    <button class="tab-btn" data-tab="reminders">🔔 Lembretes</button>
-    <button class="tab-btn" data-tab="mood">😊 Emociômetro</button>
-  </div>
+<!-- SEÇÃO: POR QUE PRESENÇA -->
+<div id="porque" class="section">
+<div class="card">
+<h2><span class="emoji">🧠</span>Por que Sentir-Se Presente?</h2>
+<p>A ansiedade nos puxa para o futuro. A presença nos ancora no agora, onde a vida realmente acontece.</p>
+<p>Quando você está ansioso, sua mente viaja para amanhã, para o "e se…". Esse movimento constante gasta energia, rouba o sono e afasta você do que é real.</p>
+<p><strong>Sentir-se presente é o antídoto.</strong> Não porque os problemas desaparecem, mas porque você recupera a capacidade de responder a eles com clareza.</p>
+<h3>Como o FQ10C ajuda:</h3>
+<ul style="margin-left: 20px; line-height: 2;">
+<li><strong>📝 Os 12 verbos</strong> – um mapa diário para reconhecer a presença em cada ação.</li>
+<li><strong>🧘 Ancoragem sensorial</strong> – treina sua atenção para o aqui e agora.</li>
+<li><strong>🌬️ Respiração guiada</strong> – reduz a ansiedade em minutos.</li>
+<li><strong>❓ Pergunta de Frankl</strong> – desloca o foco do futuro para o presente.</li>
+</ul>
+<blockquote style="border-left: 4px solid #DC143C; padding-left: 15px; margin: 20px 0; font-style: italic;">
+"Entre o estímulo e a resposta, há um espaço. Nesse espaço está o nosso poder de escolha." – Viktor Frankl
+</blockquote>
+<p>Use o FQ10C como um treino diário. Cada verbo registrado é um passo para recuperar a serenidade. A presença não é um destino, é uma prática.</p>
+</div>
+</div>
 
-  <!-- ==================== TAB "Agora" ==================== -->
-  <div class="tab-content active" id="tab-agora">
-    <div class="card">
-      <h2>👁️ Ancoragem dos 5 Sentidos</h2>
-      <p style="margin-bottom: 12px;">Observe ao redor e nomeie:</p>
-      <div class="sense-grid">
-        <input type="text" placeholder="5 coisas que você vê..." id="sense1" />
-        <input type="text" placeholder="4 coisas que você toca..." id="sense2" />
-        <input type="text" placeholder="3 sons que você ouve..." id="sense3" />
-        <input type="text" placeholder="2 cheiros que sente..." id="sense4" />
-        <input type="text" placeholder="1 sabor ou sensação..." id="sense5" class="full" />
-      </div>
-      <button class="btn-primary" id="saveSenseBtn">Salvar essa ancoragem</button>
-    </div>
+<!-- SEÇÃO: HÁBITOS -->
+<div id="habitos" class="section">
+<div class="card">
+<h2><span class="emoji">📋</span>Hábitos Diários</h2>
+<div id="habitosDiarios"></div>
+</div>
+<div class="card">
+<h2><span class="emoji">📋</span>Hábitos Semanais</h2>
+<div id="habitosSemanais"></div>
+</div>
+</div>
 
-    <div class="card">
-      <h2>🌬️ Respiração Consciente (1 min)</h2>
-      <div class="breath-wrap">
-        <div class="breath-circle" id="breathCircle">Inspire</div>
-        <div class="breath-timer" id="breathTimer">00:00</div>
-        <button class="btn-primary" id="breathStartBtn" style="width: auto; padding: 12px 30px; margin-top: 12px;">Iniciar</button>
-      </div>
-    </div>
+<!-- SEÇÃO: DESAFIO -->
+<div id="desafio" class="section">
+<div class="card">
+<h2><span class="emoji">🏆</span>Desafio do Mês</h2>
+<input type="text" class="input" id="desafioInput" placeholder="Definir novo desafio">
+<button class="btn" onclick="saveDesafio()">Salvar Desafio</button>
+<h3>Histórico</h3>
+<div id="desafioHistorico"></div>
+</div>
+</div>
 
-    <div class="card">
-      <h2>❓ A pergunta do dia</h2>
-      <p style="font-size: 16px; color: #5d6d7e;">"O que hoje só existiu por um instante, e quase passou despercebido?"</p>
-      <textarea id="franklAnswer" rows="3" style="width:100%; padding:12px; border-radius:14px; border:2px solid #dfe6e9; margin:12px 0; font-family:inherit; font-size:16px;"></textarea>
-      <button class="btn-primary" id="saveFranklBtn">Guardar essa percepção</button>
-    </div>
+<!-- SEÇÃO: SOCIAL -->
+<div id="social" class="section">
+<div class="card">
+<h2><span class="emoji">👥</span>Termômetro Social</h2>
+<div class="grid">
+<div class="stat-card">
+<div>Família</div>
+<div class="stat-number" id="statFamilia">0</div>
+</div>
+<div class="stat-card">
+<div>Trabalho</div>
+<div class="stat-number" id="statTrabalho">0</div>
+</div>
+<div class="stat-card">
+<div>Lazer</div>
+<div class="stat-number" id="statLazer">0</div>
+</div>
+<div class="stat-card">
+<div>Dias ativos</div>
+<div class="stat-number" id="statDias">0</div>
+</div>
+</div>
+<button class="btn" onclick="addEvento()">Adicionar evento</button>
+<div id="eventosLista"></div>
+</div>
+</div>
 
-    <div class="card">
-      <h3>📖 Diário de Presença</h3>
-      <div id="presenceHistory" style="font-size:16px; color:#2c3e50;"></div>
-    </div>
-  </div>
+<!-- SEÇÃO: FINANÇAS -->
+<div id="financas" class="section">
+<div class="card">
+<h2><span class="emoji">💰</span>Controle Financeiro</h2>
+<div class="stat-card" style="margin: 20px 0;">
+<div>Saldo</div>
+<div class="stat-number" id="saldo">R$ 0,00</div>
+</div>
+<button class="btn" onclick="addTransacao()">+</button>
+<div id="transacoesLista"></div>
+</div>
+</div>
 
-  <!-- ==================== TAB "FQ10C" ==================== -->
-  <div class="tab-content" id="tab-diario">
-    <div class="card">
-      <h2>📝 Diário FQ10C</h2>
-      <p style="font-size:15px; color:#5d6d7e; margin-bottom:16px;">
-        Registre como os 12 verbos se manifestaram em você hoje.
-        <span style="display:block; margin-top:4px; font-weight:500;">🔒 Fica apenas no seu celular.</span>
-      </p>
+<!-- SEÇÃO: LEMBRETES -->
+<div id="lembretes" class="section">
+<div class="card">
+<h2><span class="emoji">🔔</span>Lembretes</h2>
+<button class="btn" onclick="addLembrete()">+</button>
+<div id="lembretesLista"></div>
+</div>
+</div>
 
-      <!-- Calendário -->
-      <div style="background:#f8f9fa; border-radius:16px; padding:12px; margin-bottom:20px;">
-        <div class="cal-header">
-          <div class="cal-title" id="fqCalTitle">Janeiro 2026</div>
-          <div class="cal-nav">
-            <button id="fqCalPrev">◀</button>
-            <button id="fqCalNext">▶</button>
-          </div>
-        </div>
-        <div class="cal-grid" id="fqCalGrid"></div>
-        <div style="text-align:center; margin-top:8px; font-size:13px; color:#5d6d7e;">
-          <span style="background:#fef9e7; padding:2px 8px; border-radius:30px;">📌 dias com registro</span>
-        </div>
-      </div>
+<!-- SEÇÃO: EMOCIÔMETRO -->
+<div id="emocimetro" class="section">
+<div class="card">
+<h2><span class="emoji">😊</span>Emociômetro + Presença</h2>
+<p>Selecione seu humor:</p>
+<select class="input" id="humor">
+<option value="">Selecione...</option>
+<option value="😔">😔 Triste</option>
+<option value="😐">😐 Neutro</option>
+<option value="🙂">🙂 Content</option>
+<option value="😊">😊 Feliz</option>
+<option value="😄">😄 Muito Feliz</option>
+</select>
+<p>🧘 Nível de Presença:</p>
+<select class="input" id="presenca">
+<option value="">Selecione...</option>
+<option value="1">Distraído</option>
+<option value="2">Parcialmente presente</option>
+<option value="3">Aqui</option>
+<option value="4">Muito presente</option>
+<option value="5">Inteiro</option>
+</select>
+<button class="btn" onclick="saveHumor()">Salvar Humor e Presença</button>
+<h3>📊 Histórico</h3>
+<div id="humorHistorico"></div>
+</div>
+</div>
 
-      <div style="font-weight:600; margin-bottom:12px;" id="fqSelectedDate">Hoje</div>
-
-      <!-- Grid dos 12 verbos (com perguntas corrigidas) -->
-      <div class="fq-grid" id="fqGrid"></div>
-
-      <button class="btn-primary" id="saveFqBtn" style="margin-top:16px;">Salvar Diário de Hoje</button>
-      <button class="export-btn" id="exportFqBtn">📄 Exportar Diário (PDF)</button>
-      <p style="font-size:12px; color:#5d6d7e; margin-top:6px; text-align:center;">
-        Gera relatório do mês atual. O PDF é gerado localmente no seu dispositivo.
-      </p>
-    </div>
-  </div>
-
-  <!-- ==================== TAB "Por que Presença?" ==================== -->
-  <div class="tab-content" id="tab-presence-why">
-    <div class="card">
-      <h2>🧠 Por que Sentir-Se Presente?</h2>
-      <div class="highlight">
-        <p><strong>A ansiedade nos puxa para o futuro. A presença nos ancora no agora, onde a vida realmente acontece.</strong></p>
-      </div>
-      <p style="margin-bottom: 16px;">
-        Quando você está ansioso, sua mente viaja para amanhã, para o “e se…”. 
-        Esse movimento constante gasta energia, rouba o sono e afasta você do que é real.
-      </p>
-      <p style="margin-bottom: 16px;">
-        <strong>Sentir-se presente é o antídoto.</strong> Não porque os problemas desaparecem, mas porque 
-        você recupera a capacidade de responder a eles com clareza.
-      </p>
-      <div style="background: #eaf2f8; padding: 16px; border-radius: 16px; margin-bottom: 16px;">
-        <h3 style="margin-bottom: 8px;">Como o FQ10C ajuda:</h3>
-        <ul style="padding-left: 20px; margin-bottom: 0;">
-          <li><strong>📝 Os 12 verbos</strong> – um mapa diário para reconhecer a presença em cada ação.</li>
-          <li><strong>🧘 Ancoragem sensorial</strong> – treina sua atenção para o aqui e agora.</li>
-          <li><strong>🌬️ Respiração guiada</strong> – reduz a ansiedade em minutos.</li>
-          <li><strong>❓ Pergunta de Frankl</strong> – desloca o foco do futuro para o presente.</li>
-        </ul>
-      </div>
-      <div class="highlight">
-        <p><em>“Entre o estímulo e a resposta, há um espaço. Nesse espaço está o nosso poder de escolha.”</em> – Viktor Frankl</p>
-      </div>
-      <p style="margin-top: 16px;">
-        Use o FQ10C como um treino diário. Cada verbo registrado é um passo para recuperar a serenidade.
-        <strong>A presença não é um destino, é uma prática.</strong>
-      </p>
-    </div>
-  </div>
-
-  <!-- ==================== TAB "Hábitos" ==================== -->
-  <div class="tab-content" id="tab-habits">
-    <div class="card">
-      <h2>📋 Hábitos Diários</h2>
-      <div id="dailyHabits"></div>
-      <h2 style="margin-top:20px;">📋 Hábitos Semanais</h2>
-      <div id="weeklyHabits"></div>
-    </div>
-  </div>
-
-  <!-- ==================== TAB "Desafio" ==================== -->
-  <div class="tab-content" id="tab-challenge">
-    <div class="card">
-      <h2>🏆 Desafio do Mês</h2>
-      <div id="currentMonthDisplay" style="font-weight:600; color:#2c3e50;"></div>
-      <div id="challengeDisplay"></div>
-      <hr style="margin: 20px 0;" />
-      <h3>Definir novo desafio</h3>
-      <input type="text" id="challengeTitle" placeholder="Título" style="width:100%; padding:12px; border-radius:14px; border:2px solid #dfe6e9; margin-bottom:10px;" />
-      <textarea id="challengeDesc" placeholder="Descrição" rows="2" style="width:100%; padding:12px; border-radius:14px; border:2px solid #dfe6e9; margin-bottom:10px;"></textarea>
-      <div style="display:flex; gap:10px;">
-        <input type="number" id="challengeGoal" placeholder="Meta" style="flex:1; padding:12px; border-radius:14px; border:2px solid #dfe6e9;" />
-        <input type="text" id="challengeUnit" placeholder="Unidade" style="flex:1; padding:12px; border-radius:14px; border:2px solid #dfe6e9;" />
-      </div>
-      <button class="btn-primary" id="saveChallengeBtn" style="margin-top:12px;">Salvar Desafio</button>
-      <h3 style="margin-top:20px;">Histórico</h3>
-      <div id="challengeHistory"></div>
-    </div>
-  </div>
-
-  <!-- ==================== TAB "Social" ==================== -->
-  <div class="tab-content" id="tab-social">
-    <div class="card">
-      <h2>👥 Termômetro Social</h2>
-      <div style="display:flex; gap:12px; flex-wrap:wrap;">
-        <div><span class="num" id="familyCount">0</span> Família</div>
-        <div><span class="num" id="workCount">0</span> Trabalho</div>
-        <div><span class="num" id="leisureCount">0</span> Lazer</div>
-        <div><span class="num" id="socialDaysCount">0</span> Dias ativos</div>
-      </div>
-      <hr />
-      <h3>Adicionar evento</h3>
-      <div style="display:flex; gap:8px; flex-wrap:wrap;">
-        <input type="text" id="socialEventName" placeholder="Evento" style="flex:2; padding:12px; border-radius:14px; border:2px solid #dfe6e9;" />
-        <select id="socialCategory" style="flex:1; padding:12px; border-radius:14px; border:2px solid #dfe6e9;">
-          <option value="family">Família</option>
-          <option value="work">Trabalho</option>
-          <option value="leisure">Lazer</option>
-        </select>
-        <input type="number" id="socialDuration" placeholder="Horas" step="0.5" style="flex:1; padding:12px; border-radius:14px; border:2px solid #dfe6e9;" />
-        <button id="addSocialBtn" style="flex:0 0 50px; background:#2c3e50; color:white; border:none; border-radius:14px; font-size:24px;">+</button>
-      </div>
-      <div id="socialEventsList" style="margin-top:16px;"></div>
-    </div>
-  </div>
-
-  <!-- ==================== TAB "Finanças" ==================== -->
-  <div class="tab-content" id="tab-finances">
-    <div class="card">
-      <h2>💰 Controle Financeiro</h2>
-      <div style="font-size:28px; font-weight:700; color:#2c3e50;" id="totalSpent">R$ 0,00</div>
-      <hr />
-      <div style="display:flex; gap:8px; flex-wrap:wrap;">
-        <input type="text" id="expenseDesc" placeholder="Descrição" style="flex:2; padding:12px; border-radius:14px; border:2px solid #dfe6e9;" />
-        <input type="number" id="expenseAmount" placeholder="Valor" step="0.01" style="flex:1; padding:12px; border-radius:14px; border:2px solid #dfe6e9;" />
-        <button id="addExpenseBtn" style="flex:0 0 50px; background:#2c3e50; color:white; border:none; border-radius:14px; font-size:24px;">+</button>
-      </div>
-      <div id="expensesList" style="margin-top:16px;"></div>
-    </div>
-  </div>
-
-  <!-- ==================== TAB "Lembretes" ==================== -->
-  <div class="tab-content" id="tab-reminders">
-    <div class="card">
-      <h2>🔔 Lembretes</h2>
-      <div style="display:flex; gap:8px; flex-wrap:wrap;">
-        <input type="text" id="reminderText" placeholder="O que não esquecer?" style="flex:2; padding:12px; border-radius:14px; border:2px solid #dfe6e9;" />
-        <select id="reminderPriority" style="flex:1; padding:12px; border-radius:14px; border:2px solid #dfe6e9;">
-          <option value="normal">Normal</option>
-          <option value="urgent">Urgente</option>
-        </select>
-        <button id="addReminderBtn" style="flex:0 0 50px; background:#2c3e50; color:white; border:none; border-radius:14px; font-size:24px;">+</button>
-      </div>
-      <div id="remindersList" style="margin-top:16px;"></div>
-    </div>
-  </div>
-
-  <!-- ==================== TAB "Emociômetro" ==================== -->
-  <div class="tab-content" id="tab-mood">
-    <div class="card">
-      <h2>😊 Emociômetro + Presença</h2>
-      <div id="todayMoodDisplay" style="text-align:center; padding:12px; background:#f8f9fa; border-radius:20px; margin-bottom:16px;">
-        Selecione seu humor
-      </div>
-      <div class="mood-grid" id="moodGrid"></div>
-
-      <div style="margin-top:20px;">
-        <label style="font-weight:600;">🧘 Nível de Presença:</label>
-        <div class="presence-scale" id="presenceScale">
-          <button data-level="1">Distraído</button>
-          <button data-level="2">Aqui</button>
-          <button data-level="3">Inteiro</button>
-        </div>
-        <div id="presenceLevelDisplay" style="text-align:center; margin-top:8px; font-style:italic; color:#5d6d7e;"></div>
-      </div>
-
-      <textarea id="moodNotes" placeholder="Observações (opcional)" rows="2" style="width:100%; padding:12px; border-radius:14px; border:2px solid #dfe6e9; margin-top:12px;"></textarea>
-      <button class="btn-primary" id="saveMoodBtn" style="margin-top:12px;">Salvar Humor e Presença</button>
-
-      <h3 style="margin-top:20px;">📊 Histórico</h3>
-      <div id="moodHistory"></div>
-    </div>
-  </div>
-
-  <!-- ==================== RODAPÉ ==================== -->
-  <div class="footer">
-    <div class="author-name">Ricardo de Faria Barros</div>
-    <div class="author-profession">Psicólogo • Especialista em Longevidade • Consultor Projeto 70+ ANABB</div>
-    <div class="links">
-      <a href="https://a.co/d/g4s6fZ6" target="_blank" rel="noopener">📚 Meu livro na Amazon</a>
-      <a href="https://www.plenalongevidade.com.br/" target="_blank" rel="noopener">🌐 Plena Longevidade</a>
-    </div>
-    <div style="margin-top: 8px; font-size: 13px;">
-      <strong>Diário FQ10C</strong> – 12 verbos para ancorar o agora.
-    </div>
-    <div class="copy">© 2026 FQ10C – Todos os direitos reservados</div>
-    
-    <!-- Ferramenta para gerar ícones PNG (fallback) -->
-    <div class="hidden-tools">
-      <details>
-        <summary style="cursor:pointer; color:#2c3e50; font-weight:600;">🔧 Gerar ícones PNG (fallback)</summary>
-        <p style="font-size:14px; margin:8px 0;">Clique no botão abaixo para baixar ícones PNG alternativos.</p>
-        <button id="generateIconsBtn">📥 Baixar ícones PNG (192x192 e 512x512)</button>
-        <p style="font-size:12px; color:#5d6d7e; margin-top:6px;">Os arquivos serão baixados automaticamente.</p>
-      </details>
-    </div>
-  </div>
-
-</div><!-- /.container -->
+<div class="footer">
+<p><strong>Ricardo de Faria Barros</strong><br>Psicólogo • Especialista em Longevidade • Consultor Projeto 70+ ANABB</p>
+<p style="margin: 15px 0;">
+<a href="https://a.co/d/g4s6fZ6" target="_blank">📚 Meu livro na Amazon</a> • 
+<a href="https://www.plenalongevidade.com.br/" target="_blank">🌐 Plena Longevidade</a>
+</p>
+<p>Diário FQ10C – 12 verbos para ancorar o agora.</p>
+<p style="margin-top: 15px;">© 2026 FQ10C – Todos os direitos reservados</p>
+</div>
+</div>
 
 <script>
-// =====================================================================
-// DIÁRIO FQ10C – APLICAÇÃO COMPLETA (12 VERBOS COM PERGUNTAS CORRIGIDAS)
-// =====================================================================
-
-const STORAGE_KEY = 'fq10c_v1';
-let appState = {
-  user: null,
-  habits: [],
-  completed: {},
-  verbos: {},
-  finances: { expenses: [] },
-  reminders: [],
-  mood: {},
-  challenges: { current: null, history: [] },
-  social: { events: [] },
-  presence: { senseRecords: [], franklAnswers: [] },
-  fqDiary: {},
-  fqCalMonth: new Date().getMonth(),
-  fqCalYear: new Date().getFullYear()
-};
-
-// =====================================================================
-// 12 VERBOS DO FQ10C
-// =====================================================================
-const FQ_VERBS = [
-  { key: "fazer", label: "FAZER", icon: "🔨", pergunta: "O que você vai fazer hoje?" },
-  { key: "querer", label: "QUERER", icon: "💭", pergunta: "O que você vai querer hoje?" },
-  { key: "compartilhar", label: "COMPARTILHAR", icon: "🤝", pergunta: "O que você vai compartilhar hoje?" },
-  { key: "curtir", label: "CURTIR", icon: "😊", pergunta: "O que você vai curtir hoje?" },
-  { key: "comparecer", label: "COMPARECER", icon: "🚶", pergunta: "Onde você vai comparecer hoje?" },
-  { key: "conversar", label: "CONVERSAR", icon: "🗣️", pergunta: "Com quem você vai conversar hoje?" },
-  { key: "cuidar", label: "CUIDAR", icon: "🌱", pergunta: "Do que ou de quem você vai cuidar hoje?" },
-  { key: "conhecer", label: "CONHECER", icon: "🔍", pergunta: "O que você vai conhecer hoje?" },
-  { key: "criar", label: "CRIAR", icon: "🎨", pergunta: "O que você vai criar hoje?" },
-  { key: "conviver", label: "CONVIVER", icon: "👥", pergunta: "Com quem você vai conviver hoje?" },
-  { key: "contemplar", label: "CONTEMPLAR", icon: "🌅", pergunta: "O que você vai contemplar hoje?" },
-  { key: "celebrar", label: "CELEBRAR", icon: "🎉", pergunta: "O que você vai celebrar hoje?" }
-];
-
-// =====================================================================
-// HÁBITOS, MOODS
-// =====================================================================
-const ALL_HABITS = [
-  { id:1, title:"COPOS DE ÁGUA", desc:"Beber água mantém a vitalidade", freq:"daily", meta:"8 copos", presence:false },
-  { id:2, title:"SONO REVITALIZANTE", desc:"Dormir bem organiza emoções", freq:"daily", meta:"8h", presence:false },
-  { id:3, title:"SOL E AR LIVRE", desc:"Luz natural regula o humor", freq:"daily", meta:"20 min", presence:false },
-  { id:4, title:"EXERCÍCIO", desc:"Movimentar o corpo mantém autonomia", freq:"daily", meta:"30 min", presence:false },
-  { id:5, title:"RESPIRAÇÃO E ATENÇÃO PLENA", desc:"Uma pausa consciente", freq:"daily", meta:"5 min", presence:true },
-  { id:6, title:"DESCONEXÃO TECNOLÓGICA", desc:"Reduzir telas devolve presença", freq:"daily", meta:"30 min", presence:false },
-  { id:7, title:"LEITURA", desc:"Ler mantém a mente viva", freq:"daily", meta:"20 págs", presence:false },
-  { id:8, title:"EXERCITAR A MEMÓRIA", desc:"Jogos e lembranças ativam a cognição", freq:"daily", meta:"10 min", presence:false },
-  { id:9, title:"ESCUTA MUSICAL", desc:"A música acessa emoções", freq:"daily", meta:"15 min", presence:false },
-  { id:10, title:"APRECIAR BELEZA", desc:"Perceber algo bonito no dia", freq:"daily", meta:"1 momento", presence:true },
-  { id:11, title:"RIR UM POUCO", desc:"Rir alivia tensões", freq:"daily", meta:"1 momento", presence:false },
-  { id:12, title:"CUIDAR DA CASA E DA VIDA", desc:"Cuidar do lar, plantas, pets", freq:"daily", meta:"1 cuidado", presence:false },
-  { id:13, title:"MENSAGENS AFETUOSAS", desc:"Enviar carinho fortalece vínculos", freq:"daily", meta:"3 msgs", presence:false },
-  { id:14, title:"BOA CONVERSA", desc:"Conversar com presença", freq:"daily", meta:"1 conversa", presence:true },
-  { id:15, title:"REGISTRO DE VIDA", desc:"Registrar o dia dá sentido", freq:"daily", meta:"1 registro", presence:false },
-  { id:16, title:"PARADA ESPIRITUAL", desc:"Silêncio, oração ou reflexão", freq:"daily", meta:"10 min", presence:true },
-  { id:17, title:"GRATIDÃO", desc:"Reconhecer algo bom muda o olhar", freq:"daily", meta:"1 agradecimento", presence:true },
-  { id:18, title:"DESPOLUIÇÃO MENTAL", desc:"Interromper pensamentos negativos", freq:"daily", meta:"1 prática", presence:true },
-  { id:19, title:"SÓ POR HOJE, NÃO", desc:"Escolhas conscientes", freq:"daily", meta:"1 compromisso", presence:false },
-  { id:20, title:"COLORIR O PRATO", desc:"Mais cores naturais no prato", freq:"daily", meta:"1 refeição", presence:false },
-  { id:21, title:"APRENDER ALGO NOVO", desc:"Manter a curiosidade viva", freq:"daily", meta:"1 aprendizado", presence:false },
-  { id:22, title:"RECONHECER ALGUÉM", desc:"Valorizar o outro", freq:"daily", meta:"1 reconhecimento", presence:true },
-  { id:23, title:"MISSÃO PORTA AFORA", desc:"Sair de casa quebra a apatia", freq:"daily", meta:"1 saída", presence:false },
-  { id:24, title:"LIGAÇÃO QUE AQUECE", desc:"Ouvir e ser ouvido", freq:"daily", meta:"1 ligação", presence:true },
-  { id:25, title:"PEQUENA AVENTURA", desc:"Fazer algo diferente", freq:"daily", meta:"1 novidade", presence:false },
-  { id:26, title:"REGISTRO DE DESPESAS", desc:"Anotar gastos dá controle", freq:"daily", meta:"1 registro", presence:false },
-  { id:27, title:"PARTICIPAR DE ALGO", desc:"Grupos, encontros", freq:"weekly", meta:"1 vez/sem", presence:true },
-  { id:28, title:"AJUDAR ALGUÉM DE VERDADE", desc:"Oferecer ajuda concreta", freq:"weekly", meta:"1 gesto/sem", presence:true },
-  { id:29, title:"ARRUMAÇÃO COM MEMÓRIA", desc:"Organizar objetos com calma", freq:"weekly", meta:"20 min/sem", presence:false },
-  { id:30, title:"RITUAL DE LIBERAÇÃO", desc:"Escrever e soltar culpas", freq:"weekly", meta:"1 ritual", presence:true },
-  { id:31, title:"CURTIR CONSCIENTEMENTE", desc:"Permitir-se prazer simples", freq:"weekly", meta:"1 escolha", presence:true }
-];
-
-const MOODS = [
-  { emoji:"😢", name:"Triste", level:"Baixo" },
-  { emoji:"😐", name:"Neutro", level:"Médio-Baixo" },
-  { emoji:"🙂", name:"Bem", level:"Médio" },
-  { emoji:"😊", name:"Feliz", level:"Médio-Alto" },
-  { emoji:"🤩", name:"Excelente", level:"Alto" }
-];
-
-// =====================================================================
-// UTILITÁRIOS
-// =====================================================================
-function todayStr() { return new Date().toISOString().slice(0,10); }
-function formatCurrency(v) { return 'R$ '+v.toFixed(2).replace('.',','); }
-
-function showMsg(msg, type='info') {
-  const el = document.createElement('div');
-  el.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#2c3e50; color:white; padding:12px 24px; border-radius:40px; font-weight:600; z-index:9999; box-shadow:0 4px 20px rgba(0,0,0,0.3); max-width:90%; text-align:center;';
-  if (type==='error') el.style.background='#e74c3c';
-  else if (type==='success') el.style.background='#27ae60';
-  el.textContent = msg;
-  document.body.appendChild(el);
-  setTimeout(() => el.remove(), 2500);
+// Navegação entre seções
+function showSection(sectionId) {
+document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+document.getElementById(sectionId).classList.add('active');
 }
 
-// =====================================================================
-// PERSISTÊNCIA
-// =====================================================================
-function saveState() {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(appState)); } catch(e) {}
-}
-function loadState() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) {
-      const parsed = JSON.parse(raw);
-      appState = { ...appState, ...parsed };
-      if (!appState.habits || !appState.habits.length) appState.habits = ALL_HABITS.map(h => ({...h, streak:0}));
-      if (!appState.completed) appState.completed = {};
-      if (!appState.verbos) appState.verbos = {};
-      if (!appState.finances) appState.finances = { expenses: [] };
-      if (!appState.reminders) appState.reminders = [];
-      if (!appState.mood) appState.mood = {};
-      if (!appState.challenges) appState.challenges = { current: null, history: [] };
-      if (!appState.social) appState.social = { events: [] };
-      if (!appState.presence) appState.presence = { senseRecords: [], franklAnswers: [] };
-      if (!appState.fqDiary) appState.fqDiary = {};
-      if (appState.fqCalMonth === undefined) appState.fqCalMonth = new Date().getMonth();
-      if (appState.fqCalYear === undefined) appState.fqCalYear = new Date().getFullYear();
-      return true;
-    }
-  } catch(e) { console.warn('loadState error', e); }
-  return false;
-}
-function resetAllData() {
-  localStorage.removeItem(STORAGE_KEY);
-  location.reload();
-}
-function initHabits() {
-  if (!appState.habits || appState.habits.length === 0) {
-    appState.habits = ALL_HABITS.map(h => ({ ...h, streak: 0 }));
-    saveState();
-  }
+// Timer de respiração
+let timerInterval;
+function startBreathing() {
+let seconds = 0;
+clearInterval(timerInterval);
+timerInterval = setInterval(() => {
+seconds++;
+const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
+const secs = (seconds % 60).toString().padStart(2, '0');
+document.getElementById('timer').textContent = `${mins}:${secs}`;
+if (seconds >= 60) clearInterval(timerInterval);
+}, 1000);
 }
 
-// =====================================================================
-// EXPORTAÇÃO PDF (com 12 verbos)
-// =====================================================================
-function exportFqDiary() {
-  const now = new Date();
-  const month = now.getMonth();
-  const year = now.getFullYear();
-  const monthName = now.toLocaleString('pt-BR', { month: 'long' });
-  const userName = appState.user?.name || 'Usuário';
-
-  const entries = Object.entries(appState.fqDiary || {})
-    .filter(([date]) => {
-      const d = new Date(date);
-      return d.getMonth() === month && d.getFullYear() === year;
-    })
-    .sort((a, b) => a[0].localeCompare(b[0]));
-
-  if (entries.length === 0) {
-    showMsg('Nenhum registro neste mês.', 'error');
-    return;
-  }
-
-  let html = `
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <meta charset="UTF-8">
-      <title>Diário FQ10C</title>
-      <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 40px; max-width: 800px; margin: 0 auto; color: #1e2a3a; }
-        h1 { color: #2c3e50; font-size: 28px; border-bottom: 3px solid #f1c40f; padding-bottom: 10px; }
-        .sub { color: #5d6d7e; font-size: 16px; margin-bottom: 30px; }
-        .entry { background: #f8f9fa; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; border-left: 5px solid #2c3e50; page-break-inside: avoid; }
-        .entry .date { font-weight: 700; font-size: 18px; color: #2c3e50; margin-bottom: 8px; }
-        .entry .verb { font-weight: 600; color: #2c3e50; margin-top: 4px; }
-        .entry .answer { margin-left: 12px; color: #1e2a3a; }
-        .footer { margin-top: 40px; padding-top: 20px; border-top: 2px solid #ecf0f1; font-size: 13px; color: #95a5a6; text-align: center; }
-        .footer strong { color: #2c3e50; }
-        @media print {
-          body { padding: 20px; }
-          .entry { background: #f8f9fa; border-left-color: #2c3e50; }
-        }
-      </style>
-    </head>
-    <body>
-      <h1>🧘 Diário FQ10C</h1>
-      <div class="sub">
-        <strong>${userName}</strong> • ${monthName} de ${year}<br>
-        <span style="font-size:14px; color:#5d6d7e;">12 verbos para ancorar o agora</span>
-      </div>
-  `;
-
-  entries.forEach(([date, data]) => {
-    const formattedDate = new Date(date).toLocaleDateString('pt-BR', { weekday: 'short', day: '2-digit', month: 'short' });
-    html += `<div class="entry"><div class="date">📅 ${formattedDate}</div>`;
-    FQ_VERBS.forEach(v => {
-      const answer = data[v.key] || '';
-      if (answer) {
-        html += `<div class="verb">${v.icon} ${v.label}: <span class="answer">${answer}</span></div>`;
-      }
-    });
-    html += `</div>`;
-  });
-
-  html += `
-      <div class="footer">
-        <strong>Diário FQ10C</strong> – Mentoria Sentir-Se Presente • Projeto 70+ ANABB<br>
-        Desenvolvido por Ricardo de Faria Barros – Psicólogo<br>
-        Gerado em ${new Date().toLocaleString('pt-BR')}
-      </div>
-    </body>
-    </html>
-  `;
-
-  const win = window.open('', '_blank');
-  if (!win) {
-    showMsg('Permita pop-ups para exportar o PDF.', 'error');
-    return;
-  }
-  win.document.write(html);
-  win.document.close();
-  win.focus();
-  win.print();
-  showMsg('Relatório aberto. Use "Salvar como PDF".', 'success');
+// Salvar ancoragem
+function saveAncoragem() {
+const text = document.getElementById('ancoragem').value;
+if (text) {
+const data = JSON.parse(localStorage.getItem('ancoragens') || '[]');
+data.push({ date: new Date().toISOString(), text });
+localStorage.setItem('ancoragens', JSON.stringify(data));
+alert('Ancoragem salva! 🙏');
+document.getElementById('ancoragem').value = '';
+}
 }
 
-// =====================================================================
-// GERADOR DE ÍCONES PNG (fallback)
-// =====================================================================
-function generateAndDownloadIcons() {
-  function downloadIcon(size) {
-    const canvas = document.createElement('canvas');
-    canvas.width = size;
-    canvas.height = size;
-    const ctx = canvas.getContext('2d');
-    const radius = size * 0.22;
-    const w = size, h = size;
-    ctx.beginPath();
-    ctx.moveTo(radius, 0);
-    ctx.lineTo(w - radius, 0);
-    ctx.quadraticCurveTo(w, 0, w, radius);
-    ctx.lineTo(w, h - radius);
-    ctx.quadraticCurveTo(w, h, w - radius, h);
-    ctx.lineTo(radius, h);
-    ctx.quadraticCurveTo(0, h, 0, h - radius);
-    ctx.lineTo(0, radius);
-    ctx.quadraticCurveTo(0, 0, radius, 0);
-    ctx.closePath();
-    const grad = ctx.createLinearGradient(0, 0, w, h);
-    grad.addColorStop(0, '#1a252f');
-    grad.addColorStop(1, '#2c3e50');
-    ctx.fillStyle = grad;
-    ctx.fill();
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillStyle = '#f1c40f';
-    ctx.font = `bold ${size * 0.45}px Arial, sans-serif`;
-    ctx.shadowColor = 'rgba(0,0,0,0.3)';
-    ctx.shadowBlur = 10;
-    ctx.fillText('FQ10C', w/2, h/2 + size * 0.02);
-    ctx.shadowBlur = 0;
-    ctx.fillStyle = '#f1c40f';
-    ctx.font = `${size * 0.12}px Arial, sans-serif`;
-    ctx.fillText('Diário da Presença', w/2, h/2 + size * 0.35);
-    const link = document.createElement('a');
-    link.download = `icon-${size}.png`;
-    link.href = canvas.toDataURL('image/png');
-    link.click();
-  }
-  downloadIcon(192);
-  downloadIcon(512);
-  showMsg('Ícones gerados! Coloque na pasta do app.', 'success');
+// Salvar pergunta do dia
+function savePergunta() {
+const text = document.getElementById('perguntaDia').value;
+if (text) {
+const data = JSON.parse(localStorage.getItem('perguntas') || '[]');
+data.push({ date: new Date().toISOString(), text });
+localStorage.setItem('perguntas', JSON.stringify(data));
+alert('Percepção guardada! ✨');
+document.getElementById('perguntaDia').value = '';
+}
 }
 
-document.getElementById('generateIconsBtn')?.addEventListener('click', generateAndDownloadIcons);
-
-// =====================================================================
-// RENDER: DIÁRIO FQ10C + CALENDÁRIO
-// =====================================================================
-let fqSelectedDate = todayStr();
-
-function renderFqCalendar() {
-  const grid = document.getElementById('fqCalGrid');
-  const title = document.getElementById('fqCalTitle');
-  if (!grid || !title) return;
-
-  const month = appState.fqCalMonth;
-  const year = appState.fqCalYear;
-  const monthName = new Date(year, month).toLocaleString('pt-BR', { month: 'long' });
-  title.textContent = `${monthName.charAt(0).toUpperCase() + monthName.slice(1)} ${year}`;
-
-  const firstDay = new Date(year, month, 1).getDay();
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
-  const today = new Date();
-
-  const dayNames = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
-  grid.innerHTML = dayNames.map(d => `<div class="cal-day-name">${d}</div>`).join('');
-
-  for (let i = 0; i < firstDay; i++) {
-    grid.innerHTML += `<div class="cal-day empty"></div>`;
-  }
-
-  for (let d = 1; d <= daysInMonth; d++) {
-    const dateObj = new Date(year, month, d);
-    const dateStr = dateObj.toISOString().slice(0,10);
-    const isToday = dateStr === todayStr();
-    const hasEntry = appState.fqDiary && appState.fqDiary[dateStr] && 
-                     Object.values(appState.fqDiary[dateStr]).some(v => v && v.trim() !== '');
-    const isSelected = dateStr === fqSelectedDate;
-
-    let classes = 'cal-day';
-    if (isToday) classes += ' today';
-    if (hasEntry) classes += ' has-entry';
-    if (isSelected) classes += ' selected';
-
-    grid.innerHTML += `<div class="${classes}" data-date="${dateStr}">${d}</div>`;
-  }
-
-  document.querySelectorAll('#fqCalGrid .cal-day:not(.empty)').forEach(el => {
-    el.addEventListener('click', function() {
-      const date = this.dataset.date;
-      if (date) {
-        fqSelectedDate = date;
-        renderFqCalendar();
-        renderFqDiary();
-        document.getElementById('fqSelectedDate').textContent = 
-          date === todayStr() ? '📅 Hoje' : `📅 ${new Date(date).toLocaleDateString('pt-BR')}`;
-      }
-    });
-  });
+// Salvar diário
+function saveDiario() {
+const text = document.getElementById('diario').value;
+if (text) {
+const today = new Date().toISOString().split('T')[0];
+const data = JSON.parse(localStorage.getItem('diarios') || '{}');
+data[today] = text;
+localStorage.setItem('diarios', JSON.stringify(data));
+alert('Diário salvo! 📝');
+renderCalendar();
+}
 }
 
-function renderFqDiary() {
-  const container = document.getElementById('fqGrid');
-  if (!container) return;
-
-  const todayData = appState.fqDiary[fqSelectedDate] || {};
-
-  container.innerHTML = FQ_VERBS.map(v => `
-    <div class="fq-item">
-      <label>${v.icon} ${v.label}</label>
-      <textarea rows="2" data-key="${v.key}" placeholder="${v.pergunta}">${todayData[v.key] || ''}</textarea>
-    </div>
-  `).join('');
+// Renderizar calendário
+function renderCalendar() {
+const diarios = JSON.parse(localStorage.getItem('diarios') || '{}');
+const calendar = document.getElementById('calendar');
+calendar.innerHTML = '';
+const today = new Date();
+for (let i = 0; i < 30; i++) {
+const date = new Date(today);
+date.setDate(date.getDate() - i);
+const dateStr = date.toISOString().split('T')[0];
+const day = document.createElement('div');
+day.className = 'calendar-day';
+if (diarios[dateStr]) day.classList.add('has-entry');
+if (i === 0) day.classList.add('today');
+day.textContent = date.getDate();
+calendar.appendChild(day);
+}
 }
 
-function saveFqDiary() {
-  const today = fqSelectedDate;
-  const data = {};
-  document.querySelectorAll('#fqGrid textarea').forEach(ta => {
-    const key = ta.dataset.key;
-    const val = ta.value.trim();
-    if (val) data[key] = val;
-  });
-
-  if (Object.keys(data).length === 0) {
-    showMsg('Nada para salvar. Escreva algo em pelo menos um verbo.', 'error');
-    return;
-  }
-
-  if (!appState.fqDiary) appState.fqDiary = {};
-  appState.fqDiary[today] = { ...appState.fqDiary[today], ...data };
-  saveState();
-  renderFqCalendar();
-  showMsg('Diário FQ10C salvo!', 'success');
+// Exportar PDF (simulação)
+function exportPDF() {
+alert('📄 PDF será gerado com os dados do mês atual!\n\nEm um app real, isso geraria um arquivo PDF completo.');
 }
 
-document.getElementById('fqCalPrev')?.addEventListener('click', () => {
-  if (appState.fqCalMonth === 0) { appState.fqCalMonth = 11; appState.fqCalYear--; }
-  else appState.fqCalMonth--;
-  renderFqCalendar();
-});
-document.getElementById('fqCalNext')?.addEventListener('click', () => {
-  if (appState.fqCalMonth === 11) { appState.fqCalMonth = 0; appState.fqCalYear++; }
-  else appState.fqCalMonth++;
-  renderFqCalendar();
-});
-document.getElementById('saveFqBtn')?.addEventListener('click', saveFqDiary);
-document.getElementById('exportFqBtn')?.addEventListener('click', exportFqDiary);
-
-// =====================================================================
-// RENDER: DEMAIS MÓDULOS
-// =====================================================================
-function renderHabits() {
-  const dailyContainer = document.getElementById('dailyHabits');
-  const weeklyContainer = document.getElementById('weeklyHabits');
-  if (!dailyContainer || !weeklyContainer) return;
-  const today = todayStr();
-  const completedToday = appState.completed[today] || { daily: [], weekly: [] };
-
-  const daily = appState.habits.filter(h => h.freq === 'daily');
-  const weekly = appState.habits.filter(h => h.freq === 'weekly');
-
-  dailyContainer.innerHTML = daily.map(h => habitHTML(h, completedToday.daily.includes(h.id))).join('');
-  weeklyContainer.innerHTML = weekly.map(h => habitHTML(h, completedToday.weekly.includes(h.id))).join('');
+// Desafios
+function saveDesafio() {
+const input = document.getElementById('desafioInput');
+if (input.value) {
+const data = JSON.parse(localStorage.getItem('desafios') || '[]');
+data.push({ date: new Date().toISOString(), text: input.value });
+localStorage.setItem('desafios', JSON.stringify(data));
+input.value = '';
+renderDesafios();
 }
-function habitHTML(habit, done) {
-  const presenceBadge = habit.presence ? '<span class="habit-badge">🧘 Presença</span>' : '';
-  return `
-    <div class="habit-item" style="border-left-color: ${habit.presence ? '#f1c40f' : '#2c3e50'};">
-      <div class="info">
-        <h4>${habit.title} ${presenceBadge}</h4>
-        <p>${habit.desc} • ${habit.meta}</p>
-      </div>
-      <div class="habit-check ${done ? 'done' : ''}" data-id="${habit.id}" data-freq="${habit.freq}">
-        ${done ? '✓' : ''}
-      </div>
-    </div>
-  `;
 }
 
-function renderPresence() {
-  const historyDiv = document.getElementById('presenceHistory');
-  if (!historyDiv) return;
-  const allEntries = [
-    ...appState.presence.senseRecords.map(s => ({ date: s.date, text: `Ancoragem: ${s.sense1 || ''} ${s.sense2 || ''} ${s.sense3 || ''} ${s.sense4 || ''} ${s.sense5 || ''}` })),
-    ...appState.presence.franklAnswers.map(f => ({ date: f.date, text: `Pergunta: ${f.answer}` }))
-  ].sort((a,b) => b.date.localeCompare(a.date)).slice(0, 10);
-  historyDiv.innerHTML = allEntries.length === 0 ? '<p style="color:#5d6d7e;">Nenhum registro de presença ainda.</p>' :
-    allEntries.map(e => `<div style="padding:8px 0; border-bottom:1px solid #ecf0f1;"><strong>${e.date}</strong> – ${e.text}</div>`).join('');
+function renderDesafios() {
+const desafios = JSON.parse(localStorage.getItem('desafios') || '[]');
+const container = document.getElementById('desafioHistorico');
+container.innerHTML = desafios.map(d => `<div style="padding: 10px; border-bottom: 1px solid #eee;">${d.text} <small>(${new Date(d.date).toLocaleDateString()})</small></div>`).join('');
 }
 
-function renderChallenge() {
-  const monthDisplay = document.getElementById('currentMonthDisplay');
-  const challengeDisplay = document.getElementById('challengeDisplay');
-  const historyDiv = document.getElementById('challengeHistory');
-  if (!monthDisplay || !challengeDisplay) return;
-  const now = new Date();
-  monthDisplay.textContent = `${now.toLocaleString('pt-BR', { month: 'long' })} de ${now.getFullYear()}`;
-
-  const ch = appState.challenges.current;
-  if (ch) {
-    const progress = ch.currentValue ? Math.min(100, (ch.currentValue / ch.goal) * 100) : 0;
-    challengeDisplay.innerHTML = `
-      <div style="font-weight:700; font-size:20px;">${ch.title}</div>
-      <p>${ch.description}</p>
-      <div style="display:flex; gap:20px; margin:10px 0;">
-        <div><strong>Meta:</strong> ${ch.goal} ${ch.unit}</div>
-        <div><strong>Atual:</strong> ${ch.currentValue || 0} ${ch.unit}</div>
-        <div><strong>Progresso:</strong> ${Math.round(progress)}%</div>
-      </div>
-      <div class="challenge-progress"><div class="bar" style="width:${progress}%;"></div></div>
-      <div style="display:flex; gap:10px; margin-top:12px;">
-        <button class="btn-primary" style="flex:1;" id="challengeAddBtn">+1</button>
-        <button class="btn-primary" style="flex:1; background:#e67e22;" id="challengeSubBtn">-1</button>
-      </div>
-    `;
-    document.getElementById('challengeAddBtn')?.addEventListener('click', ()=> updateChallenge(1));
-    document.getElementById('challengeSubBtn')?.addEventListener('click', ()=> updateChallenge(-1));
-  } else {
-    challengeDisplay.innerHTML = '<p style="color:#5d6d7e;">Nenhum desafio ativo. Defina um abaixo.</p>';
-  }
-  if (historyDiv) {
-    const hist = appState.challenges.history || [];
-    historyDiv.innerHTML = hist.length === 0 ? '<p style="color:#5d6d7e;">Nenhum histórico.</p>' :
-      hist.map(h => `<div style="padding:8px 0; border-bottom:1px solid #ecf0f1;"><strong>${h.month}</strong> – ${h.title} (${Math.round((h.currentValue/h.goal)*100)}%)</div>`).join('');
-  }
+// Eventos sociais
+function addEvento() {
+const tipo = prompt('Tipo (Família/Trabalho/Lazer):');
+if (tipo) {
+const count = parseInt(document.getElementById(`stat${tipo}`).textContent) + 1;
+document.getElementById(`stat${tipo}`).textContent = count;
+localStorage.setItem('socialStats', JSON.stringify({
+familia: document.getElementById('statFamilia').textContent,
+trabalho: document.getElementById('statTrabalho').textContent,
+lazer: document.getElementById('statLazer').textContent
+}));
 }
-function updateChallenge(delta) {
-  const ch = appState.challenges.current;
-  if (!ch) return;
-  const newVal = Math.max(0, (ch.currentValue || 0) + delta);
-  ch.currentValue = newVal;
-  saveState();
-  renderChallenge();
-  showMsg(`Atualizado: ${newVal} ${ch.unit}`);
 }
 
-function renderSocial() {
-  const events = appState.social.events || [];
-  const cats = { family:0, work:0, leisure:0 };
-  const daysSet = new Set();
-  events.forEach(e => {
-    if (e.category) cats[e.category] = (cats[e.category] || 0) + 1;
-    daysSet.add(e.date);
-  });
-  document.getElementById('familyCount').textContent = cats.family;
-  document.getElementById('workCount').textContent = cats.work;
-  document.getElementById('leisureCount').textContent = cats.leisure;
-  document.getElementById('socialDaysCount').textContent = daysSet.size;
-
-  const list = document.getElementById('socialEventsList');
-  if (!list) return;
-  const today = todayStr();
-  const recent = events.filter(e => e.date === today).slice(0, 10);
-  list.innerHTML = recent.length === 0 ? '<p style="color:#5d6d7e;">Nenhum evento social hoje.</p>' :
-    recent.map(e => `<div class="expense-item"><span>${e.name} (${e.duration}h) <span style="font-size:14px; color:#5d6d7e;">${e.category}</span></span><span style="cursor:pointer;" onclick="deleteSocialEvent(${e.id})">✕</span></div>`).join('');
+// Emociômetro
+function saveHumor() {
+const humor = document.getElementById('humor').value;
+const presenca = document.getElementById('presenca').value;
+if (humor && presenca) {
+const data = JSON.parse(localStorage.getItem('humorHistorico') || '[]');
+data.push({ date: new Date().toISOString(), humor, presenca });
+localStorage.setItem('humorHistorico', JSON.stringify(data));
+alert('Humor e presença registrados! 😊');
+renderHumorHistorico();
 }
-function deleteSocialEvent(id) {
-  appState.social.events = appState.social.events.filter(e => e.id !== id);
-  saveState();
-  renderSocial();
 }
 
-function renderFinances() {
-  const today = todayStr();
-  const todayExpenses = (appState.finances.expenses || []).filter(e => e.date === today);
-  const total = todayExpenses.reduce((sum, e) => sum + e.amount, 0);
-  document.getElementById('totalSpent').textContent = formatCurrency(total);
-
-  const list = document.getElementById('expensesList');
-  if (!list) return;
-  list.innerHTML = todayExpenses.length === 0 ? '<p style="color:#5d6d7e;">Nenhuma despesa hoje.</p>' :
-    todayExpenses.map(e => `<div class="expense-item"><span>${e.description} <span style="font-size:14px; color:#5d6d7e;">${e.category}</span></span><span><strong>${formatCurrency(e.amount)}</strong> <span style="cursor:pointer; margin-left:10px;" onclick="deleteExpense(${e.id})">✕</span></span></div>`).join('');
-}
-function deleteExpense(id) {
-  appState.finances.expenses = appState.finances.expenses.filter(e => e.id !== id);
-  saveState();
-  renderFinances();
+function renderHumorHistorico() {
+const data = JSON.parse(localStorage.getItem('humorHistorico') || '[]');
+const container = document.getElementById('humorHistorico');
+container.innerHTML = data.slice(-10).reverse().map(d => 
+`<div style="padding: 10px; border-bottom: 1px solid #eee;">${d.humor} | Presença: ${d.presenca}/5 <small>(${new Date(d.date).toLocaleDateString()})</small></div>`
+).join('');
 }
 
-function renderReminders() {
-  const list = document.getElementById('remindersList');
-  if (!list) return;
-  const reminders = appState.reminders || [];
-  list.innerHTML = reminders.length === 0 ? '<p style="color:#5d6d7e;">Nenhum lembrete.</p>' :
-    reminders.map(r => `<div class="reminder-item" style="border-left:4px solid ${r.priority==='urgent'?'#e74c3c':'#2c3e50'};"><span class="${r.completed ? 'done' : ''}">${r.text}</span><span style="cursor:pointer;" onclick="toggleReminder(${r.id})">${r.completed ? '↩️' : '✅'}</span></div>`).join('');
+// Logout
+function logout() {
+if (confirm('Deseja sair?')) {
+localStorage.clear();
+location.reload();
 }
-function toggleReminder(id) {
-  const r = appState.reminders.find(rem => rem.id === id);
-  if (r) { r.completed = !r.completed; saveState(); renderReminders(); }
 }
 
-function renderMood() {
-  const grid = document.getElementById('moodGrid');
-  if (grid) {
-    grid.innerHTML = MOODS.map((m, i) => `
-      <div class="mood-item" data-index="${i}" style="border-color: ${appState.mood[todayStr()]?.level === m.level ? '#2c3e50' : '#dfe6e9'};">
-        <div class="emoji">${m.emoji}</div>
-        <div class="label">${m.name}</div>
-      </div>
-    `).join('');
-  }
+// Inicialização
+document.addEventListener('DOMContentLoaded', () => {
+renderCalendar();
+renderDesafios();
+renderHumorHistorico();
 
-  const historyDiv = document.getElementById('moodHistory');
-  if (historyDiv) {
-    const entries = Object.entries(appState.mood || {}).sort((a,b) => b[0].localeCompare(a[0])).slice(0,5);
-    historyDiv.innerHTML = entries.length === 0 ? '<p style="color:#5d6d7e;">Nenhum registro.</p>' :
-      entries.map(([date, data]) => {
-        const mood = MOODS.find(m => m.level === data.level);
-        return `<div style="padding:6px 0; border-bottom:1px solid #ecf0f1;">${date} – ${mood?.emoji || '?'} ${data.name || ''} ${data.presenceLevel ? '🧘 Nível '+data.presenceLevel : ''}</div>`;
-      }).join('');
-  }
-
-  const display = document.getElementById('todayMoodDisplay');
-  const today = todayStr();
-  const todayMood = appState.mood[today];
-  if (todayMood) {
-    const m = MOODS.find(m => m.level === todayMood.level);
-    display.innerHTML = `${m?.emoji || ''} ${todayMood.name || ''} ${todayMood.presenceLevel ? '– Presença: '+todayMood.presenceLevel : ''}`;
-  } else {
-    display.textContent = 'Selecione seu humor';
-  }
-  document.getElementById('moodNotes').value = todayMood?.notes || '';
-}
-
-function renderAll() {
-  renderHabits();
-  renderPresence();
-  renderChallenge();
-  renderSocial();
-  renderFinances();
-  renderReminders();
-  renderMood();
-  renderFqCalendar();
-  renderFqDiary();
-  document.getElementById('fqSelectedDate').textContent = 
-    fqSelectedDate === todayStr() ? '📅 Hoje' : `📅 ${new Date(fqSelectedDate).toLocaleDateString('pt-BR')}`;
-}
-
-// =====================================================================
-// EVENTOS DO APP
-// =====================================================================
-function setupAppEvents() {
-  document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      this.classList.add('active');
-      const tabId = this.dataset.tab;
-      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-      const target = document.getElementById('tab-'+tabId);
-      if (target) target.classList.add('active');
-      if (tabId === 'agora') renderPresence();
-      if (tabId === 'diario') { renderFqCalendar(); renderFqDiary(); }
-      if (tabId === 'challenge') renderChallenge();
-      if (tabId === 'social') renderSocial();
-      if (tabId === 'finances') renderFinances();
-      if (tabId === 'reminders') renderReminders();
-      if (tabId === 'mood') renderMood();
-      if (tabId === 'habits') renderHabits();
-    });
-  });
-
-  document.addEventListener('click', function(e) {
-    const check = e.target.closest('.habit-check');
-    if (check) {
-      const id = parseInt(check.dataset.id);
-      const freq = check.dataset.freq;
-      const today = todayStr();
-      if (!appState.completed[today]) appState.completed[today] = { daily: [], weekly: [] };
-      const arr = freq === 'weekly' ? appState.completed[today].weekly : appState.completed[today].daily;
-      const idx = arr.indexOf(id);
-      if (idx === -1) { arr.push(id); showMsg('✅ Hábito concluído!', 'success'); }
-      else { arr.splice(idx, 1); showMsg('↩️ Desfeito', 'info'); }
-      saveState();
-      renderHabits();
-    }
-  });
-
-  document.getElementById('saveSenseBtn')?.addEventListener('click', function() {
-    const s1 = document.getElementById('sense1').value.trim();
-    const s2 = document.getElementById('sense2').value.trim();
-    const s3 = document.getElementById('sense3').value.trim();
-    const s4 = document.getElementById('sense4').value.trim();
-    const s5 = document.getElementById('sense5').value.trim();
-    if (!s1 && !s2 && !s3 && !s4 && !s5) { showMsg('Preencha pelo menos um campo.', 'error'); return; }
-    appState.presence.senseRecords.push({ date: todayStr(), sense1: s1, sense2: s2, sense3: s3, sense4: s4, sense5: s5 });
-    saveState();
-    renderPresence();
-    showMsg('Ancoragem salva!', 'success');
-    ['sense1','sense2','sense3','sense4','sense5'].forEach(id => document.getElementById(id).value = '');
-  });
-
-  let breathTimerInterval = null, breathSeconds = 0, breathRunning = false;
-  document.getElementById('breathStartBtn')?.addEventListener('click', function() {
-    const circle = document.getElementById('breathCircle');
-    const timer = document.getElementById('breathTimer');
-    if (breathRunning) {
-      clearInterval(breathTimerInterval);
-      breathRunning = false;
-      this.textContent = 'Iniciar';
-      circle.style.transform = 'scale(1)';
-      circle.textContent = 'Inspire';
-      timer.textContent = '00:00';
-      return;
-    }
-    breathRunning = true;
-    this.textContent = 'Parar';
-    breathSeconds = 0;
-    timer.textContent = '00:00';
-    let phase = 'in';
-    circle.style.transition = 'transform 1.5s ease-in-out';
-    breathTimerInterval = setInterval(() => {
-      breathSeconds++;
-      const mins = String(Math.floor(breathSeconds / 60)).padStart(2, '0');
-      const secs = String(breathSeconds % 60).padStart(2, '0');
-      timer.textContent = `${mins}:${secs}`;
-      if (phase === 'in') { circle.style.transform = 'scale(1.4)'; circle.textContent = 'Inspire'; phase = 'out'; }
-      else { circle.style.transform = 'scale(1)'; circle.textContent = 'Expire'; phase = 'in'; }
-      if (breathSeconds >= 60) {
-        clearInterval(breathTimerInterval);
-        breathRunning = false;
-        document.getElementById('breathStartBtn').textContent = 'Concluído!';
-        circle.style.transform = 'scale(1)';
-        circle.textContent = '🧘';
-        showMsg('Respiração concluída!', 'success');
-      }
-    }, 3000);
-  });
-
-  document.getElementById('saveFranklBtn')?.addEventListener('click', function() {
-    const answer = document.getElementById('franklAnswer').value.trim();
-    if (!answer) { showMsg('Escreva algo para guardar.', 'error'); return; }
-    appState.presence.franklAnswers.push({ date: todayStr(), answer: answer });
-    saveState();
-    renderPresence();
-    showMsg('Percepção guardada!', 'success');
-    document.getElementById('franklAnswer').value = '';
-  });
-
-  document.getElementById('saveChallengeBtn')?.addEventListener('click', function() {
-    const title = document.getElementById('challengeTitle').value.trim();
-    const desc = document.getElementById('challengeDesc').value.trim();
-    const goal = parseFloat(document.getElementById('challengeGoal').value);
-    const unit = document.getElementById('challengeUnit').value.trim();
-    if (!title || !desc || !goal || !unit) { showMsg('Preencha todos os campos.', 'error'); return; }
-    if (appState.challenges.current) {
-      appState.challenges.history.push({
-        ...appState.challenges.current,
-        completed: (appState.challenges.current.currentValue || 0) >= appState.challenges.current.goal,
-        month: new Date().toLocaleString('pt-BR', { month: 'long', year: 'numeric' })
-      });
-    }
-    appState.challenges.current = { title, description: desc, goal, unit, currentValue: 0, month: new Date().toLocaleString('pt-BR', { month: 'long', year: 'numeric' }) };
-    saveState();
-    renderChallenge();
-    showMsg('Desafio salvo!', 'success');
-    document.getElementById('challengeTitle').value = '';
-    document.getElementById('challengeDesc').value = '';
-    document.getElementById('challengeGoal').value = '';
-    document.getElementById('challengeUnit').value = '';
-  });
-
-  document.getElementById('addSocialBtn')?.addEventListener('click', function() {
-    const name = document.getElementById('socialEventName').value.trim();
-    const category = document.getElementById('socialCategory').value;
-    const duration = parseFloat(document.getElementById('socialDuration').value);
-    if (!name || !duration || duration <= 0) { showMsg('Preencha nome e duração.', 'error'); return; }
-    appState.social.events.push({ id: Date.now(), name, category, duration, date: todayStr(), completed: true });
-    saveState();
-    renderSocial();
-    showMsg('Evento social adicionado!', 'success');
-    document.getElementById('socialEventName').value = '';
-    document.getElementById('socialDuration').value = '';
-  });
-
-  document.getElementById('addExpenseBtn')?.addEventListener('click', function() {
-    const desc = document.getElementById('expenseDesc').value.trim();
-    const amount = parseFloat(document.getElementById('expenseAmount').value);
-    if (!desc || !amount || amount <= 0) { showMsg('Preencha descrição e valor.', 'error'); return; }
-    appState.finances.expenses.push({ id: Date.now(), description: desc, category: 'outros', amount: amount, date: todayStr() });
-    saveState();
-    renderFinances();
-    showMsg('Despesa registrada!', 'success');
-    document.getElementById('expenseDesc').value = '';
-    document.getElementById('expenseAmount').value = '';
-  });
-
-  document.getElementById('addReminderBtn')?.addEventListener('click', function() {
-    const text = document.getElementById('reminderText').value.trim();
-    const priority = document.getElementById('reminderPriority').value;
-    if (!text) { showMsg('Digite o lembrete.', 'error'); return; }
-    appState.reminders.push({ id: Date.now(), text, priority, completed: false, createdAt: new Date().toISOString() });
-    saveState();
-    renderReminders();
-    showMsg('Lembrete adicionado!', 'success');
-    document.getElementById('reminderText').value = '';
-  });
-
-  document.getElementById('moodGrid')?.addEventListener('click', function(e) {
-    const item = e.target.closest('.mood-item');
-    if (!item) return;
-    document.querySelectorAll('.mood-item').forEach(el => el.style.borderColor = '#dfe6e9');
-    item.style.borderColor = '#2c3e50';
-  });
-
-  document.getElementById('presenceScale')?.addEventListener('click', function(e) {
-    const btn = e.target.closest('button');
-    if (!btn) return;
-    document.querySelectorAll('#presenceScale button').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('presenceLevelDisplay').textContent = 'Presença: ' + btn.textContent;
-  });
-
-  document.getElementById('saveMoodBtn')?.addEventListener('click', function() {
-    const selected = document.querySelector('.mood-item[style*="border-color: #2c3e50"]');
-    if (!selected) { showMsg('Selecione um humor.', 'error'); return; }
-    const index = parseInt(selected.dataset.index);
-    const mood = MOODS[index];
-    const presenceBtn = document.querySelector('#presenceScale button.active');
-    const presenceLevel = presenceBtn ? parseInt(presenceBtn.dataset.level) : null;
-    const notes = document.getElementById('moodNotes').value.trim();
-    appState.mood[todayStr()] = { level: mood.level, emoji: mood.emoji, name: mood.name, notes, presenceLevel };
-    saveState();
-    renderMood();
-    showMsg('Humor e presença salvos!', 'success');
-  });
-
-  document.getElementById('logoutBtn')?.addEventListener('click', function() {
-    if (confirm('Deseja sair?')) {
-      document.getElementById('appContent').style.display = 'none';
-      document.getElementById('loginModal').classList.remove('hidden');
-      document.getElementById('loginUserName').textContent = appState.user.name;
-      document.querySelectorAll('#loginPinGroup input').forEach(inp => { inp.value = ''; });
-      document.getElementById('loginError').textContent = '';
-      document.querySelector('#loginPinGroup input[data-idx="0"]')?.focus();
-    }
-  });
-}
-
-// =====================================================================
-// SISTEMA DE PIN
-// =====================================================================
-function setupPinNavigation(groupSelector, onComplete) {
-  const inputs = document.querySelectorAll(groupSelector + ' .pin-input');
-  inputs.forEach((input, idx) => {
-    input.addEventListener('input', function(e) {
-      this.value = this.value.replace(/\D/g, '').slice(0,1);
-      if (this.value.length === 1) {
-        if (idx < 3) inputs[idx+1]?.focus();
-        else if (onComplete) onComplete();
-      }
-    });
-    input.addEventListener('keydown', function(e) {
-      if (e.key === 'Backspace' && !this.value && idx > 0) {
-        inputs[idx-1]?.focus();
-      }
-      if (e.key === 'Enter' && onComplete) onComplete();
-    });
-    input.addEventListener('focus', function() { this.select(); });
-  });
-}
-
-function initAuth() {
-  const hasData = loadState();
-  const hasUser = appState.user && appState.user.name && appState.user.pin;
-
-  if (hasData && hasUser) {
-    document.getElementById('signupModal').classList.add('hidden');
-    document.getElementById('loginModal').classList.remove('hidden');
-    document.getElementById('loginUserName').textContent = appState.user.name;
-    document.getElementById('loginError').textContent = '';
-    document.querySelectorAll('#loginPinGroup input').forEach(inp => inp.value = '');
-    document.querySelector('#loginPinGroup input[data-idx="0"]')?.focus();
-  } else {
-    document.getElementById('signupModal').classList.remove('hidden');
-    document.getElementById('loginModal').classList.add('hidden');
-    document.getElementById('signupError').textContent = '';
-    document.querySelectorAll('#signupPinGroup input').forEach(inp => inp.value = '');
-    document.getElementById('signupName').value = '';
-    document.getElementById('signupName').focus();
-  }
-}
-
-document.getElementById('signupBtn')?.addEventListener('click', function() {
-  const name = document.getElementById('signupName').value.trim();
-  const pinInputs = document.querySelectorAll('#signupPinGroup .pin-input');
-  const pin = Array.from(pinInputs).map(inp => inp.value).join('');
-  const errorEl = document.getElementById('signupError');
-
-  if (!name) { errorEl.textContent = 'Digite seu nome.'; return; }
-  if (pin.length !== 4) { errorEl.textContent = 'Digite um PIN de 4 dígitos.'; return; }
-  if (!/^\d{4}$/.test(pin)) { errorEl.textContent = 'Use apenas números.'; return; }
-
-  appState.user = { name, pin };
-  appState.habits = ALL_HABITS.map(h => ({ ...h, streak: 0 }));
-  appState.fqDiary = {};
-  saveState();
-
-  document.getElementById('signupModal').classList.add('hidden');
-  document.getElementById('appContent').style.display = 'block';
-  document.getElementById('displayName').textContent = name;
-  initHabits();
-  fqSelectedDate = todayStr();
-  renderAll();
-  setupAppEvents();
-  showMsg(`Conta criada! Seu PIN é ${pin}. Anote em lugar seguro.`, 'success');
-
-  if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.matchMedia('(display-mode: standalone)').matches) {
-    setTimeout(() => showMsg('📱 Para instalar: Safari → Compartilhar → "Adicionar à Tela de Início"', 'info'), 2000);
-  }
-});
-
-document.getElementById('loginBtn')?.addEventListener('click', function() {
-  const pinInputs = document.querySelectorAll('#loginPinGroup .pin-input');
-  const pin = Array.from(pinInputs).map(inp => inp.value).join('');
-  const errorEl = document.getElementById('loginError');
-
-  if (pin.length !== 4) { errorEl.textContent = 'Digite o PIN de 4 dígitos.'; return; }
-  if (pin === appState.user.pin) {
-    document.getElementById('loginModal').classList.add('hidden');
-    document.getElementById('appContent').style.display = 'block';
-    document.getElementById('displayName').textContent = appState.user.name;
-    initHabits();
-    fqSelectedDate = todayStr();
-    renderAll();
-    setupAppEvents();
-    showMsg('Bem-vindo de volta!', 'success');
-  } else {
-    errorEl.textContent = 'PIN incorreto. Tente novamente.';
-    pinInputs.forEach(inp => { inp.value = ''; });
-    pinInputs[0]?.focus();
-  }
-});
-
-document.getElementById('resetPinBtn')?.addEventListener('click', function() {
-  if (confirm('⚠️ Isso vai apagar TODOS os seus dados. Tem certeza?')) {
-    resetAllData();
-  }
-});
-
-setupPinNavigation('#signupPinGroup', () => document.getElementById('signupBtn')?.click());
-setupPinNavigation('#loginPinGroup', () => document.getElementById('loginBtn')?.click());
-
-// =====================================================================
-// PWA: INSTALAÇÃO E SERVICE WORKER
-// =====================================================================
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  document.getElementById('installBtn').style.display = 'inline-block';
-});
-document.getElementById('installBtn')?.addEventListener('click', async () => {
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    const result = await deferredPrompt.userChoice;
-    if (result.outcome === 'accepted') showMsg('App instalado!', 'success');
-    deferredPrompt = null;
-    document.getElementById('installBtn').style.display = 'none';
-  } else {
-    showMsg('Abra no Safari/Chrome e use "Adicionar à Tela de Início"', 'info');
-  }
-});
-
+// Registrar Service Worker
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js').catch(console.warn);
-  });
+window.addEventListener('load', () => {
+navigator.serviceWorker.register('./sw.js')
+.then(reg => console.log('✅ Service Worker registrado'))
+.catch(err => console.log('❌ Erro no SW:', err));
+});
 }
-
-// =====================================================================
-// INICIALIZAÇÃO
-// =====================================================================
-document.addEventListener('DOMContentLoaded', function() {
-  initAuth();
 });
 </script>
+
 </body>
 </html>

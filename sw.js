@@ -1,33 +1,63 @@
-const CACHE_NAME = 'fq10c-v1';
-const ASSETS = [
+const CACHE_NAME = 'longeviver-v1';
+const urlsToCache = [
   './',
   './index.html',
-  './manifest.webmanifest',
-  './icon.png'
+  './manifest.json',
+  './icon-192.png',
+  './icon-512.png'
 ];
 
+// Instalação do Service Worker
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache =>
-      cache.addAll(ASSETS).catch(() => {})
-    )
+    caches.open(CACHE_NAME)
+      .then(cache => {
+        console.log('Cache aberto');
+        return cache.addAll(urlsToCache);
+      })
+      .catch(err => {
+        console.log('Erro ao cachear:', err);
+      })
   );
   self.skipWaiting();
 });
 
+// Ativação - limpa caches antigos
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
-    )
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cacheName => {
+          if (cacheName !== CACHE_NAME) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    })
   );
   self.clients.claim();
 });
 
+// Intercepta requisições
 self.addEventListener('fetch', event => {
   event.respondWith(
-    caches.match(event.request).then(cached => cached || fetch(event.request).catch(() => {
-      if (event.request.mode === 'navigate') return caches.match('./index.html');
-    }))
+    caches.match(event.request)
+      .then(response => {
+        if (response) {
+          return response;
+        }
+        return fetch(event.request).then(response => {
+          if (!response || response.status !== 200 || response.type !== 'basic') {
+            return response;
+          }
+          const responseToCache = response.clone();
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(event.request, responseToCache);
+          });
+          return response;
+        });
+      }).catch(() => {
+        return caches.match('./index.html');
+      })
   );
 });
