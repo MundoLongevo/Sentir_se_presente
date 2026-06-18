@@ -1,1008 +1,1778 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compliance, Ética e LGPD para Profissionais de Saúde | Rodrigo Barros</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --azul-institucional: #003366;
-            --verde-saude: #00A86B;
-            --laranja-alerta: #FF6B35;
-            --roxo-inovacao: #6B4EE6;
-            --vermelho-perigo: #D62828;
-            --cinza-claro: #F5F5F5;
-            --texto-escuro: #2C3E50;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--texto-escuro);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header */
-        header {
-            background: linear-gradient(135deg, var(--azul-institucional) 0%, var(--roxo-inovacao) 100%);
-            color: white;
-            padding: 3rem 0;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        header .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.95;
-        }
-
-        header .author {
-            margin-top: 1.5rem;
-            font-style: italic;
-            background: rgba(255,255,255,0.1);
-            display: inline-block;
-            padding: 0.5rem 1.5rem;
-            border-radius: 25px;
-        }
-
-        /* Navigation */
-        nav {
-            background: white;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 1rem 0;
-        }
-
-        nav li {
-            margin: 0 1rem;
-        }
-
-        nav a {
-            color: var(--azul-institucional);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-        }
-
-        nav a:hover {
-            color: var(--verde-saude);
-            background: var(--cinza-claro);
-        }
-
-        /* Sections */
-        section {
-            background: white;
-            margin: 2rem 0;
-            padding: 3rem 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        section h2 {
-            color: var(--azul-institucional);
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 4px solid var(--verde-saude);
-        }
-
-        section h3 {
-            color: var(--roxo-inovacao);
-            font-size: 1.5rem;
-            margin: 2rem 0 1rem;
-        }
-
-        /* Cards */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .card {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            padding: 2rem;
-            border-radius: 10px;
-            border-left: 5px solid var(--verde-saude);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-        }
-
-        .card h4 {
-            color: var(--azul-institucional);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-
-        .card.warning {
-            border-left-color: var(--laranja-alerta);
-            background: linear-gradient(135deg, #fff5f0 0%, #ffe4d6 100%);
-        }
-
-        .card.danger {
-            border-left-color: var(--vermelho-perigo);
-            background: linear-gradient(135deg, #ffe6e6 0%, #ffcccc 100%);
-        }
-
-        .card.success {
-            border-left-color: var(--verde-saude);
-            background: linear-gradient(135deg, #e6fff0 0%, #ccffe0 100%);
-        }
-
-        /* Tables */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 2rem 0;
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        th, td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background: var(--azul-institucional);
-            color: white;
-            font-weight: 600;
-        }
-
-        tr:hover {
-            background: var(--cinza-claro);
-        }
-
-        /* Quiz */
-        .quiz-container {
-            background: var(--cinza-claro);
-            padding: 2rem;
-            border-radius: 10px;
-            margin: 2rem 0;
-        }
-
-        .question {
-            background: white;
-            padding: 1.5rem;
-            margin: 1rem 0;
-            border-radius: 8px;
-            border-left: 4px solid var(--roxo-inovacao);
-        }
-
-        .question h4 {
-            color: var(--azul-institucional);
-            margin-bottom: 1rem;
-        }
-
-        .options label {
-            display: block;
-            padding: 0.8rem;
-            margin: 0.5rem 0;
-            background: var(--cinza-claro);
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .options label:hover {
-            background: #e0e0e0;
-        }
-
-        .options input[type="radio"] {
-            margin-right: 0.5rem;
-        }
-
-        .btn {
-            background: linear-gradient(135deg, var(--verde-saude) 0%, #008f5a 100%);
-            color: white;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 25px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: inline-block;
-            margin: 1rem 0;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-        }
-
-        .btn-danger {
-            background: linear-gradient(135deg, var(--vermelho-perigo) 0%, #a01e1e 100%);
-        }
-
-        .btn-warning {
-            background: linear-gradient(135deg, var(--laranja-alerta) 0%, #e55a2a 100%);
-        }
-
-        /* Case Studies */
-        .case-study {
-            background: white;
-            border: 2px solid var(--laranja-alerta);
-            border-radius: 10px;
-            padding: 2rem;
-            margin: 2rem 0;
-            position: relative;
-        }
-
-        .case-study::before {
-            content: "⚠️ CASO REAL";
-            position: absolute;
-            top: -12px;
-            left: 20px;
-            background: var(--laranja-alerta);
-            color: white;
-            padding: 0.3rem 1rem;
-            border-radius: 15px;
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-
-        .case-study h4 {
-            color: var(--azul-institucional);
-            margin-top: 1rem;
-            font-size: 1.3rem;
-        }
-
-        .case-study .impact {
-            background: #fff3cd;
-            padding: 1rem;
-            border-radius: 5px;
-            margin: 1rem 0;
-            border-left: 4px solid var(--laranja-alerta);
-        }
-
-        .case-study .lesson {
-            background: #d4edda;
-            padding: 1rem;
-            border-radius: 5px;
-            margin: 1rem 0;
-            border-left: 4px solid var(--verde-saude);
-        }
-
-        /* Decalogue */
-        .decalogue-item {
-            display: flex;
-            align-items: flex-start;
-            margin: 1.5rem 0;
-            padding: 1.5rem;
-            background: linear-gradient(135deg, #f0f4ff 0%, #e0e8ff 100%);
-            border-radius: 10px;
-            border-left: 5px solid var(--roxo-inovacao);
-        }
-
-        .decalogue-number {
-            background: var(--roxo-inovacao);
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
-            margin-right: 1rem;
-            flex-shrink: 0;
-        }
-
-        .decalogue-content h4 {
-            color: var(--azul-institucional);
-            margin-bottom: 0.5rem;
-        }
-
-        /* Printable Materials */
-        .printable-section {
-            background: linear-gradient(135deg, #fffef0 0%, #fff9e0 100%);
-            border: 3px dashed var(--laranja-alerta);
-            padding: 2rem;
-            border-radius: 10px;
-            margin: 2rem 0;
-        }
-
-        .printable-section h3 {
-            color: var(--laranja-alerta);
-        }
-
-        .checklist {
-            list-style: none;
-        }
-
-        .checklist li {
-            padding: 0.8rem;
-            margin: 0.5rem 0;
-            background: white;
-            border-radius: 5px;
-            border-left: 4px solid var(--verde-saude);
-        }
-
-        .checklist li::before {
-            content: "☐ ";
-            color: var(--verde-saude);
-            font-weight: bold;
-            margin-right: 0.5rem;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--azul-institucional);
-            color: white;
-            text-align: center;
-            padding: 3rem 2rem;
-            margin-top: 3rem;
-        }
-
-        footer .quote {
-            font-style: italic;
-            font-size: 1.2rem;
-            margin: 1rem 0;
-            padding: 1rem;
-            border-left: 4px solid var(--verde-saude);
-            background: rgba(255,255,255,0.1);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 1.8rem;
-            }
-
-            section {
-                padding: 2rem 1rem;
-            }
-
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
-
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        section {
-            animation: fadeIn 0.6s ease-out;
-        }
-
-        /* Progress Bar */
-        .progress-container {
-            background: var(--cinza-claro);
-            padding: 1rem;
-            border-radius: 10px;
-            margin: 2rem 0;
-        }
-
-        .progress-bar {
-            height: 30px;
-            background: linear-gradient(90deg, var(--verde-saude) 0%, var(--roxo-inovacao) 100%);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            transition: width 0.3s;
-        }
-
-        /* Interactive Elements */
-        .interactive-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 2rem;
-            border-radius: 10px;
-            margin: 2rem 0;
-            text-align: center;
-        }
-
-        .interactive-box h3 {
-            color: white;
-            margin-bottom: 1rem;
-        }
-
-        /* Statistics */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, var(--azul-institucional) 0%, var(--roxo-inovacao) 100%);
-            color: white;
-            padding: 2rem;
-            border-radius: 10px;
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=yes" />
+  <meta name="theme-color" content="#2c3e50" />
+  <meta name="description" content="LongeViver FQ5C - Mentoria Sentir-Se Presente - Projeto 70+ ANABB" />
+  <meta name="author" content="Ricardo de Faria Barros - Psicólogo" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="LongeViver" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  
+  <!-- Ícone para iOS e Android (SVG inline) -->
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232c3e50'/><text x='50' y='68' font-size='50' text-anchor='middle' fill='%23f1c40f'>🧘</text></svg>" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232c3e50'/><text x='50' y='68' font-size='50' text-anchor='middle' fill='%23f1c40f'>🧘</text></svg>" />
+  
+  <title>LongeViver – Sentir-Se Presente</title>
+  <style>
+    /* ===== RESET & BASE ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #f4f6f9;
+      color: #1e2a3a;
+      padding: 0 0 80px 0;
+      min-height: 100vh;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+    button, input, textarea, select {
+      font-size: 18px;
+      font-family: inherit;
+    }
+    .container { max-width: 600px; margin: 0 auto; padding: 16px; }
+    .hidden { display: none !important; }
+
+    /* ===== BANNER ===== */
+    .banner {
+      background: linear-gradient(145deg, #2c3e50, #1a252f);
+      color: #fff;
+      padding: 24px 20px;
+      border-radius: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+    .banner h1 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .banner h1 span { color: #f1c40f; }
+    .banner p {
+      margin-top: 8px;
+      font-size: 16px;
+      opacity: 0.9;
+    }
+    .banner .tag {
+      display: inline-block;
+      background: #f1c40f;
+      color: #1a252f;
+      padding: 4px 16px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+    .banner .privacy-note {
+      margin-top: 10px;
+      font-size: 13px;
+      opacity: 0.8;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      padding-top: 10px;
+    }
+    .banner .privacy-note strong { color: #f1c40f; }
+    .banner .author-credit {
+      margin-top: 12px;
+      font-size: 14px;
+      opacity: 0.8;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      padding-top: 10px;
+    }
+    .banner .author-credit a {
+      color: #f1c40f;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* ===== MODAIS DE LOGIN/PIN ===== */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 20px;
+    }
+    .modal-box {
+      background: white;
+      border-radius: 32px;
+      padding: 32px 24px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    .modal-box h2 {
+      font-size: 24px;
+      margin-bottom: 8px;
+      color: #2c3e50;
+      text-align: center;
+    }
+    .modal-box .sub {
+      text-align: center;
+      color: #5d6d7e;
+      font-size: 15px;
+      margin-bottom: 24px;
+    }
+    .modal-box input[type="text"],
+    .modal-box input[type="password"] {
+      width: 100%;
+      padding: 14px;
+      border: 2px solid #dfe6e9;
+      border-radius: 16px;
+      font-size: 18px;
+      margin-bottom: 16px;
+    }
+    .modal-box input:focus { border-color: #2c3e50; outline: none; }
+    .pin-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .pin-group input {
+      width: 56px;
+      height: 64px;
+      text-align: center;
+      font-size: 28px;
+      font-weight: 700;
+      border: 2px solid #dfe6e9;
+      border-radius: 16px;
+      background: #f8f9fa;
+      letter-spacing: 4px;
+    }
+    .pin-group input:focus { border-color: #2c3e50; background: white; }
+    .btn-modal {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .btn-modal.primary { background: #2c3e50; color: white; }
+    .btn-modal.primary:active { transform: scale(0.97); background: #1a252f; }
+    .btn-modal.secondary { background: transparent; color: #2c3e50; border: 2px solid #dfe6e9; margin-top: 10px; }
+    .btn-modal.danger { background: #e74c3c; color: white; margin-top: 10px; }
+    .modal-box .error-msg {
+      color: #e74c3c;
+      font-size: 14px;
+      text-align: center;
+      margin-top: 8px;
+      min-height: 24px;
+    }
+    .modal-box .hint {
+      font-size: 13px;
+      color: #95a5a6;
+      text-align: center;
+      margin-top: 12px;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      padding: 12px 16px;
+      border-radius: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      margin-bottom: 20px;
+    }
+    .user-name { font-weight: 600; color: #2c3e50; }
+    .btn-logout {
+      background: #e74c3c;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* ===== NAVEGAÇÃO (TABS) ===== */
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      background: white;
+      padding: 10px 8px;
+      border-radius: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      margin-bottom: 20px;
+    }
+    .tab-btn {
+      flex: 1 0 auto;
+      padding: 10px 12px;
+      border: none;
+      background: transparent;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 15px;
+      color: #5d6d7e;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+      min-width: 50px;
+    }
+    .tab-btn.active {
+      background: #2c3e50;
+      color: white;
+      box-shadow: 0 4px 10px rgba(44,62,80,0.3);
+    }
+    .tab-btn:active { transform: scale(0.96); }
+
+    /* ===== CONTEÚDO DAS TABS ===== */
+    .tab-content { display: none; animation: fade 0.25s ease; }
+    .tab-content.active { display: block; }
+    @keyframes fade { from { opacity: 0.3; } to { opacity: 1; } }
+
+    /* ===== CARTÕES ===== */
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .card h2 { font-size: 22px; margin-bottom: 12px; color: #2c3e50; }
+    .card h3 { font-size: 18px; margin-bottom: 8px; color: #2c3e50; }
+    .card .highlight {
+      background: #fef9e7;
+      border-left: 4px solid #f1c40f;
+      padding: 12px 16px;
+      border-radius: 12px;
+      margin: 12px 0;
+      font-style: italic;
+    }
+
+    /* ===== DIÁRIO FQ (verbo grid) ===== */
+    .fq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .fq-item {
+      background: #f8f9fa;
+      border-radius: 14px;
+      padding: 12px;
+      border-left: 4px solid #2c3e50;
+    }
+    .fq-item label {
+      font-weight: 700;
+      font-size: 15px;
+      color: #2c3e50;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .fq-item textarea {
+      width: 100%;
+      border: 2px solid #dfe6e9;
+      border-radius: 10px;
+      padding: 8px;
+      font-size: 16px;
+      font-family: inherit;
+      min-height: 50px;
+      resize: vertical;
+    }
+    .fq-item textarea:focus { border-color: #2c3e50; outline: none; }
+
+    /* ===== CALENDÁRIO ===== */
+    .cal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .cal-title { font-weight: 700; font-size: 18px; color: #2c3e50; }
+    .cal-nav button {
+      background: none;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      padding: 4px 12px;
+      border-radius: 30px;
+      transition: 0.2s;
+    }
+    .cal-nav button:hover { background: #ecf0f1; }
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+    }
+    .cal-day-name {
+      text-align: center;
+      font-weight: 600;
+      font-size: 13px;
+      color: #5d6d7e;
+      padding: 6px 0;
+    }
+    .cal-day {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 40px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.2s;
+      background: white;
+      border: 2px solid transparent;
+    }
+    .cal-day:hover { background: #ecf0f1; }
+    .cal-day.today { border-color: #2c3e50; font-weight: 700; }
+    .cal-day.has-entry { background: #fef9e7; border-color: #f1c40f; }
+    .cal-day.selected { background: #2c3e50; color: white; }
+    .cal-day.empty { background: transparent; cursor: default; }
+    .cal-day.empty:hover { background: transparent; }
+
+    .export-btn {
+      background: #27ae60;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 12px;
+      width: 100%;
+      transition: 0.2s;
+    }
+    .export-btn:active { transform: scale(0.97); background: #1e8449; }
+
+    /* ===== EXERCÍCIOS DE PRESENÇA ===== */
+    .sense-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .sense-grid input {
+      padding: 12px;
+      border: 2px solid #dfe6e9;
+      border-radius: 14px;
+      background: #f8f9fa;
+      font-size: 16px;
+      width: 100%;
+    }
+    .sense-grid input:focus { border-color: #2c3e50; outline: none; }
+    .sense-grid .full { grid-column: span 2; }
+
+    .btn-primary {
+      background: #2c3e50;
+      color: white;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 18px;
+      cursor: pointer;
+      width: 100%;
+      transition: 0.2s;
+    }
+    .btn-primary:active { transform: scale(0.97); background: #1a252f; }
+
+    /* ===== CÍRCULO DA RESPIRAÇÃO ===== */
+    .breath-wrap {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .breath-circle {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: #2c3e50;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 22px;
+      transition: transform 1.5s ease-in-out;
+      box-shadow: 0 8px 30px rgba(44,62,80,0.3);
+    }
+    .breath-timer {
+      font-size: 28px;
+      font-weight: 700;
+      margin-top: 10px;
+      color: #2c3e50;
+    }
+
+    /* ===== EMOÇIÔMETRO ===== */
+    .mood-grid {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 16px 0;
+    }
+    .mood-item {
+      background: white;
+      padding: 12px 10px;
+      border-radius: 16px;
+      border: 2px solid #dfe6e9;
+      text-align: center;
+      cursor: pointer;
+      min-width: 70px;
+      transition: 0.2s;
+    }
+    .mood-item.selected { border-color: #2c3e50; background: #eaf2f8; }
+    .mood-item .emoji { font-size: 32px; }
+    .mood-item .label { font-size: 14px; font-weight: 500; }
+
+    .presence-scale {
+      display: flex;
+      gap: 8px;
+      margin: 12px 0;
+    }
+    .presence-scale button {
+      flex: 1;
+      padding: 12px;
+      border: 2px solid #dfe6e9;
+      background: white;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .presence-scale button.active { border-color: #2c3e50; background: #d5e8f0; }
+
+    /* ===== HÁBITOS ===== */
+    .habit-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px;
+      background: #f8f9fa;
+      border-radius: 16px;
+      margin-bottom: 10px;
+      border-left: 6px solid #2c3e50;
+    }
+    .habit-item .info { flex: 1; }
+    .habit-item .info h4 { font-size: 17px; }
+    .habit-item .info p { font-size: 14px; color: #5d6d7e; }
+    .habit-check {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      border: 2px solid #bdc3c7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 700;
+      cursor: pointer;
+      background: white;
+    }
+    .habit-check.done { background: #27ae60; border-color: #27ae60; color: white; }
+    .habit-badge {
+      background: #f1c40f;
+      color: #1a252f;
+      padding: 2px 10px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+
+    /* ===== DESAFIO ===== */
+    .challenge-progress {
+      background: #ecf0f1;
+      height: 12px;
+      border-radius: 30px;
+      margin: 12px 0;
+    }
+    .challenge-progress .bar {
+      height: 100%;
+      background: #2c3e50;
+      border-radius: 30px;
+      width: 0%;
+    }
+
+    /* ===== FINANÇAS ===== */
+    .expense-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid #ecf0f1;
+    }
+    .expense-item .amount { font-weight: 700; color: #2c3e50; }
+
+    /* ===== SOCIAL ===== */
+    .social-stat {
+      display: flex;
+      gap: 12px;
+      margin: 8px 0;
+    }
+    .social-stat .num { font-weight: 700; font-size: 24px; color: #2c3e50; }
+
+    /* ===== LEMBRETES ===== */
+    .reminder-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px;
+      background: #f8f9fa;
+      border-radius: 14px;
+      margin-bottom: 8px;
+    }
+    .reminder-item .text { font-weight: 500; }
+    .reminder-item .done { text-decoration: line-through; opacity: 0.6; }
+
+    /* ===== RODAPÉ ===== */
+    .footer {
+      margin-top: 40px;
+      padding: 20px 16px;
+      background: white;
+      border-radius: 24px 24px 0 0;
+      box-shadow: 0 -4px 12px rgba(0,0,0,0.04);
+      text-align: center;
+      font-size: 14px;
+      color: #5d6d7e;
+    }
+    .footer .author-name {
+      font-weight: 700;
+      font-size: 18px;
+      color: #2c3e50;
+    }
+    .footer .author-profession {
+      margin: 4px 0 12px 0;
+      font-size: 15px;
+    }
+    .footer .links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin: 12px 0;
+    }
+    .footer .links a {
+      background: #eaf2f8;
+      padding: 8px 16px;
+      border-radius: 30px;
+      color: #2c3e50;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+    .footer .links a:hover { background: #2c3e50; color: white; }
+    .footer .copy {
+      margin-top: 12px;
+      font-size: 12px;
+      color: #95a5a6;
+    }
+
+    /* ===== RESPONSIVO ===== */
+    @media (max-width: 480px) {
+      .tabs { gap: 4px; }
+      .tab-btn { font-size: 13px; padding: 8px 10px; }
+      .sense-grid { grid-template-columns: 1fr; }
+      .sense-grid .full { grid-column: span 1; }
+      .pin-group input { width: 48px; height: 56px; font-size: 24px; }
+      .fq-grid { grid-template-columns: 1fr; }
+    }
+    @supports (padding: max(0px)) {
+      body { padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); }
+    }
+    #installBtn {
+      background: #f1c40f;
+      color: #1a252f;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-weight: 700;
+      cursor: pointer;
+      display: none;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>🛡️ Compliance, Ética e LGPD para Profissionais de Saúde</h1>
-            <p class="subtitle">Programa de Integridade e Proteção de Dados na Saúde</p>
-            <div class="author">
-                <p>👨‍💼 Autor: Rodrigo Barros</p>
-                <p>Especialista em Compliance e LGPD | Auditor Certificado LEC</p>
-                <p>Ano: 2026</p>
-            </div>
+
+<!-- ===== MODAL DE CRIAÇÃO DE CONTA ===== -->
+<div id="signupModal" class="modal-overlay">
+  <div class="modal-box">
+    <h2>🧘 LongeViver</h2>
+    <p class="sub">Comece sua jornada de presença</p>
+    <input type="text" id="signupName" placeholder="Seu nome" autocomplete="off" />
+    <p class="sub" style="font-size:14px; margin-top: -8px;">Crie um PIN de 4 dígitos</p>
+    <div class="pin-group" id="signupPinGroup">
+      <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" class="pin-input" data-idx="0" />
+      <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" class="pin-input" data-idx="1" />
+      <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" class="pin-input" data-idx="2" />
+      <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" class="pin-input" data-idx="3" />
+    </div>
+    <div id="signupError" class="error-msg"></div>
+    <button class="btn-modal primary" id="signupBtn">Criar conta</button>
+    <div class="hint">Anote seu PIN em um lugar seguro.</div>
+  </div>
+</div>
+
+<!-- ===== MODAL DE LOGIN ===== -->
+<div id="loginModal" class="modal-overlay hidden">
+  <div class="modal-box">
+    <h2>🔐 Bem-vindo de volta</h2>
+    <p class="sub" id="loginUserName">Usuário</p>
+    <p class="sub" style="font-size:14px;">Digite seu PIN de 4 dígitos</p>
+    <div class="pin-group" id="loginPinGroup">
+      <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" class="pin-input" data-idx="0" />
+      <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" class="pin-input" data-idx="1" />
+      <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" class="pin-input" data-idx="2" />
+      <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" class="pin-input" data-idx="3" />
+    </div>
+    <div id="loginError" class="error-msg"></div>
+    <button class="btn-modal primary" id="loginBtn">Acessar</button>
+    <button class="btn-modal secondary" id="resetPinBtn">Esqueci meu PIN</button>
+    <div class="hint">Resetar apagará todos os seus dados.</div>
+  </div>
+</div>
+
+<!-- ===== CONTEÚDO PRINCIPAL ===== -->
+<div class="container" id="appContent" style="display:none;">
+
+  <!-- BANNER -->
+  <div class="banner" id="banner">
+    <h1>🧘 <span>Sentir-Se Presente</span></h1>
+    <p>Mentoria 70+ ANABB – Cada instante é uma oportunidade de se encontrar.</p>
+    <div class="tag">LongeViver FQ5C</div>
+    <div class="privacy-note">
+      🔒 <strong>Seus dados ficam apenas neste dispositivo.</strong> Não vão para a nuvem. 
+      Você pode instalar este app como nativo no celular (via "Adicionar à Tela de Início").
+    </div>
+    <div class="author-credit">
+      Desenvolvido por <strong>Ricardo de Faria Barros</strong> – Psicólogo<br />
+      <a href="https://a.co/d/g4s6fZ6" target="_blank">📚 Meu livro na Amazon</a> •
+      <a href="https://www.plenalongevidade.com.br/" target="_blank">🌐 Plena Longevidade</a>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <div class="header">
+    <span class="user-name">👤 <span id="displayName">Usuário</span></span>
+    <div>
+      <button id="installBtn">📲 Instalar</button>
+      <button class="btn-logout" id="logoutBtn">Sair</button>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs" id="tabsContainer">
+    <button class="tab-btn active" data-tab="agora">🧘 Agora</button>
+    <button class="tab-btn" data-tab="diario">📝 Diário FQ</button>
+    <button class="tab-btn" data-tab="presence-why">🧠 Por que Presença?</button>
+    <button class="tab-btn" data-tab="habits">📋 Hábitos</button>
+    <button class="tab-btn" data-tab="challenge">🏆 Desafio</button>
+    <button class="tab-btn" data-tab="social">👥 Social</button>
+    <button class="tab-btn" data-tab="finances">💰 Finanças</button>
+    <button class="tab-btn" data-tab="reminders">🔔 Lembretes</button>
+    <button class="tab-btn" data-tab="mood">😊 Emociômetro</button>
+  </div>
+
+  <!-- ==================== TAB "Agora" ==================== -->
+  <div class="tab-content active" id="tab-agora">
+    <div class="card">
+      <h2>👁️ Ancoragem dos 5 Sentidos</h2>
+      <p style="margin-bottom: 12px;">Observe ao redor e nomeie:</p>
+      <div class="sense-grid">
+        <input type="text" placeholder="5 coisas que você vê..." id="sense1" />
+        <input type="text" placeholder="4 coisas que você toca..." id="sense2" />
+        <input type="text" placeholder="3 sons que você ouve..." id="sense3" />
+        <input type="text" placeholder="2 cheiros que sente..." id="sense4" />
+        <input type="text" placeholder="1 sabor ou sensação..." id="sense5" class="full" />
+      </div>
+      <button class="btn-primary" id="saveSenseBtn">Salvar essa ancoragem</button>
+    </div>
+
+    <div class="card">
+      <h2>🌬️ Respiração Consciente (1 min)</h2>
+      <div class="breath-wrap">
+        <div class="breath-circle" id="breathCircle">Inspire</div>
+        <div class="breath-timer" id="breathTimer">00:00</div>
+        <button class="btn-primary" id="breathStartBtn" style="width: auto; padding: 12px 30px; margin-top: 12px;">Iniciar</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>❓ A pergunta do dia</h2>
+      <p style="font-size: 16px; color: #5d6d7e;">"O que hoje só existiu por um instante, e quase passou despercebido?"</p>
+      <textarea id="franklAnswer" rows="3" style="width:100%; padding:12px; border-radius:14px; border:2px solid #dfe6e9; margin:12px 0; font-family:inherit; font-size:16px;"></textarea>
+      <button class="btn-primary" id="saveFranklBtn">Guardar essa percepção</button>
+    </div>
+
+    <div class="card">
+      <h3>📖 Diário de Presença</h3>
+      <div id="presenceHistory" style="font-size:16px; color:#2c3e50;"></div>
+    </div>
+  </div>
+
+  <!-- ==================== TAB "Diário FQ" ==================== -->
+  <div class="tab-content" id="tab-diario">
+    <div class="card">
+      <h2>📝 Diário da Presença – FQ</h2>
+      <p style="font-size:15px; color:#5d6d7e; margin-bottom:16px;">
+        Registre como cada verbo se manifestou em você hoje. 
+        <span style="display:block; margin-top:4px; font-weight:500;">🔒 Fica apenas no seu celular.</span>
+      </p>
+
+      <!-- Calendário -->
+      <div style="background:#f8f9fa; border-radius:16px; padding:12px; margin-bottom:20px;">
+        <div class="cal-header">
+          <div class="cal-title" id="fqCalTitle">Janeiro 2026</div>
+          <div class="cal-nav">
+            <button id="fqCalPrev">◀</button>
+            <button id="fqCalNext">▶</button>
+          </div>
         </div>
-    </header>
-
-    <nav>
-        <div class="container">
-            <ul>
-                <li><a href="#introducao">Introdução</a></li>
-                <li><a href="#compliance">Compliance</a></li>
-                <li><a href="#lgpd">LGPD</a></li>
-                <li><a href="#casos">Casos Reais</a></li>
-                <li><a href="#boas-praticas">Boas Práticas</a></li>
-                <li><a href="#autoteste">Autoteste</a></li>
-                <li><a href="#materiais">Materiais</a></li>
-            </ul>
+        <div class="cal-grid" id="fqCalGrid"></div>
+        <div style="text-align:center; margin-top:8px; font-size:13px; color:#5d6d7e;">
+          <span style="background:#fef9e7; padding:2px 8px; border-radius:30px;">📌 dias com registro</span>
         </div>
-    </nav>
+      </div>
 
-    <main class="container">
-        <!-- Introdução -->
-        <section id="introducao">
-            <h2>🎯 Objetivos de Aprendizagem</h2>
-            <div class="cards-grid">
-                <div class="card success">
-                    <h4>✅ Compreender Compliance</h4>
-                    <p>Entender os pilares do Compliance e sua aplicação prática na saúde</p>
-                </div>
-                <div class="card success">
-                    <h4>✅ Identificar Dados Sensíveis</h4>
-                    <p>Aplicar a LGPD no dia a dia com dados de pacientes</p>
-                </div>
-                <div class="card success">
-                    <h4>✅ Reconhecer Riscos</h4>
-                    <p>Evitar violações de segurança e proteger informações</p>
-                </div>
-                <div class="card success">
-                    <h4>✅ Agir com Ética</h4>
-                    <p>Manter sigilo e respeito no tratamento de dados</p>
-                </div>
-            </div>
+      <div style="font-weight:600; margin-bottom:12px;" id="fqSelectedDate">Hoje</div>
 
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <span class="stat-number">R$ 50M</span>
-                    <span class="stat-label">Multa máxima LGPD por infração</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number">243M</span>
-                    <span class="stat-label">Registros vazados no MS (2020)</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number">81</span>
-                    <span class="stat-label">Processos ANPD em 2025</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number">3 dias</span>
-                    <span class="stat-label">Prazo para notificar incidentes</span>
-                </div>
-            </div>
-        </section>
+      <!-- Grid dos verbos -->
+      <div class="fq-grid" id="fqGrid"></div>
 
-        <!-- Compliance -->
-        <section id="compliance">
-            <h2>🔐 O Que é Compliance?</h2>
-            <p><strong>Compliance</strong> vem do inglês <em>"to comply"</em> = <strong>estar em conformidade</strong></p>
-            <p>É a cultura de fazer o <strong>certo</strong>, mesmo quando <strong>ninguém está olhando</strong>.</p>
+      <button class="btn-primary" id="saveFqBtn" style="margin-top:16px;">Salvar Diário de Hoje</button>
+      
+      <!-- Botão de exportação PDF -->
+      <button class="export-btn" id="exportFqBtn">📄 Exportar Diário FQ (PDF)</button>
+      <p style="font-size:12px; color:#5d6d7e; margin-top:6px; text-align:center;">
+        Gera um relatório do mês atual. O PDF é gerado localmente no seu dispositivo.
+      </p>
+    </div>
+  </div>
 
-            <h3>💡 Os 4 Pilares do Respeito Operacional</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Pilar</th>
-                        <th>Aplicação Prática</th>
-                        <th>Impacto</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>🤝 Respeito ao Próximo</td>
-                        <td>Cordialidade com colegas e equipe</td>
-                        <td>Ambiente colaborativo e seguro</td>
-                    </tr>
-                    <tr>
-                        <td>📋 Respeito às Regras</td>
-                        <td>Cumprimento de protocolos</td>
-                        <td>Segurança jurídica e qualidade</td>
-                    </tr>
-                    <tr>
-                        <td>🏥 Respeito ao Paciente</td>
-                        <td>Sigilo absoluto e cuidado humanizado</td>
-                        <td>Confiança e fidelização</td>
-                    </tr>
-                    <tr>
-                        <td>🏥 Respeito à Instituição</td>
-                        <td>Postura profissional ética</td>
-                        <td>Credibilidade e sustentabilidade</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+  <!-- ==================== TAB "Por que Presença?" ==================== -->
+  <div class="tab-content" id="tab-presence-why">
+    <div class="card">
+      <h2>🧠 Por que Sentir-Se Presente?</h2>
+      <div class="highlight">
+        <p><strong>A ansiedade nos puxa para o futuro, para o que pode acontecer. A presença nos ancora no agora, onde a vida realmente acontece.</strong></p>
+      </div>
+      <p style="margin-bottom: 16px;">
+        Quando você está ansioso, sua mente viaja para amanhã, para a próxima semana, para o “e se…”. 
+        Esse movimento constante gasta energia, rouba o sono e afasta você do que é real.
+      </p>
+      <p style="margin-bottom: 16px;">
+        <strong>Sentir-se presente é o antídoto.</strong> Não porque os problemas desaparecem, mas porque 
+        você recupera a capacidade de responder a eles com clareza, em vez de reagir com medo.
+      </p>
+      <div style="background: #eaf2f8; padding: 16px; border-radius: 16px; margin-bottom: 16px;">
+        <h3 style="margin-bottom: 8px;">Como este app ajuda:</h3>
+        <ul style="padding-left: 20px; margin-bottom: 0;">
+          <li><strong>🧘 Ancoragem sensorial</strong> – treina sua atenção para o aqui e agora.</li>
+          <li><strong>🌬️ Respiração guiada</strong> – reduz a ansiedade em minutos.</li>
+          <li><strong>❓ Pergunta de Frankl</strong> – desloca o foco do futuro para o presente.</li>
+          <li><strong>📊 Termômetro de Presença</strong> – você nomeia seu nível de presença.</li>
+          <li><strong>📝 Diário FQ</strong> – mapeia os 12 verbos da presença no seu dia a dia.</li>
+        </ul>
+      </div>
+      <div class="highlight">
+        <p><em>“Entre o estímulo e a resposta, há um espaço. Nesse espaço está o nosso poder de escolha.”</em> – Viktor Frankl</p>
+      </div>
+      <p style="margin-top: 16px;">
+        Use este app como um treino diário. Cada exercício é um passo para recuperar a serenidade 
+        que a ansiedade rouba. <strong>A presença não é um destino, é uma prática.</strong>
+      </p>
+    </div>
+  </div>
 
-        <!-- LGPD -->
-        <section id="lgpd">
-            <h2>📋 LGPD e Dados de Saúde</h2>
-            
-            <div class="case-study" style="border-color: var(--vermelho-perigo);">
-                <h4>⚠️ Dados de Saúde São SENSÍVEIS</h4>
-                <p>Conforme <strong>Art. 5º, II da LGPD (Lei 13.709/2018)</strong>, dados de saúde são classificados como <strong>DADOS PESSOAIS SENSÍVEIS</strong> - nível <strong>MÁXIMO</strong> de proteção!</p>
-                
-                <h4>O que inclui:</h4>
-                <ul style="margin-left: 2rem; margin-top: 1rem;">
-                    <li>📋 Prontuários médicos e de enfermagem</li>
-                    <li>🔬 Resultados de exames laboratoriais e de imagem</li>
-                    <li>💊 Histórico de medicamentos e alergias</li>
-                    <li>🏥 Registros de internação e evolução clínica</li>
-                    <li>🦠 Diagnósticos, CIDs e laudos</li>
-                    <li>🧬 Dados genéticos, biométricos e de saúde mental</li>
-                </ul>
-            </div>
+  <!-- ==================== TAB "Hábitos" ==================== -->
+  <div class="tab-content" id="tab-habits">
+    <div class="card">
+      <h2>📋 Hábitos Diários</h2>
+      <div id="dailyHabits"></div>
+      <h2 style="margin-top:20px;">📋 Hábitos Semanais</h2>
+      <div id="weeklyHabits"></div>
+    </div>
+  </div>
 
-            <h3>⚡ Princípios de Ouro da LGPD</h3>
-            <div class="cards-grid">
-                <div class="card">
-                    <h4>🎯 FINALIDADE</h4>
-                    <p>Motivo legítimo e específico para tratamento de dados</p>
-                </div>
-                <div class="card">
-                    <h4>⚡ NECESSIDADE</h4>
-                    <p>Apenas o essencial - mínimo necessário</p>
-                </div>
-                <div class="card">
-                    <h4>🔒 SEGURANÇA</h4>
-                    <p>Proteção máxima dos dados tratados</p>
-                </div>
-            </div>
+  <!-- ==================== TAB "Desafio" ==================== -->
+  <div class="tab-content" id="tab-challenge">
+    <div class="card">
+      <h2>🏆 Desafio do Mês</h2>
+      <div id="currentMonthDisplay" style="font-weight:600; color:#2c3e50;"></div>
+      <div id="challengeDisplay"></div>
+      <hr style="margin: 20px 0;" />
+      <h3>Definir novo desafio</h3>
+      <input type="text" id="challengeTitle" placeholder="Título" style="width:100%; padding:12px; border-radius:14px; border:2px solid #dfe6e9; margin-bottom:10px;" />
+      <textarea id="challengeDesc" placeholder="Descrição" rows="2" style="width:100%; padding:12px; border-radius:14px; border:2px solid #dfe6e9; margin-bottom:10px;"></textarea>
+      <div style="display:flex; gap:10px;">
+        <input type="number" id="challengeGoal" placeholder="Meta" style="flex:1; padding:12px; border-radius:14px; border:2px solid #dfe6e9;" />
+        <input type="text" id="challengeUnit" placeholder="Unidade" style="flex:1; padding:12px; border-radius:14px; border:2px solid #dfe6e9;" />
+      </div>
+      <button class="btn-primary" id="saveChallengeBtn" style="margin-top:12px;">Salvar Desafio</button>
+      <h3 style="margin-top:20px;">Histórico</h3>
+      <div id="challengeHistory"></div>
+    </div>
+  </div>
 
-            <div class="interactive-box">
-                <h3>📊 Regra de Ouro</h3>
-                <p style="font-size: 1.3rem;">"Acesse apenas o estritamente necessário para sua função.<br><strong>Curiosidade é infração!</strong>"</p>
-            </div>
-        </section>
+  <!-- ==================== TAB "Social" ==================== -->
+  <div class="tab-content" id="tab-social">
+    <div class="card">
+      <h2>👥 Termômetro Social</h2>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <div><span class="num" id="familyCount">0</span> Família</div>
+        <div><span class="num" id="workCount">0</span> Trabalho</div>
+        <div><span class="num" id="leisureCount">0</span> Lazer</div>
+        <div><span class="num" id="socialDaysCount">0</span> Dias ativos</div>
+      </div>
+      <hr />
+      <h3>Adicionar evento</h3>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <input type="text" id="socialEventName" placeholder="Evento" style="flex:2; padding:12px; border-radius:14px; border:2px solid #dfe6e9;" />
+        <select id="socialCategory" style="flex:1; padding:12px; border-radius:14px; border:2px solid #dfe6e9;">
+          <option value="family">Família</option>
+          <option value="work">Trabalho</option>
+          <option value="leisure">Lazer</option>
+        </select>
+        <input type="number" id="socialDuration" placeholder="Horas" step="0.5" style="flex:1; padding:12px; border-radius:14px; border:2px solid #dfe6e9;" />
+        <button id="addSocialBtn" style="flex:0 0 50px; background:#2c3e50; color:white; border:none; border-radius:14px; font-size:24px;">+</button>
+      </div>
+      <div id="socialEventsList" style="margin-top:16px;"></div>
+    </div>
+  </div>
 
-        <!-- Casos Reais -->
-        <section id="casos">
-            <h2>📰 Casos Reais de Fiscalização</h2>
+  <!-- ==================== TAB "Finanças" ==================== -->
+  <div class="tab-content" id="tab-finances">
+    <div class="card">
+      <h2>💰 Controle Financeiro</h2>
+      <div style="font-size:28px; font-weight:700; color:#2c3e50;" id="totalSpent">R$ 0,00</div>
+      <hr />
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <input type="text" id="expenseDesc" placeholder="Descrição" style="flex:2; padding:12px; border-radius:14px; border:2px solid #dfe6e9;" />
+        <input type="number" id="expenseAmount" placeholder="Valor" step="0.01" style="flex:1; padding:12px; border-radius:14px; border:2px solid #dfe6e9;" />
+        <button id="addExpenseBtn" style="flex:0 0 50px; background:#2c3e50; color:white; border:none; border-radius:14px; font-size:24px;">+</button>
+      </div>
+      <div id="expensesList" style="margin-top:16px;"></div>
+    </div>
+  </div>
 
-            <div class="case-study">
-                <h4>CASO 1: Ministério da Saúde (2020/2024)</h4>
-                <p><strong>O que aconteceu:</strong> Credenciais de acesso expostas por 6 meses. Senhas publicadas em código-fonte (Base64). <strong>243 MILHÕES</strong> de registros de saúde acessíveis.</p>
-                
-                <div class="impact">
-                    <strong>💥 Impacto:</strong> Sanção administrativa da ANPD em 2024. Danos graves à imagem institucional.
-                </div>
-                
-                <div class="lesson">
-                    <strong>💡 Lição:</strong> Senhas fracas e credenciais mal protegidas = porta aberta para vazamentos
-                </div>
-            </div>
+  <!-- ==================== TAB "Lembretes" ==================== -->
+  <div class="tab-content" id="tab-reminders">
+    <div class="card">
+      <h2>🔔 Lembretes</h2>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <input type="text" id="reminderText" placeholder="O que não esquecer?" style="flex:2; padding:12px; border-radius:14px; border:2px solid #dfe6e9;" />
+        <select id="reminderPriority" style="flex:1; padding:12px; border-radius:14px; border:2px solid #dfe6e9;">
+          <option value="normal">Normal</option>
+          <option value="urgent">Urgente</option>
+        </select>
+        <button id="addReminderBtn" style="flex:0 0 50px; background:#2c3e50; color:white; border:none; border-radius:14px; font-size:24px;">+</button>
+      </div>
+      <div id="remindersList" style="margin-top:16px;"></div>
+    </div>
+  </div>
 
-            <div class="case-study">
-                <h4>CASO 2: Hospital Universitário da USP (Março 2023)</h4>
-                <p><strong>O que aconteceu:</strong> Ataque de <strong>RANSOMWARE</strong> comprometeu 600 computadores. Sistemas paralisados por dias.</p>
-                
-                <div class="impact">
-                    <strong>💥 Impacto:</strong> 769 consultas canceladas. Atendimentos suspensos. Prejuízo operacional e reputacional incalculável.
-                </div>
-                
-                <div class="lesson">
-                    <strong>💡 Lição:</strong> Ransomware entra por e-mails maliciosos e dispositivos infectados
-                </div>
-            </div>
+  <!-- ==================== TAB "Emociômetro" ==================== -->
+  <div class="tab-content" id="tab-mood">
+    <div class="card">
+      <h2>😊 Emociômetro + Presença</h2>
+      <div id="todayMoodDisplay" style="text-align:center; padding:12px; background:#f8f9fa; border-radius:20px; margin-bottom:16px;">
+        Selecione seu humor
+      </div>
+      <div class="mood-grid" id="moodGrid"></div>
 
-            <div class="case-study">
-                <h4>CASO 3: Telekall Infoservice (2023)</h4>
-                <p><strong>Marco Histórico:</strong> Primeira empresa PRIVADA multada pela ANPD. Valor: <strong>R$ 14,4 mil</strong>. Motivo: Comercializar dados pessoais sem autorização.</p>
-                
-                <div class="lesson">
-                    <strong>💡 Lição:</strong> A ANPD fiscaliza e multa empresas privadas! Reincidência agrava sanções.
-                </div>
-            </div>
-
-            <div class="case-study">
-                <h4>CASO 4: ANPD Fiscaliza 20 Empresas (Dezembro 2024)</h4>
-                <p><strong>O que aconteceu:</strong> ANPD iniciou fiscalização de 20 empresas de grande porte, incluindo setor de saúde, por falta de indicação de Encarregado (DPO).</p>
-                
-                <div class="lesson">
-                    <strong>💡 Lição:</strong> Setor de saúde está no radar da fiscalização. Conformidade não é opcional!
-                </div>
-            </div>
-        </section>
-
-        <!-- Boas Práticas -->
-        <section id="boas-praticas">
-            <h2>✅ Decálogo do Profissional de Saúde Conforme</h2>
-            <p>10 Boas Práticas Para o Dia a Dia</p>
-
-            <div class="decalogue-item">
-                <div class="decalogue-number">1</div>
-                <div class="decalogue-content">
-                    <h4>🔒 Trate Dados como Vidas</h4>
-                    <p><strong>Confidencialidade Absoluta:</strong> Cada prontuário é uma pessoa real. Trate como gostaria que tratassem seus dados. Sigilo não tem exceção.</p>
-                </div>
-            </div>
-
-            <div class="decalogue-item">
-                <div class="decalogue-number">2</div>
-                <div class="decalogue-content">
-                    <h4>📧 Canais Corporativos Exclusivos</h4>
-                    <p><strong>Proibido WhatsApp ou E-mail Pessoal:</strong> Use apenas sistemas homologados. VPN corporativa para acesso remoto.</p>
-                </div>
-            </div>
-
-            <div class="decalogue-item">
-                <div class="decalogue-number">3</div>
-                <div class="decalogue-content">
-                    <h4>🎯 Acesso por Necessidade</h4>
-                    <p><strong>Acesse Apenas o Estritamente Necessário:</strong> Curiosidade é infração grave. Mínimo necessário = menor risco.</p>
-                </div>
-            </div>
-
-            <div class="decalogue-item">
-                <div class="decalogue-number">4</div>
-                <div class="decalogue-content">
-                    <h4>📢 Comunicação Imediata de Incidentes</h4>
-                    <p><strong>Notifique Imediatamente:</strong> Errou? Comunique NA HORA. Prazo ANPD: 3 dias úteis. Não há punição por reportar de boa-fé.</p>
-                </div>
-            </div>
-
-            <div class="decalogue-item">
-                <div class="decalogue-number">5</div>
-                <div class="decalogue-content">
-                    <h4>🔐 Segurança Digital Básica</h4>
-                    <p><strong>Senhas Fortes e Autenticação:</strong> Mínimo 12 caracteres. Ative 2FA. Nunca compartilhe senhas. Bloqueie tela sempre (Win + L).</p>
-                </div>
-            </div>
-
-            <div class="decalogue-item">
-                <div class="decalogue-number">6</div>
-                <div class="decalogue-content">
-                    <h4>🛡️ Privacidade por Design</h4>
-                    <p><strong>Proteja Desde o Início:</strong> Ao criar planilhas ou relatórios, questione: "Como protejo os dados?" Anonimize quando possível.</p>
-                </div>
-            </div>
-
-            <div class="decalogue-item">
-                <div class="decalogue-number">7</div>
-                <div class="decalogue-content">
-                    <h4>📋 Documente Processos</h4>
-                    <p><strong>Registro é Proteção:</strong> Consentimentos por escrito. Autorizações documentadas. Rastreabilidade de acessos.</p>
-                </div>
-            </div>
-
-            <div class="decalogue-item">
-                <div class="decalogue-number">8</div>
-                <div class="decalogue-content">
-                    <h4>🗑️ Descarte Seguro</h4>
-                    <p><strong>Não Basta "Jogar na Lixeira":</strong> Fragmentação de documentos físicos. Exclusão segura de arquivos digitais.</p>
-                </div>
-            </div>
-
-            <div class="decalogue-item">
-                <div class="decalogue-number">9</div>
-                <div class="decalogue-content">
-                    <h4>🤝 Respeito Interno e Externo</h4>
-                    <p><strong>Ética Começa Entre Nós:</strong> Sem fofocas sobre dados de pacientes. Respeite colegas, pacientes e sistemas.</p>
-                </div>
-            </div>
-
-            <div class="decalogue-item">
-                <div class="decalogue-number">10</div>
-                <div class="decalogue-content">
-                    <h4>📚 Participação Ativa</h4>
-                    <p><strong>Treinamentos Continuados:</strong> Compliance e LGPD são dinâmicos. Mantenha-se atualizado. Participe de todos os treinamentos.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Autoteste -->
-        <section id="autoteste">
-            <h2>🎮 Autoteste Interativo</h2>
-            <p>Descubra Seu Nível de Preparo! Responda sinceramente e some seus pontos.</p>
-
-            <div class="quiz-container">
-                <form id="quizForm">
-                    <div class="question">
-                        <h4>1. Um colega pede sua senha porque esqueceu a dele. Você:</h4>
-                        <div class="options">
-                            <label><input type="radio" name="q1" value="0"> A) Empresta, são da mesma equipe (0 pts)</label>
-                            <label><input type="radio" name="q1" value="10"> B) Orienta a recuperar pelo sistema oficial (10 pts)</label>
-                            <label><input type="radio" name="q1" value="0"> C) Compartilha só por hoje (0 pts)</label>
-                        </div>
-                    </div>
-
-                    <div class="question">
-                        <h4>2. Ao se ausentar da mesa por 2 minutos, você:</h4>
-                        <div class="options">
-                            <label><input type="radio" name="q2" value="0"> A) Deixa aberto, é rapidinho (0 pts)</label>
-                            <label><input type="radio" name="q2" value="10"> B) Bloqueia a tela (Win + L) (10 pts)</label>
-                            <label><input type="radio" name="q2" value="2"> C) Minimiza as janelas (2 pts)</label>
-                        </div>
-                    </div>
-
-                    <div class="question">
-                        <h4>3. Precisa enviar um prontuário urgente. Você usa:</h4>
-                        <div class="options">
-                            <label><input type="radio" name="q3" value="0"> A) WhatsApp pessoal (0 pts)</label>
-                            <label><input type="radio" name="q3" value="10"> B) E-mail institucional seguro (10 pts)</label>
-                            <label><input type="radio" name="q3" value="5"> C) WhatsApp corporativo (5 pts)</label>
-                        </div>
-                    </div>
-
-                    <div class="question">
-                        <h4>4. Acessa sistema e vê prontuário de pessoa famosa. Você:</h4>
-                        <div class="options">
-                            <label><input type="radio" name="q4" value="0"> A) Abre por curiosidade (0 pts)</label>
-                            <label><input type="radio" name="q4" value="10"> B) Acessa apenas se for da sua atribuição (10 pts)</label>
-                            <label><input type="radio" name="q4" value="0"> C) Abre só para ver (0 pts)</label>
-                        </div>
-                    </div>
-
-                    <div class="question">
-                        <h4>5. Envia e-mail com dados para destinatário errado. Você:</h4>
-                        <div class="options">
-                            <label><input type="radio" name="q5" value="0"> A) Torce para ninguém perceber (0 pts)</label>
-                            <label><input type="radio" name="q5" value="10"> B) Comunica responsável IMEDIATAMENTE (10 pts)</label>
-                            <label><input type="radio" name="q5" value="2"> C) Tenta recuperar o e-mail (2 pts)</label>
-                        </div>
-                    </div>
-
-                    <button type="button" class="btn" onclick="calculateScore()">Calcular Resultado</button>
-                </form>
-
-                <div id="result" style="display: none; margin-top: 2rem; padding: 2rem; border-radius: 10px;">
-                    <h3>📊 Seu Resultado:</h3>
-                    <div id="scoreDisplay"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Materiais para Impressão -->
-        <section id="materiais">
-            <h2>🖨️ Materiais Conceituais para Impressão</h2>
-            
-            <div class="printable-section">
-                <h3>📄 Checklist do Profissional Conforme</h3>
-                <p><em>Imprima e cole na sua mesa!</em></p>
-                <ul class="checklist">
-                    <li>Acesso somente ao necessário para minha função</li>
-                    <li>Senha forte, pessoal e NUNCA compartilhada</li>
-                    <li>Tela bloqueada sempre que me afastar (Win + L)</li>
-                    <li>Documentos médicos apenas por canais autorizados</li>
-                    <li>E-mails suspeitos REPORTADOS ao TI</li>
-                    <li>Incidentes comunicados IMEDIATAMENTE</li>
-                    <li>Documentos físicos descartados com fragmentação</li>
-                    <li>Dados de pacientes com discrição absoluta</li>
-                    <li>Participação ativa nos treinamentos</li>
-                </ul>
-            </div>
-
-            <div class="printable-section">
-                <h3>📋 Plano de Ação Pessoal - Compromisso Individual</h3>
-                <div style="background: white; padding: 2rem; border-radius: 5px; margin-top: 1rem;">
-                    <p><strong>Eu, ___________________________________________</strong></p>
-                    <p><strong>Função: ________________________________________</strong></p>
-                    <p><strong>Matrícula: _____________________________________</strong></p>
-                    
-                    <h4 style="margin-top: 2rem;">DECLARO que:</h4>
-                    <ul class="checklist" style="margin-top: 1rem;">
-                        <li>Li e compreendi este material de treinamento</li>
-                        <li>Estou ciente das responsabilidades com dados sensíveis</li>
-                        <li>Comprometo-me a seguir o Decálogo do Profissional de Saúde Conforme</li>
-                        <li>Comunicarei imediatamente qualquer incidente</li>
-                        <li>Participarei dos treinamentos continuados</li>
-                        <li>Agirei com ética, sigilo e profissionalismo</li>
-                    </ul>
-                    
-                    <div style="margin-top: 3rem;">
-                        <p>Assinatura: _________________________________</p>
-                        <p>Data: ___/___/2026</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="printable-section">
-                <h3>📚 Folha de Consulta Rápida: LGPD em 1 Página</h3>
-                <div style="background: white; padding: 2rem; border-radius: 5px; margin-top: 1rem;">
-                    <h4>Princípios da LGPD:</h4>
-                    <ul>
-                        <li><strong>Finalidade:</strong> Motivo legítimo e específico</li>
-                        <li><strong>Necessidade:</strong> Mínimo necessário</li>
-                        <li><strong>Segurança:</strong> Proteção máxima</li>
-                        <li><strong>Transparência:</strong> Clareza nas informações</li>
-                    </ul>
-                    
-                    <h4 style="margin-top: 1.5rem;">Prazos Legais Importantes:</h4>
-                    <ul>
-                        <li>⏱️ <strong>3 dias úteis:</strong> Notificação de incidentes à ANPD</li>
-                        <li>📋 <strong>15 dias:</strong> Resposta a solicitações de titulares</li>
-                    </ul>
-                    
-                    <h4 style="margin-top: 1.5rem;">Multas:</h4>
-                    <ul>
-                        <li>💰 Até 2% do faturamento anual</li>
-                        <li>💵 Limitadas a R$ 50 MILHÕES por infração</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="interactive-box">
-                <h3>📥 Como Acessar os Materiais para Impressão</h3>
-                <p style="font-size: 1.1rem;">
-                    Acesse o repositório da instituição &gt; Compliance & LGPD &gt; Materiais de Apoio<br><br>
-                    ✅ Cartilha de Bolso (PDF)<br>
-                    ✅ Folha de Consulta Rápida (PDF)<br>
-                    ✅ Checklist Operacional (PDF)<br>
-                    ✅ Guia de Resposta a Incidentes (PDF)<br>
-                    ✅ Glossário Compliance & LGPD (PDF)
-                </p>
-            </div>
-        </section>
-
-        <!-- Referências -->
-        <section>
-            <h2>📚 Referências Bibliográficas</h2>
-            <ul style="line-height: 2;">
-                <li><strong>LGPD</strong> - Lei nº 13.709/2018</li>
-                <li><strong>Resolução CD/ANPD nº 15/2024</strong> - Incidentes de segurança</li>
-                <li><strong>Resolução CD/ANPD nº 23/2024</strong> - Agenda regulatória</li>
-                <li><strong>Acordo ANS + ANPD</strong> - Dezembro de 2024</li>
-                <li><strong>Estatuto do Paciente</strong> - Lei nº 15.378/2026</li>
-                <li><strong>Ponemon Institute</strong> - Healthcare Data Breach Report</li>
-                <li><strong>ANAHP</strong> - Relatório de Glosas 2025</li>
-            </ul>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <div class="quote">
-                "Na saúde, um arquivo não é apenas um documento.<br>
-                É a exposição da vida e da dignidade de um paciente.<br>
-                <strong>Cuidar de dados é cuidar de pessoas.</strong>"
-            </div>
-            
-            <h3 style="margin-top: 2rem;">Sobre o Autor</h3>
-            <p><strong>Rodrigo Barros</strong></p>
-            <p>Especialista em Compliance e LGPD<br>
-            Auditor certificado pela LEC (Legal, Ethics & Compliance)</p>
-            
-            <p style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.3);">
-                <em>"Segurança, Ética e Respeito: Esse é o nosso código."</em> 🛡️
-            </p>
-            
-            <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.8;">
-                Material Técnico de Uso Interno<br>
-                Desenvolvido por Rodrigo Barros - 2026<br>
-                Programa de Integridade e Proteção de Dados na Saúde
-            </p>
+      <div style="margin-top:20px;">
+        <label style="font-weight:600;">🧘 Nível de Presença:</label>
+        <div class="presence-scale" id="presenceScale">
+          <button data-level="1">Distraído</button>
+          <button data-level="2">Aqui</button>
+          <button data-level="3">Inteiro</button>
         </div>
-    </footer>
+        <div id="presenceLevelDisplay" style="text-align:center; margin-top:8px; font-style:italic; color:#5d6d7e;"></div>
+      </div>
 
-    <script>
-        function calculateScore() {
-            let score = 0;
-            const form = document.getElementById('quizForm');
-            const formData = new FormData(form);
-            
-            for (let [key, value] of formData.entries()) {
-                score += parseInt(value);
-            }
-            
-            const resultDiv = document.getElementById('result');
-            const scoreDisplay = document.getElementById('scoreDisplay');
-            
-            let message = '';
-            let color = '';
-            
-            if (score >= 40 && score <= 50) {
-                message = '🏆 GUARDIÃO DA PROTEÇÃO DE DADOS<br><br>Excelente! Você domina Compliance e LGPD. Continue assim e seja exemplo para a equipe!';
-                color = '#d4edda';
-            } else if (score >= 28 && score < 40) {
-                message = '⚠️ EM DESENVOLVIMENTO<br><br>Bom, mas precisa reforçar alguns pontos. Revise os módulos sobre casos reais, decálogo e boas práticas.';
-                color = '#fff3cd';
-            } else if (score >= 16 && score < 28) {
-                message = '🚨 ATENÇÃO NECESSÁRIA<br><br>Risco alto de violações! Refaça TODO o treinamento urgentemente.';
-                color = '#f8d7da';
-            } else {
-                message = '💥 RISCO CRÍTICO<br><br>Pare! Você está colocando a instituição e pacientes em risco grave. Procure o responsável pela proteção de dados imediatamente.';
-                color = '#f5c6cb';
-            }
-            
-            scoreDisplay.innerHTML = `
-                <div style="background: ${color}; padding: 2rem; border-radius: 10px; text-align: center;">
-                    <h2 style="font-size: 3rem; margin-bottom: 1rem;">${score} pontos</h2>
-                    <p style="font-size: 1.2rem;">${message}</p>
-                </div>
-            `;
-            
-            resultDiv.style.display = 'block';
-            resultDiv.scrollIntoView({ behavior: 'smooth' });
+      <textarea id="moodNotes" placeholder="Observações (opcional)" rows="2" style="width:100%; padding:12px; border-radius:14px; border:2px solid #dfe6e9; margin-top:12px;"></textarea>
+      <button class="btn-primary" id="saveMoodBtn" style="margin-top:12px;">Salvar Humor e Presença</button>
+
+      <h3 style="margin-top:20px;">📊 Histórico</h3>
+      <div id="moodHistory"></div>
+    </div>
+  </div>
+
+  <!-- ==================== RODAPÉ ==================== -->
+  <div class="footer">
+    <div class="author-name">Ricardo de Faria Barros</div>
+    <div class="author-profession">Psicólogo • Especialista em Longevidade • Consultor Projeto 70+ ANABB</div>
+    <div class="links">
+      <a href="https://a.co/d/g4s6fZ6" target="_blank" rel="noopener">📚 Meu livro na Amazon</a>
+      <a href="https://www.plenalongevidade.com.br/" target="_blank" rel="noopener">🌐 Plena Longevidade</a>
+    </div>
+    <div style="margin-top: 8px; font-size: 13px;">
+      Sistema <strong>LongeViver FQ5C</strong> – Verbos em ação, atitudes que vestimos.
+    </div>
+    <div class="copy">© 2026 LongeViver FQ5C – Todos os direitos reservados</div>
+  </div>
+
+</div><!-- /.container -->
+
+<script>
+// =====================================================================
+// LONGEVIVER FQ5C – APLICAÇÃO COMPLETA COM EXPORTAÇÃO PDF
+// =====================================================================
+
+const STORAGE_KEY = 'longeviver_fq5c_v5';
+let appState = {
+  user: null,
+  habits: [],
+  completed: {},
+  verbos: {},
+  finances: { expenses: [] },
+  reminders: [],
+  mood: {},
+  challenges: { current: null, history: [] },
+  social: { events: [] },
+  presence: { senseRecords: [], franklAnswers: [] },
+  fqDiary: {},
+  fqCalMonth: new Date().getMonth(),
+  fqCalYear: new Date().getFullYear()
+};
+
+// =====================================================================
+// HÁBITOS, MOODS, VERBOS (definições)
+// =====================================================================
+const ALL_HABITS = [
+  { id:1, title:"COPOS DE ÁGUA", desc:"Beber água mantém a vitalidade", freq:"daily", meta:"8 copos", presence:false },
+  { id:2, title:"SONO REVITALIZANTE", desc:"Dormir bem organiza emoções", freq:"daily", meta:"8h", presence:false },
+  { id:3, title:"SOL E AR LIVRE", desc:"Luz natural regula o humor", freq:"daily", meta:"20 min", presence:false },
+  { id:4, title:"EXERCÍCIO", desc:"Movimentar o corpo mantém autonomia", freq:"daily", meta:"30 min", presence:false },
+  { id:5, title:"RESPIRAÇÃO E ATENÇÃO PLENA", desc:"Uma pausa consciente", freq:"daily", meta:"5 min", presence:true },
+  { id:6, title:"DESCONEXÃO TECNOLÓGICA", desc:"Reduzir telas devolve presença", freq:"daily", meta:"30 min", presence:false },
+  { id:7, title:"LEITURA", desc:"Ler mantém a mente viva", freq:"daily", meta:"20 págs", presence:false },
+  { id:8, title:"EXERCITAR A MEMÓRIA", desc:"Jogos e lembranças ativam a cognição", freq:"daily", meta:"10 min", presence:false },
+  { id:9, title:"ESCUTA MUSICAL", desc:"A música acessa emoções", freq:"daily", meta:"15 min", presence:false },
+  { id:10, title:"APRECIAR BELEZA", desc:"Perceber algo bonito no dia", freq:"daily", meta:"1 momento", presence:true },
+  { id:11, title:"RIR UM POUCO", desc:"Rir alivia tensões", freq:"daily", meta:"1 momento", presence:false },
+  { id:12, title:"CUIDAR DA CASA E DA VIDA", desc:"Cuidar do lar, plantas, pets", freq:"daily", meta:"1 cuidado", presence:false },
+  { id:13, title:"MENSAGENS AFETUOSAS", desc:"Enviar carinho fortalece vínculos", freq:"daily", meta:"3 msgs", presence:false },
+  { id:14, title:"BOA CONVERSA", desc:"Conversar com presença", freq:"daily", meta:"1 conversa", presence:true },
+  { id:15, title:"REGISTRO DE VIDA", desc:"Registrar o dia dá sentido", freq:"daily", meta:"1 registro", presence:false },
+  { id:16, title:"PARADA ESPIRITUAL", desc:"Silêncio, oração ou reflexão", freq:"daily", meta:"10 min", presence:true },
+  { id:17, title:"GRATIDÃO", desc:"Reconhecer algo bom muda o olhar", freq:"daily", meta:"1 agradecimento", presence:true },
+  { id:18, title:"DESPOLUIÇÃO MENTAL", desc:"Interromper pensamentos negativos", freq:"daily", meta:"1 prática", presence:true },
+  { id:19, title:"SÓ POR HOJE, NÃO", desc:"Escolhas conscientes", freq:"daily", meta:"1 compromisso", presence:false },
+  { id:20, title:"COLORIR O PRATO", desc:"Mais cores naturais no prato", freq:"daily", meta:"1 refeição", presence:false },
+  { id:21, title:"APRENDER ALGO NOVO", desc:"Manter a curiosidade viva", freq:"daily", meta:"1 aprendizado", presence:false },
+  { id:22, title:"RECONHECER ALGUÉM", desc:"Valorizar o outro", freq:"daily", meta:"1 reconhecimento", presence:true },
+  { id:23, title:"MISSÃO PORTA AFORA", desc:"Sair de casa quebra a apatia", freq:"daily", meta:"1 saída", presence:false },
+  { id:24, title:"LIGAÇÃO QUE AQUECE", desc:"Ouvir e ser ouvido", freq:"daily", meta:"1 ligação", presence:true },
+  { id:25, title:"PEQUENA AVENTURA", desc:"Fazer algo diferente", freq:"daily", meta:"1 novidade", presence:false },
+  { id:26, title:"REGISTRO DE DESPESAS", desc:"Anotar gastos dá controle", freq:"daily", meta:"1 registro", presence:false },
+  { id:27, title:"PARTICIPAR DE ALGO", desc:"Grupos, encontros", freq:"weekly", meta:"1 vez/sem", presence:true },
+  { id:28, title:"AJUDAR ALGUÉM DE VERDADE", desc:"Oferecer ajuda concreta", freq:"weekly", meta:"1 gesto/sem", presence:true },
+  { id:29, title:"ARRUMAÇÃO COM MEMÓRIA", desc:"Organizar objetos com calma", freq:"weekly", meta:"20 min/sem", presence:false },
+  { id:30, title:"RITUAL DE LIBERAÇÃO", desc:"Escrever e soltar culpas", freq:"weekly", meta:"1 ritual", presence:true },
+  { id:31, title:"CURTIR CONSCIENTEMENTE", desc:"Permitir-se prazer simples", freq:"weekly", meta:"1 escolha", presence:true }
+];
+
+const FQ_VERBS = [
+  { key: "fazer", label: "FAZER", icon: "🔨" },
+  { key: "querer", label: "QUERER", icon: "💭" },
+  { key: "compartilhar", label: "COMPARTILHAR", icon: "🤝" },
+  { key: "curtir", label: "CURTIR", icon: "😊" },
+  { key: "comparecer", label: "COMPARECER", icon: "🚶" },
+  { key: "conversar", label: "CONVERSAR", icon: "🗣️" },
+  { key: "cuidar", label: "CUIDAR", icon: "🌱" },
+  { key: "conhecer", label: "CONHECER", icon: "🔍" },
+  { key: "criar", label: "CRIAR", icon: "🎨" },
+  { key: "conviver", label: "CONVIVER", icon: "👥" },
+  { key: "contemplar", label: "CONTEMPLAR", icon: "🌅" },
+  { key: "celebrar", label: "CELEBRAR", icon: "🎉" }
+];
+
+const MOODS = [
+  { emoji:"😢", name:"Triste", level:"Baixo" },
+  { emoji:"😐", name:"Neutro", level:"Médio-Baixo" },
+  { emoji:"🙂", name:"Bem", level:"Médio" },
+  { emoji:"😊", name:"Feliz", level:"Médio-Alto" },
+  { emoji:"🤩", name:"Excelente", level:"Alto" }
+];
+
+// =====================================================================
+// UTILITÁRIOS
+// =====================================================================
+function todayStr() { return new Date().toISOString().slice(0,10); }
+function formatCurrency(v) { return 'R$ '+v.toFixed(2).replace('.',','); }
+
+function showMsg(msg, type='info') {
+  const el = document.createElement('div');
+  el.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#2c3e50; color:white; padding:12px 24px; border-radius:40px; font-weight:600; z-index:9999; box-shadow:0 4px 20px rgba(0,0,0,0.3); max-width:90%; text-align:center;';
+  if (type==='error') el.style.background='#e74c3c';
+  else if (type==='success') el.style.background='#27ae60';
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 2500);
+}
+
+// =====================================================================
+// PERSISTÊNCIA
+// =====================================================================
+function saveState() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(appState)); } catch(e) {}
+}
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      appState = { ...appState, ...parsed };
+      if (!appState.habits || !appState.habits.length) appState.habits = ALL_HABITS.map(h => ({...h, streak:0}));
+      if (!appState.completed) appState.completed = {};
+      if (!appState.verbos) appState.verbos = {};
+      if (!appState.finances) appState.finances = { expenses: [] };
+      if (!appState.reminders) appState.reminders = [];
+      if (!appState.mood) appState.mood = {};
+      if (!appState.challenges) appState.challenges = { current: null, history: [] };
+      if (!appState.social) appState.social = { events: [] };
+      if (!appState.presence) appState.presence = { senseRecords: [], franklAnswers: [] };
+      if (!appState.fqDiary) appState.fqDiary = {};
+      if (appState.fqCalMonth === undefined) appState.fqCalMonth = new Date().getMonth();
+      if (appState.fqCalYear === undefined) appState.fqCalYear = new Date().getFullYear();
+      return true;
+    }
+  } catch(e) { console.warn('loadState error', e); }
+  return false;
+}
+function resetAllData() {
+  localStorage.removeItem(STORAGE_KEY);
+  location.reload();
+}
+
+function initHabits() {
+  if (!appState.habits || appState.habits.length === 0) {
+    appState.habits = ALL_HABITS.map(h => ({ ...h, streak: 0 }));
+    saveState();
+  }
+}
+
+// =====================================================================
+// EXPORTAÇÃO PDF (via impressão nativa)
+// =====================================================================
+function exportFqDiary() {
+  const now = new Date();
+  const month = now.getMonth();
+  const year = now.getFullYear();
+  const monthName = now.toLocaleString('pt-BR', { month: 'long' });
+  const userName = appState.user?.name || 'Usuário';
+
+  // Filtrar entradas do mês atual
+  const entries = Object.entries(appState.fqDiary || {})
+    .filter(([date]) => {
+      const d = new Date(date);
+      return d.getMonth() === month && d.getFullYear() === year;
+    })
+    .sort((a, b) => a[0].localeCompare(b[0]));
+
+  if (entries.length === 0) {
+    showMsg('Nenhum registro neste mês para exportar.', 'error');
+    return;
+  }
+
+  // Construir HTML do relatório
+  let html = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="UTF-8">
+      <title>Diário FQ - ${monthName} ${year}</title>
+      <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 40px; max-width: 800px; margin: 0 auto; color: #1e2a3a; }
+        h1 { color: #2c3e50; font-size: 28px; border-bottom: 3px solid #f1c40f; padding-bottom: 10px; }
+        .sub { color: #5d6d7e; font-size: 16px; margin-bottom: 30px; }
+        .entry { background: #f8f9fa; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; border-left: 5px solid #2c3e50; page-break-inside: avoid; }
+        .entry .date { font-weight: 700; font-size: 18px; color: #2c3e50; margin-bottom: 8px; }
+        .entry .verb { font-weight: 600; color: #2c3e50; margin-top: 4px; }
+        .entry .answer { margin-left: 12px; color: #1e2a3a; }
+        .footer { margin-top: 40px; padding-top: 20px; border-top: 2px solid #ecf0f1; font-size: 13px; color: #95a5a6; text-align: center; }
+        .footer strong { color: #2c3e50; }
+        @media print {
+          body { padding: 20px; }
+          .entry { background: #f8f9fa; border-left-color: #2c3e50; }
         }
+      </style>
+    </head>
+    <body>
+      <h1>🧘 Diário da Presença – FQ</h1>
+      <div class="sub">
+        <strong>${userName}</strong> • ${monthName} de ${year}<br>
+        <span style="font-size:14px; color:#5d6d7e;">Registros dos 12 verbos da presença</span>
+      </div>
+  `;
 
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-    </script>
+  entries.forEach(([date, data]) => {
+    const formattedDate = new Date(date).toLocaleDateString('pt-BR', { weekday: 'short', day: '2-digit', month: 'short' });
+    html += `<div class="entry"><div class="date">📅 ${formattedDate}</div>`;
+    FQ_VERBS.forEach(v => {
+      const answer = data[v.key] || '';
+      if (answer) {
+        html += `<div class="verb">${v.icon} ${v.label}: <span class="answer">${answer}</span></div>`;
+      }
+    });
+    html += `</div>`;
+  });
+
+  html += `
+      <div class="footer">
+        <strong>LongeViver FQ5C</strong> – Mentoria Sentir-Se Presente • Projeto 70+ ANABB<br>
+        Desenvolvido por Ricardo de Faria Barros – Psicólogo<br>
+        Gerado em ${new Date().toLocaleString('pt-BR')}
+      </div>
+    </body>
+    </html>
+  `;
+
+  // Abrir em nova janela e disparar impressão
+  const win = window.open('', '_blank');
+  if (!win) {
+    showMsg('Permita pop-ups para exportar o PDF.', 'error');
+    return;
+  }
+  win.document.write(html);
+  win.document.close();
+  win.focus();
+  win.print(); // Abre o diálogo de impressão (salvar como PDF)
+  showMsg('Relatório aberto. Use "Salvar como PDF" no diálogo de impressão.', 'success');
+}
+
+// =====================================================================
+// RENDER: DIÁRIO FQ + CALENDÁRIO
+// =====================================================================
+let fqSelectedDate = todayStr();
+
+function renderFqCalendar() {
+  const grid = document.getElementById('fqCalGrid');
+  const title = document.getElementById('fqCalTitle');
+  if (!grid || !title) return;
+
+  const month = appState.fqCalMonth;
+  const year = appState.fqCalYear;
+  const monthName = new Date(year, month).toLocaleString('pt-BR', { month: 'long' });
+  title.textContent = `${monthName.charAt(0).toUpperCase() + monthName.slice(1)} ${year}`;
+
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const today = new Date();
+
+  const dayNames = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+  grid.innerHTML = dayNames.map(d => `<div class="cal-day-name">${d}</div>`).join('');
+
+  for (let i = 0; i < firstDay; i++) {
+    grid.innerHTML += `<div class="cal-day empty"></div>`;
+  }
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dateObj = new Date(year, month, d);
+    const dateStr = dateObj.toISOString().slice(0,10);
+    const isToday = dateStr === todayStr();
+    const hasEntry = appState.fqDiary && appState.fqDiary[dateStr] && 
+                     Object.values(appState.fqDiary[dateStr]).some(v => v && v.trim() !== '');
+    const isSelected = dateStr === fqSelectedDate;
+
+    let classes = 'cal-day';
+    if (isToday) classes += ' today';
+    if (hasEntry) classes += ' has-entry';
+    if (isSelected) classes += ' selected';
+
+    grid.innerHTML += `<div class="${classes}" data-date="${dateStr}">${d}</div>`;
+  }
+
+  document.querySelectorAll('#fqCalGrid .cal-day:not(.empty)').forEach(el => {
+    el.addEventListener('click', function() {
+      const date = this.dataset.date;
+      if (date) {
+        fqSelectedDate = date;
+        renderFqCalendar();
+        renderFqDiary();
+        document.getElementById('fqSelectedDate').textContent = 
+          date === todayStr() ? '📅 Hoje' : `📅 ${new Date(date).toLocaleDateString('pt-BR')}`;
+      }
+    });
+  });
+}
+
+function renderFqDiary() {
+  const container = document.getElementById('fqGrid');
+  if (!container) return;
+
+  const todayData = appState.fqDiary[fqSelectedDate] || {};
+
+  container.innerHTML = FQ_VERBS.map(v => `
+    <div class="fq-item">
+      <label>${v.icon} ${v.label}</label>
+      <textarea rows="2" data-key="${v.key}" placeholder="O que você ${v.label.toLowerCase()} hoje...">${todayData[v.key] || ''}</textarea>
+    </div>
+  `).join('');
+}
+
+function saveFqDiary() {
+  const today = fqSelectedDate;
+  const data = {};
+  document.querySelectorAll('#fqGrid textarea').forEach(ta => {
+    const key = ta.dataset.key;
+    const val = ta.value.trim();
+    if (val) data[key] = val;
+  });
+
+  if (Object.keys(data).length === 0) {
+    showMsg('Nada para salvar. Escreva algo em pelo menos um verbo.', 'error');
+    return;
+  }
+
+  if (!appState.fqDiary) appState.fqDiary = {};
+  appState.fqDiary[today] = { ...appState.fqDiary[today], ...data };
+  saveState();
+  renderFqCalendar();
+  showMsg('Diário FQ salvo com sucesso!', 'success');
+}
+
+document.getElementById('fqCalPrev')?.addEventListener('click', () => {
+  if (appState.fqCalMonth === 0) { appState.fqCalMonth = 11; appState.fqCalYear--; }
+  else appState.fqCalMonth--;
+  renderFqCalendar();
+});
+document.getElementById('fqCalNext')?.addEventListener('click', () => {
+  if (appState.fqCalMonth === 11) { appState.fqCalMonth = 0; appState.fqCalYear++; }
+  else appState.fqCalMonth++;
+  renderFqCalendar();
+});
+document.getElementById('saveFqBtn')?.addEventListener('click', saveFqDiary);
+document.getElementById('exportFqBtn')?.addEventListener('click', exportFqDiary);
+
+// =====================================================================
+// RENDER: DEMAIS MÓDULOS (resumido)
+// =====================================================================
+function renderHabits() {
+  const dailyContainer = document.getElementById('dailyHabits');
+  const weeklyContainer = document.getElementById('weeklyHabits');
+  if (!dailyContainer || !weeklyContainer) return;
+  const today = todayStr();
+  const completedToday = appState.completed[today] || { daily: [], weekly: [] };
+
+  const daily = appState.habits.filter(h => h.freq === 'daily');
+  const weekly = appState.habits.filter(h => h.freq === 'weekly');
+
+  dailyContainer.innerHTML = daily.map(h => habitHTML(h, completedToday.daily.includes(h.id))).join('');
+  weeklyContainer.innerHTML = weekly.map(h => habitHTML(h, completedToday.weekly.includes(h.id))).join('');
+}
+function habitHTML(habit, done) {
+  const presenceBadge = habit.presence ? '<span class="habit-badge">🧘 Presença</span>' : '';
+  return `
+    <div class="habit-item" style="border-left-color: ${habit.presence ? '#f1c40f' : '#2c3e50'};">
+      <div class="info">
+        <h4>${habit.title} ${presenceBadge}</h4>
+        <p>${habit.desc} • ${habit.meta}</p>
+      </div>
+      <div class="habit-check ${done ? 'done' : ''}" data-id="${habit.id}" data-freq="${habit.freq}">
+        ${done ? '✓' : ''}
+      </div>
+    </div>
+  `;
+}
+
+function renderPresence() {
+  const historyDiv = document.getElementById('presenceHistory');
+  if (!historyDiv) return;
+  const allEntries = [
+    ...appState.presence.senseRecords.map(s => ({ date: s.date, text: `Ancoragem: ${s.sense1 || ''} ${s.sense2 || ''} ${s.sense3 || ''} ${s.sense4 || ''} ${s.sense5 || ''}` })),
+    ...appState.presence.franklAnswers.map(f => ({ date: f.date, text: `Pergunta: ${f.answer}` }))
+  ].sort((a,b) => b.date.localeCompare(a.date)).slice(0, 10);
+  historyDiv.innerHTML = allEntries.length === 0 ? '<p style="color:#5d6d7e;">Nenhum registro de presença ainda.</p>' :
+    allEntries.map(e => `<div style="padding:8px 0; border-bottom:1px solid #ecf0f1;"><strong>${e.date}</strong> – ${e.text}</div>`).join('');
+}
+
+function renderChallenge() {
+  const monthDisplay = document.getElementById('currentMonthDisplay');
+  const challengeDisplay = document.getElementById('challengeDisplay');
+  const historyDiv = document.getElementById('challengeHistory');
+  if (!monthDisplay || !challengeDisplay) return;
+  const now = new Date();
+  monthDisplay.textContent = `${now.toLocaleString('pt-BR', { month: 'long' })} de ${now.getFullYear()}`;
+
+  const ch = appState.challenges.current;
+  if (ch) {
+    const progress = ch.currentValue ? Math.min(100, (ch.currentValue / ch.goal) * 100) : 0;
+    challengeDisplay.innerHTML = `
+      <div style="font-weight:700; font-size:20px;">${ch.title}</div>
+      <p>${ch.description}</p>
+      <div style="display:flex; gap:20px; margin:10px 0;">
+        <div><strong>Meta:</strong> ${ch.goal} ${ch.unit}</div>
+        <div><strong>Atual:</strong> ${ch.currentValue || 0} ${ch.unit}</div>
+        <div><strong>Progresso:</strong> ${Math.round(progress)}%</div>
+      </div>
+      <div class="challenge-progress"><div class="bar" style="width:${progress}%;"></div></div>
+      <div style="display:flex; gap:10px; margin-top:12px;">
+        <button class="btn-primary" style="flex:1;" id="challengeAddBtn">+1</button>
+        <button class="btn-primary" style="flex:1; background:#e67e22;" id="challengeSubBtn">-1</button>
+      </div>
+    `;
+    document.getElementById('challengeAddBtn')?.addEventListener('click', ()=> updateChallenge(1));
+    document.getElementById('challengeSubBtn')?.addEventListener('click', ()=> updateChallenge(-1));
+  } else {
+    challengeDisplay.innerHTML = '<p style="color:#5d6d7e;">Nenhum desafio ativo. Defina um abaixo.</p>';
+  }
+  if (historyDiv) {
+    const hist = appState.challenges.history || [];
+    historyDiv.innerHTML = hist.length === 0 ? '<p style="color:#5d6d7e;">Nenhum histórico.</p>' :
+      hist.map(h => `<div style="padding:8px 0; border-bottom:1px solid #ecf0f1;"><strong>${h.month}</strong> – ${h.title} (${Math.round((h.currentValue/h.goal)*100)}%)</div>`).join('');
+  }
+}
+function updateChallenge(delta) {
+  const ch = appState.challenges.current;
+  if (!ch) return;
+  const newVal = Math.max(0, (ch.currentValue || 0) + delta);
+  ch.currentValue = newVal;
+  saveState();
+  renderChallenge();
+  showMsg(`Atualizado: ${newVal} ${ch.unit}`);
+}
+
+function renderSocial() {
+  const events = appState.social.events || [];
+  const cats = { family:0, work:0, leisure:0 };
+  const daysSet = new Set();
+  events.forEach(e => {
+    if (e.category) cats[e.category] = (cats[e.category] || 0) + 1;
+    daysSet.add(e.date);
+  });
+  document.getElementById('familyCount').textContent = cats.family;
+  document.getElementById('workCount').textContent = cats.work;
+  document.getElementById('leisureCount').textContent = cats.leisure;
+  document.getElementById('socialDaysCount').textContent = daysSet.size;
+
+  const list = document.getElementById('socialEventsList');
+  if (!list) return;
+  const today = todayStr();
+  const recent = events.filter(e => e.date === today).slice(0, 10);
+  list.innerHTML = recent.length === 0 ? '<p style="color:#5d6d7e;">Nenhum evento social hoje.</p>' :
+    recent.map(e => `<div class="expense-item"><span>${e.name} (${e.duration}h) <span style="font-size:14px; color:#5d6d7e;">${e.category}</span></span><span style="cursor:pointer;" onclick="deleteSocialEvent(${e.id})">✕</span></div>`).join('');
+}
+function deleteSocialEvent(id) {
+  appState.social.events = appState.social.events.filter(e => e.id !== id);
+  saveState();
+  renderSocial();
+}
+
+function renderFinances() {
+  const today = todayStr();
+  const todayExpenses = (appState.finances.expenses || []).filter(e => e.date === today);
+  const total = todayExpenses.reduce((sum, e) => sum + e.amount, 0);
+  document.getElementById('totalSpent').textContent = formatCurrency(total);
+
+  const list = document.getElementById('expensesList');
+  if (!list) return;
+  list.innerHTML = todayExpenses.length === 0 ? '<p style="color:#5d6d7e;">Nenhuma despesa hoje.</p>' :
+    todayExpenses.map(e => `<div class="expense-item"><span>${e.description} <span style="font-size:14px; color:#5d6d7e;">${e.category}</span></span><span><strong>${formatCurrency(e.amount)}</strong> <span style="cursor:pointer; margin-left:10px;" onclick="deleteExpense(${e.id})">✕</span></span></div>`).join('');
+}
+function deleteExpense(id) {
+  appState.finances.expenses = appState.finances.expenses.filter(e => e.id !== id);
+  saveState();
+  renderFinances();
+}
+
+function renderReminders() {
+  const list = document.getElementById('remindersList');
+  if (!list) return;
+  const reminders = appState.reminders || [];
+  list.innerHTML = reminders.length === 0 ? '<p style="color:#5d6d7e;">Nenhum lembrete.</p>' :
+    reminders.map(r => `<div class="reminder-item" style="border-left:4px solid ${r.priority==='urgent'?'#e74c3c':'#2c3e50'};"><span class="${r.completed ? 'done' : ''}">${r.text}</span><span style="cursor:pointer;" onclick="toggleReminder(${r.id})">${r.completed ? '↩️' : '✅'}</span></div>`).join('');
+}
+function toggleReminder(id) {
+  const r = appState.reminders.find(rem => rem.id === id);
+  if (r) { r.completed = !r.completed; saveState(); renderReminders(); }
+}
+
+function renderMood() {
+  const grid = document.getElementById('moodGrid');
+  if (grid) {
+    grid.innerHTML = MOODS.map((m, i) => `
+      <div class="mood-item" data-index="${i}" style="border-color: ${appState.mood[todayStr()]?.level === m.level ? '#2c3e50' : '#dfe6e9'};">
+        <div class="emoji">${m.emoji}</div>
+        <div class="label">${m.name}</div>
+      </div>
+    `).join('');
+  }
+
+  const historyDiv = document.getElementById('moodHistory');
+  if (historyDiv) {
+    const entries = Object.entries(appState.mood || {}).sort((a,b) => b[0].localeCompare(a[0])).slice(0,5);
+    historyDiv.innerHTML = entries.length === 0 ? '<p style="color:#5d6d7e;">Nenhum registro.</p>' :
+      entries.map(([date, data]) => {
+        const mood = MOODS.find(m => m.level === data.level);
+        return `<div style="padding:6px 0; border-bottom:1px solid #ecf0f1;">${date} – ${mood?.emoji || '?'} ${data.name || ''} ${data.presenceLevel ? '🧘 Nível '+data.presenceLevel : ''}</div>`;
+      }).join('');
+  }
+
+  const display = document.getElementById('todayMoodDisplay');
+  const today = todayStr();
+  const todayMood = appState.mood[today];
+  if (todayMood) {
+    const m = MOODS.find(m => m.level === todayMood.level);
+    display.innerHTML = `${m?.emoji || ''} ${todayMood.name || ''} ${todayMood.presenceLevel ? '– Presença: '+todayMood.presenceLevel : ''}`;
+  } else {
+    display.textContent = 'Selecione seu humor';
+  }
+  document.getElementById('moodNotes').value = todayMood?.notes || '';
+}
+
+function renderAll() {
+  renderHabits();
+  renderPresence();
+  renderChallenge();
+  renderSocial();
+  renderFinances();
+  renderReminders();
+  renderMood();
+  renderFqCalendar();
+  renderFqDiary();
+  document.getElementById('fqSelectedDate').textContent = 
+    fqSelectedDate === todayStr() ? '📅 Hoje' : `📅 ${new Date(fqSelectedDate).toLocaleDateString('pt-BR')}`;
+}
+
+// =====================================================================
+// EVENTOS DO APP
+// =====================================================================
+function setupAppEvents() {
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      const tabId = this.dataset.tab;
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      const target = document.getElementById('tab-'+tabId);
+      if (target) target.classList.add('active');
+      if (tabId === 'agora') renderPresence();
+      if (tabId === 'diario') { renderFqCalendar(); renderFqDiary(); }
+      if (tabId === 'challenge') renderChallenge();
+      if (tabId === 'social') renderSocial();
+      if (tabId === 'finances') renderFinances();
+      if (tabId === 'reminders') renderReminders();
+      if (tabId === 'mood') renderMood();
+      if (tabId === 'habits') renderHabits();
+    });
+  });
+
+  document.addEventListener('click', function(e) {
+    const check = e.target.closest('.habit-check');
+    if (check) {
+      const id = parseInt(check.dataset.id);
+      const freq = check.dataset.freq;
+      const today = todayStr();
+      if (!appState.completed[today]) appState.completed[today] = { daily: [], weekly: [] };
+      const arr = freq === 'weekly' ? appState.completed[today].weekly : appState.completed[today].daily;
+      const idx = arr.indexOf(id);
+      if (idx === -1) { arr.push(id); showMsg('✅ Hábito concluído!', 'success'); }
+      else { arr.splice(idx, 1); showMsg('↩️ Desfeito', 'info'); }
+      saveState();
+      renderHabits();
+    }
+  });
+
+  document.getElementById('saveSenseBtn')?.addEventListener('click', function() {
+    const s1 = document.getElementById('sense1').value.trim();
+    const s2 = document.getElementById('sense2').value.trim();
+    const s3 = document.getElementById('sense3').value.trim();
+    const s4 = document.getElementById('sense4').value.trim();
+    const s5 = document.getElementById('sense5').value.trim();
+    if (!s1 && !s2 && !s3 && !s4 && !s5) { showMsg('Preencha pelo menos um campo.', 'error'); return; }
+    appState.presence.senseRecords.push({ date: todayStr(), sense1: s1, sense2: s2, sense3: s3, sense4: s4, sense5: s5 });
+    saveState();
+    renderPresence();
+    showMsg('Ancoragem salva!', 'success');
+    ['sense1','sense2','sense3','sense4','sense5'].forEach(id => document.getElementById(id).value = '');
+  });
+
+  let breathTimerInterval = null, breathSeconds = 0, breathRunning = false;
+  document.getElementById('breathStartBtn')?.addEventListener('click', function() {
+    const circle = document.getElementById('breathCircle');
+    const timer = document.getElementById('breathTimer');
+    if (breathRunning) {
+      clearInterval(breathTimerInterval);
+      breathRunning = false;
+      this.textContent = 'Iniciar';
+      circle.style.transform = 'scale(1)';
+      circle.textContent = 'Inspire';
+      timer.textContent = '00:00';
+      return;
+    }
+    breathRunning = true;
+    this.textContent = 'Parar';
+    breathSeconds = 0;
+    timer.textContent = '00:00';
+    let phase = 'in';
+    circle.style.transition = 'transform 1.5s ease-in-out';
+    breathTimerInterval = setInterval(() => {
+      breathSeconds++;
+      const mins = String(Math.floor(breathSeconds / 60)).padStart(2, '0');
+      const secs = String(breathSeconds % 60).padStart(2, '0');
+      timer.textContent = `${mins}:${secs}`;
+      if (phase === 'in') { circle.style.transform = 'scale(1.4)'; circle.textContent = 'Inspire'; phase = 'out'; }
+      else { circle.style.transform = 'scale(1)'; circle.textContent = 'Expire'; phase = 'in'; }
+      if (breathSeconds >= 60) {
+        clearInterval(breathTimerInterval);
+        breathRunning = false;
+        document.getElementById('breathStartBtn').textContent = 'Concluído!';
+        circle.style.transform = 'scale(1)';
+        circle.textContent = '🧘';
+        showMsg('Respiração concluída!', 'success');
+      }
+    }, 3000);
+  });
+
+  document.getElementById('saveFranklBtn')?.addEventListener('click', function() {
+    const answer = document.getElementById('franklAnswer').value.trim();
+    if (!answer) { showMsg('Escreva algo para guardar.', 'error'); return; }
+    appState.presence.franklAnswers.push({ date: todayStr(), answer: answer });
+    saveState();
+    renderPresence();
+    showMsg('Percepção guardada!', 'success');
+    document.getElementById('franklAnswer').value = '';
+  });
+
+  document.getElementById('saveChallengeBtn')?.addEventListener('click', function() {
+    const title = document.getElementById('challengeTitle').value.trim();
+    const desc = document.getElementById('challengeDesc').value.trim();
+    const goal = parseFloat(document.getElementById('challengeGoal').value);
+    const unit = document.getElementById('challengeUnit').value.trim();
+    if (!title || !desc || !goal || !unit) { showMsg('Preencha todos os campos.', 'error'); return; }
+    if (appState.challenges.current) {
+      appState.challenges.history.push({
+        ...appState.challenges.current,
+        completed: (appState.challenges.current.currentValue || 0) >= appState.challenges.current.goal,
+        month: new Date().toLocaleString('pt-BR', { month: 'long', year: 'numeric' })
+      });
+    }
+    appState.challenges.current = { title, description: desc, goal, unit, currentValue: 0, month: new Date().toLocaleString('pt-BR', { month: 'long', year: 'numeric' }) };
+    saveState();
+    renderChallenge();
+    showMsg('Desafio salvo!', 'success');
+    document.getElementById('challengeTitle').value = '';
+    document.getElementById('challengeDesc').value = '';
+    document.getElementById('challengeGoal').value = '';
+    document.getElementById('challengeUnit').value = '';
+  });
+
+  document.getElementById('addSocialBtn')?.addEventListener('click', function() {
+    const name = document.getElementById('socialEventName').value.trim();
+    const category = document.getElementById('socialCategory').value;
+    const duration = parseFloat(document.getElementById('socialDuration').value);
+    if (!name || !duration || duration <= 0) { showMsg('Preencha nome e duração.', 'error'); return; }
+    appState.social.events.push({ id: Date.now(), name, category, duration, date: todayStr(), completed: true });
+    saveState();
+    renderSocial();
+    showMsg('Evento social adicionado!', 'success');
+    document.getElementById('socialEventName').value = '';
+    document.getElementById('socialDuration').value = '';
+  });
+
+  document.getElementById('addExpenseBtn')?.addEventListener('click', function() {
+    const desc = document.getElementById('expenseDesc').value.trim();
+    const amount = parseFloat(document.getElementById('expenseAmount').value);
+    if (!desc || !amount || amount <= 0) { showMsg('Preencha descrição e valor.', 'error'); return; }
+    appState.finances.expenses.push({ id: Date.now(), description: desc, category: 'outros', amount: amount, date: todayStr() });
+    saveState();
+    renderFinances();
+    showMsg('Despesa registrada!', 'success');
+    document.getElementById('expenseDesc').value = '';
+    document.getElementById('expenseAmount').value = '';
+  });
+
+  document.getElementById('addReminderBtn')?.addEventListener('click', function() {
+    const text = document.getElementById('reminderText').value.trim();
+    const priority = document.getElementById('reminderPriority').value;
+    if (!text) { showMsg('Digite o lembrete.', 'error'); return; }
+    appState.reminders.push({ id: Date.now(), text, priority, completed: false, createdAt: new Date().toISOString() });
+    saveState();
+    renderReminders();
+    showMsg('Lembrete adicionado!', 'success');
+    document.getElementById('reminderText').value = '';
+  });
+
+  document.getElementById('moodGrid')?.addEventListener('click', function(e) {
+    const item = e.target.closest('.mood-item');
+    if (!item) return;
+    document.querySelectorAll('.mood-item').forEach(el => el.style.borderColor = '#dfe6e9');
+    item.style.borderColor = '#2c3e50';
+  });
+
+  document.getElementById('presenceScale')?.addEventListener('click', function(e) {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    document.querySelectorAll('#presenceScale button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('presenceLevelDisplay').textContent = 'Presença: ' + btn.textContent;
+  });
+
+  document.getElementById('saveMoodBtn')?.addEventListener('click', function() {
+    const selected = document.querySelector('.mood-item[style*="border-color: #2c3e50"]');
+    if (!selected) { showMsg('Selecione um humor.', 'error'); return; }
+    const index = parseInt(selected.dataset.index);
+    const mood = MOODS[index];
+    const presenceBtn = document.querySelector('#presenceScale button.active');
+    const presenceLevel = presenceBtn ? parseInt(presenceBtn.dataset.level) : null;
+    const notes = document.getElementById('moodNotes').value.trim();
+    appState.mood[todayStr()] = { level: mood.level, emoji: mood.emoji, name: mood.name, notes, presenceLevel };
+    saveState();
+    renderMood();
+    showMsg('Humor e presença salvos!', 'success');
+  });
+
+  document.getElementById('logoutBtn')?.addEventListener('click', function() {
+    if (confirm('Deseja sair?')) {
+      document.getElementById('appContent').style.display = 'none';
+      document.getElementById('loginModal').classList.remove('hidden');
+      document.getElementById('loginUserName').textContent = appState.user.name;
+      document.querySelectorAll('#loginPinGroup input').forEach(inp => { inp.value = ''; });
+      document.getElementById('loginError').textContent = '';
+      document.querySelector('#loginPinGroup input[data-idx="0"]')?.focus();
+    }
+  });
+}
+
+// =====================================================================
+// SISTEMA DE PIN
+// =====================================================================
+function setupPinNavigation(groupSelector, onComplete) {
+  const inputs = document.querySelectorAll(groupSelector + ' .pin-input');
+  inputs.forEach((input, idx) => {
+    input.addEventListener('input', function(e) {
+      this.value = this.value.replace(/\D/g, '').slice(0,1);
+      if (this.value.length === 1) {
+        if (idx < 3) inputs[idx+1]?.focus();
+        else if (onComplete) onComplete();
+      }
+    });
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Backspace' && !this.value && idx > 0) {
+        inputs[idx-1]?.focus();
+      }
+      if (e.key === 'Enter' && onComplete) onComplete();
+    });
+    input.addEventListener('focus', function() { this.select(); });
+  });
+}
+
+function initAuth() {
+  const hasData = loadState();
+  const hasUser = appState.user && appState.user.name && appState.user.pin;
+
+  if (hasData && hasUser) {
+    document.getElementById('signupModal').classList.add('hidden');
+    document.getElementById('loginModal').classList.remove('hidden');
+    document.getElementById('loginUserName').textContent = appState.user.name;
+    document.getElementById('loginError').textContent = '';
+    document.querySelectorAll('#loginPinGroup input').forEach(inp => inp.value = '');
+    document.querySelector('#loginPinGroup input[data-idx="0"]')?.focus();
+  } else {
+    document.getElementById('signupModal').classList.remove('hidden');
+    document.getElementById('loginModal').classList.add('hidden');
+    document.getElementById('signupError').textContent = '';
+    document.querySelectorAll('#signupPinGroup input').forEach(inp => inp.value = '');
+    document.getElementById('signupName').value = '';
+    document.getElementById('signupName').focus();
+  }
+}
+
+document.getElementById('signupBtn')?.addEventListener('click', function() {
+  const name = document.getElementById('signupName').value.trim();
+  const pinInputs = document.querySelectorAll('#signupPinGroup .pin-input');
+  const pin = Array.from(pinInputs).map(inp => inp.value).join('');
+  const errorEl = document.getElementById('signupError');
+
+  if (!name) { errorEl.textContent = 'Digite seu nome.'; return; }
+  if (pin.length !== 4) { errorEl.textContent = 'Digite um PIN de 4 dígitos.'; return; }
+  if (!/^\d{4}$/.test(pin)) { errorEl.textContent = 'Use apenas números.'; return; }
+
+  appState.user = { name, pin };
+  appState.habits = ALL_HABITS.map(h => ({ ...h, streak: 0 }));
+  appState.fqDiary = {};
+  saveState();
+
+  document.getElementById('signupModal').classList.add('hidden');
+  document.getElementById('appContent').style.display = 'block';
+  document.getElementById('displayName').textContent = name;
+  initHabits();
+  fqSelectedDate = todayStr();
+  renderAll();
+  setupAppEvents();
+  showMsg(`Conta criada! Seu PIN é ${pin}. Anote em lugar seguro.`, 'success');
+
+  if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.matchMedia('(display-mode: standalone)').matches) {
+    setTimeout(() => showMsg('📱 Para instalar: Safari → Compartilhar → "Adicionar à Tela de Início"', 'info'), 2000);
+  }
+});
+
+document.getElementById('loginBtn')?.addEventListener('click', function() {
+  const pinInputs = document.querySelectorAll('#loginPinGroup .pin-input');
+  const pin = Array.from(pinInputs).map(inp => inp.value).join('');
+  const errorEl = document.getElementById('loginError');
+
+  if (pin.length !== 4) { errorEl.textContent = 'Digite o PIN de 4 dígitos.'; return; }
+  if (pin === appState.user.pin) {
+    document.getElementById('loginModal').classList.add('hidden');
+    document.getElementById('appContent').style.display = 'block';
+    document.getElementById('displayName').textContent = appState.user.name;
+    initHabits();
+    fqSelectedDate = todayStr();
+    renderAll();
+    setupAppEvents();
+    showMsg('Bem-vindo de volta!', 'success');
+  } else {
+    errorEl.textContent = 'PIN incorreto. Tente novamente.';
+    pinInputs.forEach(inp => { inp.value = ''; });
+    pinInputs[0]?.focus();
+  }
+});
+
+document.getElementById('resetPinBtn')?.addEventListener('click', function() {
+  if (confirm('⚠️ Isso vai apagar TODOS os seus dados. Tem certeza?')) {
+    resetAllData();
+  }
+});
+
+setupPinNavigation('#signupPinGroup', () => document.getElementById('signupBtn')?.click());
+setupPinNavigation('#loginPinGroup', () => document.getElementById('loginBtn')?.click());
+
+// =====================================================================
+// PWA: INSTALAÇÃO E SERVICE WORKER
+// =====================================================================
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  document.getElementById('installBtn').style.display = 'inline-block';
+});
+document.getElementById('installBtn')?.addEventListener('click', async () => {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    const result = await deferredPrompt.userChoice;
+    if (result.outcome === 'accepted') showMsg('App instalado!', 'success');
+    deferredPrompt = null;
+    document.getElementById('installBtn').style.display = 'none';
+  } else {
+    showMsg('Abra no Safari/Chrome e use "Adicionar à Tela de Início"', 'info');
+  }
+});
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(console.warn);
+  });
+}
+
+// =====================================================================
+// INICIALIZAÇÃO
+// =====================================================================
+document.addEventListener('DOMContentLoaded', function() {
+  initAuth();
+});
+</script>
 </body>
 </html>
