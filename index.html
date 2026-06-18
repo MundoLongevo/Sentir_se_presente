@@ -4,18 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=yes" />
   <meta name="theme-color" content="#2c3e50" />
-  <meta name="description" content="LongeViver FQ5C - Mentoria Sentir-Se Presente - Projeto 70+ ANABB" />
+  <meta name="description" content="FQ10C - Diário da Presença - Mentoria Sentir-Se Presente - Projeto 70+ ANABB" />
   <meta name="author" content="Ricardo de Faria Barros - Psicólogo" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="LongeViver" />
+  <meta name="apple-mobile-web-app-title" content="FQ10C" />
   <link rel="manifest" href="./manifest.webmanifest" />
   
-  <!-- Ícone para iOS e Android (SVG inline) -->
-  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232c3e50'/><text x='50' y='68' font-size='50' text-anchor='middle' fill='%23f1c40f'>🧘</text></svg>" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232c3e50'/><text x='50' y='68' font-size='50' text-anchor='middle' fill='%23f1c40f'>🧘</text></svg>" />
+  <!-- Ícone para iOS e Android -->
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232c3e50'/><text x='50' y='68' font-size='45' text-anchor='middle' fill='%23f1c40f'>FQ10C</text></svg>" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232c3e50'/><text x='50' y='68' font-size='45' text-anchor='middle' fill='%23f1c40f'>FQ10C</text></svg>" />
   
-  <title>LongeViver – Sentir-Se Presente</title>
+  <title>FQ10C – Diário da Presença</title>
   <style>
     /* ===== RESET & BASE ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -46,11 +46,16 @@
       text-align: center;
     }
     .banner h1 {
-      font-size: 28px;
+      font-size: 32px;
       font-weight: 700;
       letter-spacing: 1px;
     }
     .banner h1 span { color: #f1c40f; }
+    .banner .subtitle {
+      margin-top: 6px;
+      font-size: 18px;
+      font-weight: 300;
+    }
     .banner p {
       margin-top: 8px;
       font-size: 16px;
@@ -252,7 +257,7 @@
       font-style: italic;
     }
 
-    /* ===== DIÁRIO FQ (verbo grid) ===== */
+    /* ===== DIÁRIO FQ10C (10 verbos) ===== */
     .fq-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -594,11 +599,11 @@
 </head>
 <body>
 
-<!-- ===== MODAL DE CRIAÇÃO DE CONTA ===== -->
+<!-- ===== MODAIS DE CRIAÇÃO DE CONTA E LOGIN ===== -->
 <div id="signupModal" class="modal-overlay">
   <div class="modal-box">
-    <h2>🧘 LongeViver</h2>
-    <p class="sub">Comece sua jornada de presença</p>
+    <h2>🧘 FQ10C</h2>
+    <p class="sub">Diário da Presença – Comece sua jornada</p>
     <input type="text" id="signupName" placeholder="Seu nome" autocomplete="off" />
     <p class="sub" style="font-size:14px; margin-top: -8px;">Crie um PIN de 4 dígitos</p>
     <div class="pin-group" id="signupPinGroup">
@@ -613,7 +618,6 @@
   </div>
 </div>
 
-<!-- ===== MODAL DE LOGIN ===== -->
 <div id="loginModal" class="modal-overlay hidden">
   <div class="modal-box">
     <h2>🔐 Bem-vindo de volta</h2>
@@ -636,13 +640,14 @@
 <div class="container" id="appContent" style="display:none;">
 
   <!-- BANNER -->
-  <div class="banner" id="banner">
-    <h1>🧘 <span>Sentir-Se Presente</span></h1>
-    <p>Mentoria 70+ ANABB – Cada instante é uma oportunidade de se encontrar.</p>
-    <div class="tag">LongeViver FQ5C</div>
+  <div class="banner">
+    <h1>🧘 <span>FQ10C</span></h1>
+    <div class="subtitle">Diário da Presença</div>
+    <p>Mentoria 70+ ANABB – 10 verbos para ancorar o agora</p>
+    <div class="tag">Sentir-Se Presente</div>
     <div class="privacy-note">
-      🔒 <strong>Seus dados ficam apenas neste dispositivo.</strong> Não vão para a nuvem. 
-      Você pode instalar este app como nativo no celular (via "Adicionar à Tela de Início").
+      🔒 <strong>Seus dados ficam apenas neste dispositivo.</strong> Não vão para a nuvem.<br>
+      Instale como app nativo: "Adicionar à Tela de Início"
     </div>
     <div class="author-credit">
       Desenvolvido por <strong>Ricardo de Faria Barros</strong> – Psicólogo<br />
@@ -663,7 +668,7 @@
   <!-- TABS -->
   <div class="tabs" id="tabsContainer">
     <button class="tab-btn active" data-tab="agora">🧘 Agora</button>
-    <button class="tab-btn" data-tab="diario">📝 Diário FQ</button>
+    <button class="tab-btn" data-tab="diario">📝 FQ10C</button>
     <button class="tab-btn" data-tab="presence-why">🧠 Por que Presença?</button>
     <button class="tab-btn" data-tab="habits">📋 Hábitos</button>
     <button class="tab-btn" data-tab="challenge">🏆 Desafio</button>
@@ -710,12 +715,12 @@
     </div>
   </div>
 
-  <!-- ==================== TAB "Diário FQ" ==================== -->
+  <!-- ==================== TAB "FQ10C" (Diário com 10 verbos) ==================== -->
   <div class="tab-content" id="tab-diario">
     <div class="card">
-      <h2>📝 Diário da Presença – FQ</h2>
+      <h2>📝 FQ10C – Diário da Presença</h2>
       <p style="font-size:15px; color:#5d6d7e; margin-bottom:16px;">
-        Registre como cada verbo se manifestou em você hoje. 
+        Registre como os 10 verbos se manifestaram em você hoje.
         <span style="display:block; margin-top:4px; font-weight:500;">🔒 Fica apenas no seu celular.</span>
       </p>
 
@@ -736,15 +741,13 @@
 
       <div style="font-weight:600; margin-bottom:12px;" id="fqSelectedDate">Hoje</div>
 
-      <!-- Grid dos verbos -->
+      <!-- Grid dos 10 verbos -->
       <div class="fq-grid" id="fqGrid"></div>
 
       <button class="btn-primary" id="saveFqBtn" style="margin-top:16px;">Salvar Diário de Hoje</button>
-      
-      <!-- Botão de exportação PDF -->
-      <button class="export-btn" id="exportFqBtn">📄 Exportar Diário FQ (PDF)</button>
+      <button class="export-btn" id="exportFqBtn">📄 Exportar FQ10C (PDF)</button>
       <p style="font-size:12px; color:#5d6d7e; margin-top:6px; text-align:center;">
-        Gera um relatório do mês atual. O PDF é gerado localmente no seu dispositivo.
+        Gera relatório do mês atual. O PDF é gerado localmente no seu dispositivo.
       </p>
     </div>
   </div>
@@ -754,32 +757,31 @@
     <div class="card">
       <h2>🧠 Por que Sentir-Se Presente?</h2>
       <div class="highlight">
-        <p><strong>A ansiedade nos puxa para o futuro, para o que pode acontecer. A presença nos ancora no agora, onde a vida realmente acontece.</strong></p>
+        <p><strong>A ansiedade nos puxa para o futuro. A presença nos ancora no agora, onde a vida realmente acontece.</strong></p>
       </div>
       <p style="margin-bottom: 16px;">
-        Quando você está ansioso, sua mente viaja para amanhã, para a próxima semana, para o “e se…”. 
+        Quando você está ansioso, sua mente viaja para amanhã, para o “e se…”. 
         Esse movimento constante gasta energia, rouba o sono e afasta você do que é real.
       </p>
       <p style="margin-bottom: 16px;">
         <strong>Sentir-se presente é o antídoto.</strong> Não porque os problemas desaparecem, mas porque 
-        você recupera a capacidade de responder a eles com clareza, em vez de reagir com medo.
+        você recupera a capacidade de responder a eles com clareza.
       </p>
       <div style="background: #eaf2f8; padding: 16px; border-radius: 16px; margin-bottom: 16px;">
-        <h3 style="margin-bottom: 8px;">Como este app ajuda:</h3>
+        <h3 style="margin-bottom: 8px;">Como o FQ10C ajuda:</h3>
         <ul style="padding-left: 20px; margin-bottom: 0;">
+          <li><strong>📝 Os 10 verbos</strong> – um mapa diário para reconhecer a presença em cada ação.</li>
           <li><strong>🧘 Ancoragem sensorial</strong> – treina sua atenção para o aqui e agora.</li>
           <li><strong>🌬️ Respiração guiada</strong> – reduz a ansiedade em minutos.</li>
           <li><strong>❓ Pergunta de Frankl</strong> – desloca o foco do futuro para o presente.</li>
-          <li><strong>📊 Termômetro de Presença</strong> – você nomeia seu nível de presença.</li>
-          <li><strong>📝 Diário FQ</strong> – mapeia os 12 verbos da presença no seu dia a dia.</li>
         </ul>
       </div>
       <div class="highlight">
         <p><em>“Entre o estímulo e a resposta, há um espaço. Nesse espaço está o nosso poder de escolha.”</em> – Viktor Frankl</p>
       </div>
       <p style="margin-top: 16px;">
-        Use este app como um treino diário. Cada exercício é um passo para recuperar a serenidade 
-        que a ansiedade rouba. <strong>A presença não é um destino, é uma prática.</strong>
+        Use o FQ10C como um treino diário. Cada verbo registrado é um passo para recuperar a serenidade.
+        <strong>A presença não é um destino, é uma prática.</strong>
       </p>
     </div>
   </div>
@@ -907,19 +909,19 @@
       <a href="https://www.plenalongevidade.com.br/" target="_blank" rel="noopener">🌐 Plena Longevidade</a>
     </div>
     <div style="margin-top: 8px; font-size: 13px;">
-      Sistema <strong>LongeViver FQ5C</strong> – Verbos em ação, atitudes que vestimos.
+      <strong>FQ10C</strong> – Diário da Presença • Verbos em ação, atitudes que vestimos.
     </div>
-    <div class="copy">© 2026 LongeViver FQ5C – Todos os direitos reservados</div>
+    <div class="copy">© 2026 FQ10C – Todos os direitos reservados</div>
   </div>
 
 </div><!-- /.container -->
 
 <script>
 // =====================================================================
-// LONGEVIVER FQ5C – APLICAÇÃO COMPLETA COM EXPORTAÇÃO PDF
+// FQ10C – APLICAÇÃO COMPLETA (10 verbos, PIN, offline, PDF)
 // =====================================================================
 
-const STORAGE_KEY = 'longeviver_fq5c_v5';
+const STORAGE_KEY = 'fq10c_v1';
 let appState = {
   user: null,
   habits: [],
@@ -937,7 +939,23 @@ let appState = {
 };
 
 // =====================================================================
-// HÁBITOS, MOODS, VERBOS (definições)
+// 10 VERBOS DO FQ10C (exatamente como você pediu)
+// =====================================================================
+const FQ_VERBS = [
+  { key: "fazer", label: "FAZER", icon: "🔨" },
+  { key: "querer", label: "QUERER", icon: "💭" },
+  { key: "compartilhar", label: "COMPARTILHAR", icon: "🤝" },
+  { key: "curtir", label: "CURTIR", icon: "😊" },
+  { key: "comparecer", label: "COMPARECER", icon: "🚶" },
+  { key: "conversar", label: "CONVERSAR", icon: "🗣️" },
+  { key: "cuidar", label: "CUIDAR", icon: "🌱" },
+  { key: "conhecer", label: "CONHECER", icon: "🔍" },
+  { key: "criar", label: "CRIAR", icon: "🎨" },
+  { key: "conviver", label: "CONVIVER", icon: "👥" }
+];
+
+// =====================================================================
+// HÁBITOS, MOODS (mesmos de antes)
 // =====================================================================
 const ALL_HABITS = [
   { id:1, title:"COPOS DE ÁGUA", desc:"Beber água mantém a vitalidade", freq:"daily", meta:"8 copos", presence:false },
@@ -971,21 +989,6 @@ const ALL_HABITS = [
   { id:29, title:"ARRUMAÇÃO COM MEMÓRIA", desc:"Organizar objetos com calma", freq:"weekly", meta:"20 min/sem", presence:false },
   { id:30, title:"RITUAL DE LIBERAÇÃO", desc:"Escrever e soltar culpas", freq:"weekly", meta:"1 ritual", presence:true },
   { id:31, title:"CURTIR CONSCIENTEMENTE", desc:"Permitir-se prazer simples", freq:"weekly", meta:"1 escolha", presence:true }
-];
-
-const FQ_VERBS = [
-  { key: "fazer", label: "FAZER", icon: "🔨" },
-  { key: "querer", label: "QUERER", icon: "💭" },
-  { key: "compartilhar", label: "COMPARTILHAR", icon: "🤝" },
-  { key: "curtir", label: "CURTIR", icon: "😊" },
-  { key: "comparecer", label: "COMPARECER", icon: "🚶" },
-  { key: "conversar", label: "CONVERSAR", icon: "🗣️" },
-  { key: "cuidar", label: "CUIDAR", icon: "🌱" },
-  { key: "conhecer", label: "CONHECER", icon: "🔍" },
-  { key: "criar", label: "CRIAR", icon: "🎨" },
-  { key: "conviver", label: "CONVIVER", icon: "👥" },
-  { key: "contemplar", label: "CONTEMPLAR", icon: "🌅" },
-  { key: "celebrar", label: "CELEBRAR", icon: "🎉" }
 ];
 
 const MOODS = [
@@ -1045,7 +1048,6 @@ function resetAllData() {
   localStorage.removeItem(STORAGE_KEY);
   location.reload();
 }
-
 function initHabits() {
   if (!appState.habits || appState.habits.length === 0) {
     appState.habits = ALL_HABITS.map(h => ({ ...h, streak: 0 }));
@@ -1054,7 +1056,7 @@ function initHabits() {
 }
 
 // =====================================================================
-// EXPORTAÇÃO PDF (via impressão nativa)
+// EXPORTAÇÃO PDF (com 10 verbos)
 // =====================================================================
 function exportFqDiary() {
   const now = new Date();
@@ -1063,7 +1065,6 @@ function exportFqDiary() {
   const monthName = now.toLocaleString('pt-BR', { month: 'long' });
   const userName = appState.user?.name || 'Usuário';
 
-  // Filtrar entradas do mês atual
   const entries = Object.entries(appState.fqDiary || {})
     .filter(([date]) => {
       const d = new Date(date);
@@ -1072,17 +1073,16 @@ function exportFqDiary() {
     .sort((a, b) => a[0].localeCompare(b[0]));
 
   if (entries.length === 0) {
-    showMsg('Nenhum registro neste mês para exportar.', 'error');
+    showMsg('Nenhum registro neste mês.', 'error');
     return;
   }
 
-  // Construir HTML do relatório
   let html = `
     <!DOCTYPE html>
     <html>
     <head>
       <meta charset="UTF-8">
-      <title>Diário FQ - ${monthName} ${year}</title>
+      <title>FQ10C - Diário da Presença</title>
       <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 40px; max-width: 800px; margin: 0 auto; color: #1e2a3a; }
         h1 { color: #2c3e50; font-size: 28px; border-bottom: 3px solid #f1c40f; padding-bottom: 10px; }
@@ -1100,10 +1100,10 @@ function exportFqDiary() {
       </style>
     </head>
     <body>
-      <h1>🧘 Diário da Presença – FQ</h1>
+      <h1>🧘 FQ10C – Diário da Presença</h1>
       <div class="sub">
         <strong>${userName}</strong> • ${monthName} de ${year}<br>
-        <span style="font-size:14px; color:#5d6d7e;">Registros dos 12 verbos da presença</span>
+        <span style="font-size:14px; color:#5d6d7e;">10 verbos para ancorar o agora</span>
       </div>
   `;
 
@@ -1121,7 +1121,7 @@ function exportFqDiary() {
 
   html += `
       <div class="footer">
-        <strong>LongeViver FQ5C</strong> – Mentoria Sentir-Se Presente • Projeto 70+ ANABB<br>
+        <strong>FQ10C</strong> – Diário da Presença • Mentoria Sentir-Se Presente • Projeto 70+ ANABB<br>
         Desenvolvido por Ricardo de Faria Barros – Psicólogo<br>
         Gerado em ${new Date().toLocaleString('pt-BR')}
       </div>
@@ -1129,7 +1129,6 @@ function exportFqDiary() {
     </html>
   `;
 
-  // Abrir em nova janela e disparar impressão
   const win = window.open('', '_blank');
   if (!win) {
     showMsg('Permita pop-ups para exportar o PDF.', 'error');
@@ -1138,12 +1137,12 @@ function exportFqDiary() {
   win.document.write(html);
   win.document.close();
   win.focus();
-  win.print(); // Abre o diálogo de impressão (salvar como PDF)
-  showMsg('Relatório aberto. Use "Salvar como PDF" no diálogo de impressão.', 'success');
+  win.print();
+  showMsg('Relatório aberto. Use "Salvar como PDF".', 'success');
 }
 
 // =====================================================================
-// RENDER: DIÁRIO FQ + CALENDÁRIO
+// RENDER: DIÁRIO FQ10C + CALENDÁRIO
 // =====================================================================
 let fqSelectedDate = todayStr();
 
@@ -1230,7 +1229,7 @@ function saveFqDiary() {
   appState.fqDiary[today] = { ...appState.fqDiary[today], ...data };
   saveState();
   renderFqCalendar();
-  showMsg('Diário FQ salvo com sucesso!', 'success');
+  showMsg('Diário FQ10C salvo!', 'success');
 }
 
 document.getElementById('fqCalPrev')?.addEventListener('click', () => {
