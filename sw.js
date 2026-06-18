@@ -2,7 +2,8 @@ const CACHE_NAME = 'fq10c-v1';
 const ASSETS = [
   './',
   './index.html',
-  './manifest.webmanifest'
+  './manifest.webmanifest',
+  './icon.png'
 ];
 
 self.addEventListener('install', event => {

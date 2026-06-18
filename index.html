@@ -11,9 +11,9 @@
   <meta name="apple-mobile-web-app-title" content="Diário FQ10C" />
   <link rel="manifest" href="./manifest.webmanifest" />
   
-  <!-- ÍCONE SVG INLINE (funciona na maioria dos celulares) -->
-  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232c3e50'/%3E%3Ctext x='50' y='68' font-family='Arial, sans-serif' font-size='44' font-weight='bold' text-anchor='middle' fill='%23f1c40f'%3EFQ10C%3C/text%3E%3C/svg%3E" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232c3e50'/%3E%3Ctext x='50' y='68' font-family='Arial, sans-serif' font-size='44' font-weight='bold' text-anchor='middle' fill='%23f1c40f'%3EFQ10C%3C/text%3E%3C/svg%3E" />
+  <!-- ÍCONE PNG (substitua pelo seu) -->
+  <link rel="apple-touch-icon" href="icon.png" />
+  <link rel="icon" type="image/png" href="icon.png" />
 
   <title>Diário FQ10C – Presença</title>
   <style>
@@ -573,7 +573,7 @@
       color: #95a5a6;
     }
 
-    /* ===== BOTÃO GERAR ÍCONES (oculto, mas acessível) ===== */
+    /* ===== BOTÃO GERAR ÍCONES (fallback) ===== */
     .hidden-tools {
       margin-top: 12px;
       padding: 10px;
@@ -659,7 +659,7 @@
   <!-- BANNER -->
   <div class="banner">
     <h1>🧘 <span>Diário FQ10C</span></h1>
-    <div class="subtitle">10 verbos para ancorar o agora</div>
+    <div class="subtitle">12 verbos para ancorar o agora</div>
     <p>Mentoria 70+ ANABB – Sentir-Se Presente</p>
     <div class="tag">FQ10C</div>
     <div class="privacy-note">
@@ -737,7 +737,7 @@
     <div class="card">
       <h2>📝 Diário FQ10C</h2>
       <p style="font-size:15px; color:#5d6d7e; margin-bottom:16px;">
-        Registre como os 10 verbos se manifestaram em você hoje.
+        Registre como os 12 verbos se manifestaram em você hoje.
         <span style="display:block; margin-top:4px; font-weight:500;">🔒 Fica apenas no seu celular.</span>
       </p>
 
@@ -758,7 +758,7 @@
 
       <div style="font-weight:600; margin-bottom:12px;" id="fqSelectedDate">Hoje</div>
 
-      <!-- Grid dos 10 verbos -->
+      <!-- Grid dos 12 verbos -->
       <div class="fq-grid" id="fqGrid"></div>
 
       <button class="btn-primary" id="saveFqBtn" style="margin-top:16px;">Salvar Diário de Hoje</button>
@@ -787,7 +787,7 @@
       <div style="background: #eaf2f8; padding: 16px; border-radius: 16px; margin-bottom: 16px;">
         <h3 style="margin-bottom: 8px;">Como o FQ10C ajuda:</h3>
         <ul style="padding-left: 20px; margin-bottom: 0;">
-          <li><strong>📝 Os 10 verbos</strong> – um mapa diário para reconhecer a presença em cada ação.</li>
+          <li><strong>📝 Os 12 verbos</strong> – um mapa diário para reconhecer a presença em cada ação.</li>
           <li><strong>🧘 Ancoragem sensorial</strong> – treina sua atenção para o aqui e agora.</li>
           <li><strong>🌬️ Respiração guiada</strong> – reduz a ansiedade em minutos.</li>
           <li><strong>❓ Pergunta de Frankl</strong> – desloca o foco do futuro para o presente.</li>
@@ -926,15 +926,15 @@
       <a href="https://www.plenalongevidade.com.br/" target="_blank" rel="noopener">🌐 Plena Longevidade</a>
     </div>
     <div style="margin-top: 8px; font-size: 13px;">
-      <strong>Diário FQ10C</strong> – 10 verbos para ancorar o agora.
+      <strong>Diário FQ10C</strong> – 12 verbos para ancorar o agora.
     </div>
     <div class="copy">© 2026 FQ10C – Todos os direitos reservados</div>
     
-    <!-- Ferramenta para gerar ícones PNG (caso o SVG não funcione) -->
+    <!-- Ferramenta para gerar ícones PNG (fallback) -->
     <div class="hidden-tools">
       <details>
-        <summary style="cursor:pointer; color:#2c3e50; font-weight:600;">🔧 Gerar ícones PNG (se o ícone não aparecer)</summary>
-        <p style="font-size:14px; margin:8px 0;">Clique no botão abaixo para baixar os ícones PNG. Depois, coloque na pasta <code>icons/</code> e atualize o manifest.</p>
+        <summary style="cursor:pointer; color:#2c3e50; font-weight:600;">🔧 Gerar ícones PNG (fallback)</summary>
+        <p style="font-size:14px; margin:8px 0;">Clique no botão abaixo para baixar ícones PNG alternativos.</p>
         <button id="generateIconsBtn">📥 Baixar ícones PNG (192x192 e 512x512)</button>
         <p style="font-size:12px; color:#5d6d7e; margin-top:6px;">Os arquivos serão baixados automaticamente.</p>
       </details>
@@ -945,7 +945,7 @@
 
 <script>
 // =====================================================================
-// DIÁRIO FQ10C – APLICAÇÃO COMPLETA
+// DIÁRIO FQ10C – APLICAÇÃO COMPLETA (12 VERBOS)
 // =====================================================================
 
 const STORAGE_KEY = 'fq10c_v1';
@@ -966,7 +966,7 @@ let appState = {
 };
 
 // =====================================================================
-// 10 VERBOS DO FQ10C
+// 12 VERBOS DO FQ10C (agora completos)
 // =====================================================================
 const FQ_VERBS = [
   { key: "fazer", label: "FAZER", icon: "🔨" },
@@ -978,7 +978,9 @@ const FQ_VERBS = [
   { key: "cuidar", label: "CUIDAR", icon: "🌱" },
   { key: "conhecer", label: "CONHECER", icon: "🔍" },
   { key: "criar", label: "CRIAR", icon: "🎨" },
-  { key: "conviver", label: "CONVIVER", icon: "👥" }
+  { key: "conviver", label: "CONVIVER", icon: "👥" },
+  { key: "contemplar", label: "CONTEMPLAR", icon: "🌅" },
+  { key: "celebrar", label: "CELEBRAR", icon: "🎉" }
 ];
 
 // =====================================================================
@@ -1083,7 +1085,7 @@ function initHabits() {
 }
 
 // =====================================================================
-// EXPORTAÇÃO PDF
+// EXPORTAÇÃO PDF (com 12 verbos)
 // =====================================================================
 function exportFqDiary() {
   const now = new Date();
@@ -1130,7 +1132,7 @@ function exportFqDiary() {
       <h1>🧘 Diário FQ10C</h1>
       <div class="sub">
         <strong>${userName}</strong> • ${monthName} de ${year}<br>
-        <span style="font-size:14px; color:#5d6d7e;">10 verbos para ancorar o agora</span>
+        <span style="font-size:14px; color:#5d6d7e;">12 verbos para ancorar o agora</span>
       </div>
   `;
 
@@ -1169,7 +1171,7 @@ function exportFqDiary() {
 }
 
 // =====================================================================
-// GERADOR DE ÍCONES PNG (botão no rodapé)
+// GERADOR DE ÍCONES PNG (fallback)
 // =====================================================================
 function generateAndDownloadIcons() {
   function downloadIcon(size) {
@@ -1213,7 +1215,7 @@ function generateAndDownloadIcons() {
   }
   downloadIcon(192);
   downloadIcon(512);
-  showMsg('Ícones gerados! Coloque na pasta icons/.', 'success');
+  showMsg('Ícones gerados! Coloque na pasta do app.', 'success');
 }
 
 document.getElementById('generateIconsBtn')?.addEventListener('click', generateAndDownloadIcons);
