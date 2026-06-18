@@ -4,18 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=yes" />
   <meta name="theme-color" content="#2c3e50" />
-  <meta name="description" content="FQ10C - Diário da Presença - Mentoria Sentir-Se Presente - Projeto 70+ ANABB" />
+  <meta name="description" content="Diário FQ10C - Mentoria Sentir-Se Presente - Projeto 70+ ANABB" />
   <meta name="author" content="Ricardo de Faria Barros - Psicólogo" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="FQ10C" />
+  <meta name="apple-mobile-web-app-title" content="Diário FQ10C" />
   <link rel="manifest" href="./manifest.webmanifest" />
+  
+  <!-- ÍCONE SVG INLINE (funciona na maioria dos celulares) -->
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232c3e50'/%3E%3Ctext x='50' y='68' font-family='Arial, sans-serif' font-size='44' font-weight='bold' text-anchor='middle' fill='%23f1c40f'%3EFQ10C%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232c3e50'/%3E%3Ctext x='50' y='68' font-family='Arial, sans-serif' font-size='44' font-weight='bold' text-anchor='middle' fill='%23f1c40f'%3EFQ10C%3C/text%3E%3C/svg%3E" />
 
-  <!-- ÍCONE MELHORADO para iOS e Android (gradiente + texto) -->
-  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%231a252f'/%3E%3Cstop offset='100%25' stop-color='%232c3e50'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23g)'/%3E%3Ctext x='50' y='68' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='48' font-weight='bold' text-anchor='middle' fill='%23f1c40f' letter-spacing='-1'%3EFQ10C%3C/text%3E%3C/svg%3E" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%231a252f'/%3E%3Cstop offset='100%25' stop-color='%232c3e50'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23g)'/%3E%3Ctext x='50' y='68' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-size='48' font-weight='bold' text-anchor='middle' fill='%23f1c40f' letter-spacing='-1'%3EFQ10C%3C/text%3E%3C/svg%3E" />
-
-  <title>FQ10C – Diário da Presença</title>
+  <title>Diário FQ10C – Presença</title>
   <style>
     /* ===== RESET & BASE ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -573,6 +573,23 @@
       color: #95a5a6;
     }
 
+    /* ===== BOTÃO GERAR ÍCONES (oculto, mas acessível) ===== */
+    .hidden-tools {
+      margin-top: 12px;
+      padding: 10px;
+      background: #ecf0f1;
+      border-radius: 12px;
+    }
+    .hidden-tools button {
+      background: #2c3e50;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
     /* ===== RESPONSIVO ===== */
     @media (max-width: 480px) {
       .tabs { gap: 4px; }
@@ -602,8 +619,8 @@
 <!-- ===== MODAIS ===== -->
 <div id="signupModal" class="modal-overlay">
   <div class="modal-box">
-    <h2>🧘 FQ10C</h2>
-    <p class="sub">Diário da Presença – Comece sua jornada</p>
+    <h2>🧘 Diário FQ10C</h2>
+    <p class="sub">Comece sua jornada de presença</p>
     <input type="text" id="signupName" placeholder="Seu nome" autocomplete="off" />
     <p class="sub" style="font-size:14px; margin-top: -8px;">Crie um PIN de 4 dígitos</p>
     <div class="pin-group" id="signupPinGroup">
@@ -641,10 +658,10 @@
 
   <!-- BANNER -->
   <div class="banner">
-    <h1>🧘 <span>FQ10C</span></h1>
-    <div class="subtitle">Diário da Presença</div>
-    <p>Mentoria 70+ ANABB – 10 verbos para ancorar o agora</p>
-    <div class="tag">Sentir-Se Presente</div>
+    <h1>🧘 <span>Diário FQ10C</span></h1>
+    <div class="subtitle">10 verbos para ancorar o agora</div>
+    <p>Mentoria 70+ ANABB – Sentir-Se Presente</p>
+    <div class="tag">FQ10C</div>
     <div class="privacy-note">
       🔒 <strong>Seus dados ficam apenas neste dispositivo.</strong> Não vão para a nuvem.<br>
       Instale como app nativo: "Adicionar à Tela de Início"
@@ -718,7 +735,7 @@
   <!-- ==================== TAB "FQ10C" ==================== -->
   <div class="tab-content" id="tab-diario">
     <div class="card">
-      <h2>📝 FQ10C – Diário da Presença</h2>
+      <h2>📝 Diário FQ10C</h2>
       <p style="font-size:15px; color:#5d6d7e; margin-bottom:16px;">
         Registre como os 10 verbos se manifestaram em você hoje.
         <span style="display:block; margin-top:4px; font-weight:500;">🔒 Fica apenas no seu celular.</span>
@@ -745,7 +762,7 @@
       <div class="fq-grid" id="fqGrid"></div>
 
       <button class="btn-primary" id="saveFqBtn" style="margin-top:16px;">Salvar Diário de Hoje</button>
-      <button class="export-btn" id="exportFqBtn">📄 Exportar FQ10C (PDF)</button>
+      <button class="export-btn" id="exportFqBtn">📄 Exportar Diário (PDF)</button>
       <p style="font-size:12px; color:#5d6d7e; margin-top:6px; text-align:center;">
         Gera relatório do mês atual. O PDF é gerado localmente no seu dispositivo.
       </p>
@@ -909,16 +926,26 @@
       <a href="https://www.plenalongevidade.com.br/" target="_blank" rel="noopener">🌐 Plena Longevidade</a>
     </div>
     <div style="margin-top: 8px; font-size: 13px;">
-      <strong>FQ10C</strong> – Diário da Presença • Verbos em ação, atitudes que vestimos.
+      <strong>Diário FQ10C</strong> – 10 verbos para ancorar o agora.
     </div>
     <div class="copy">© 2026 FQ10C – Todos os direitos reservados</div>
+    
+    <!-- Ferramenta para gerar ícones PNG (caso o SVG não funcione) -->
+    <div class="hidden-tools">
+      <details>
+        <summary style="cursor:pointer; color:#2c3e50; font-weight:600;">🔧 Gerar ícones PNG (se o ícone não aparecer)</summary>
+        <p style="font-size:14px; margin:8px 0;">Clique no botão abaixo para baixar os ícones PNG. Depois, coloque na pasta <code>icons/</code> e atualize o manifest.</p>
+        <button id="generateIconsBtn">📥 Baixar ícones PNG (192x192 e 512x512)</button>
+        <p style="font-size:12px; color:#5d6d7e; margin-top:6px;">Os arquivos serão baixados automaticamente.</p>
+      </details>
+    </div>
   </div>
 
 </div><!-- /.container -->
 
 <script>
 // =====================================================================
-// FQ10C – APLICAÇÃO COMPLETA (10 verbos, PIN, offline, PDF)
+// DIÁRIO FQ10C – APLICAÇÃO COMPLETA
 // =====================================================================
 
 const STORAGE_KEY = 'fq10c_v1';
@@ -1082,7 +1109,7 @@ function exportFqDiary() {
     <html>
     <head>
       <meta charset="UTF-8">
-      <title>FQ10C - Diário da Presença</title>
+      <title>Diário FQ10C</title>
       <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 40px; max-width: 800px; margin: 0 auto; color: #1e2a3a; }
         h1 { color: #2c3e50; font-size: 28px; border-bottom: 3px solid #f1c40f; padding-bottom: 10px; }
@@ -1100,7 +1127,7 @@ function exportFqDiary() {
       </style>
     </head>
     <body>
-      <h1>🧘 FQ10C – Diário da Presença</h1>
+      <h1>🧘 Diário FQ10C</h1>
       <div class="sub">
         <strong>${userName}</strong> • ${monthName} de ${year}<br>
         <span style="font-size:14px; color:#5d6d7e;">10 verbos para ancorar o agora</span>
@@ -1121,7 +1148,7 @@ function exportFqDiary() {
 
   html += `
       <div class="footer">
-        <strong>FQ10C</strong> – Diário da Presença • Mentoria Sentir-Se Presente • Projeto 70+ ANABB<br>
+        <strong>Diário FQ10C</strong> – Mentoria Sentir-Se Presente • Projeto 70+ ANABB<br>
         Desenvolvido por Ricardo de Faria Barros – Psicólogo<br>
         Gerado em ${new Date().toLocaleString('pt-BR')}
       </div>
@@ -1140,6 +1167,56 @@ function exportFqDiary() {
   win.print();
   showMsg('Relatório aberto. Use "Salvar como PDF".', 'success');
 }
+
+// =====================================================================
+// GERADOR DE ÍCONES PNG (botão no rodapé)
+// =====================================================================
+function generateAndDownloadIcons() {
+  function downloadIcon(size) {
+    const canvas = document.createElement('canvas');
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext('2d');
+    const radius = size * 0.22;
+    const w = size, h = size;
+    ctx.beginPath();
+    ctx.moveTo(radius, 0);
+    ctx.lineTo(w - radius, 0);
+    ctx.quadraticCurveTo(w, 0, w, radius);
+    ctx.lineTo(w, h - radius);
+    ctx.quadraticCurveTo(w, h, w - radius, h);
+    ctx.lineTo(radius, h);
+    ctx.quadraticCurveTo(0, h, 0, h - radius);
+    ctx.lineTo(0, radius);
+    ctx.quadraticCurveTo(0, 0, radius, 0);
+    ctx.closePath();
+    const grad = ctx.createLinearGradient(0, 0, w, h);
+    grad.addColorStop(0, '#1a252f');
+    grad.addColorStop(1, '#2c3e50');
+    ctx.fillStyle = grad;
+    ctx.fill();
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = '#f1c40f';
+    ctx.font = `bold ${size * 0.45}px Arial, sans-serif`;
+    ctx.shadowColor = 'rgba(0,0,0,0.3)';
+    ctx.shadowBlur = 10;
+    ctx.fillText('FQ10C', w/2, h/2 + size * 0.02);
+    ctx.shadowBlur = 0;
+    ctx.fillStyle = '#f1c40f';
+    ctx.font = `${size * 0.12}px Arial, sans-serif`;
+    ctx.fillText('Diário da Presença', w/2, h/2 + size * 0.35);
+    const link = document.createElement('a');
+    link.download = `icon-${size}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  }
+  downloadIcon(192);
+  downloadIcon(512);
+  showMsg('Ícones gerados! Coloque na pasta icons/.', 'success');
+}
+
+document.getElementById('generateIconsBtn')?.addEventListener('click', generateAndDownloadIcons);
 
 // =====================================================================
 // RENDER: DIÁRIO FQ10C + CALENDÁRIO
