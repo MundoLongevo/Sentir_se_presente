@@ -12,12 +12,12 @@
   
   <link rel="manifest" href="./manifest.json" />
   
-  <!-- Ícones PNG (use seus arquivos) -->
+  <!-- Ícones PNG -->
   <link rel="apple-touch-icon" href="icon-192.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png" />
   
-  <!-- Fallback SVG caso os PNGs não carreguem -->
+  <!-- Fallback SVG -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232c3e50'/%3E%3Ctext x='50' y='68' font-family='Arial, sans-serif' font-size='44' font-weight='bold' text-anchor='middle' fill='%23f1c40f'%3EFQ10C%3C/text%3E%3C/svg%3E" />
 
   <title>Diário FQ10C – Presença</title>
@@ -278,6 +278,15 @@
       border-radius: 12px;
       margin: 12px 0;
       font-style: italic;
+    }
+    .card .breath-info {
+      background: #eaf2f8;
+      padding: 10px 14px;
+      border-radius: 12px;
+      margin: 12px 0;
+      font-size: 15px;
+      color: #2c3e50;
+      text-align: center;
     }
 
     /* ===== DIÁRIO FQ10C ===== */
@@ -736,8 +745,15 @@
       <button class="btn-primary" id="saveSenseBtn">Salvar essa ancoragem</button>
     </div>
 
+    <!-- CARD DA RESPIRAÇÃO – EXPLICAÇÃO MELHORADA -->
     <div class="card">
-      <h2>🌬️ Respiração Consciente (1 min)</h2>
+      <h2>🌬️ Respiração Consciente (1 minuto)</h2>
+      <div class="breath-info">
+        <strong>🧘 Como fazer:</strong> Siga o movimento do círculo. 
+        <span style="display:inline-block; background:#f1c40f; color:#1a252f; padding:2px 10px; border-radius:30px; font-weight:700;">4 segundos</span> para inspirar (círculo expande) e 
+        <span style="display:inline-block; background:#f1c40f; color:#1a252f; padding:2px 10px; border-radius:30px; font-weight:700;">4 segundos</span> para expirar (círculo contrai). 
+        Repita por 1 minuto – cerca de 7 ciclos completos.
+      </div>
       <div class="breath-wrap">
         <div class="breath-circle" id="breathCircle">Inspire</div>
         <div class="breath-timer" id="breathTimer">00:00</div>
@@ -815,7 +831,7 @@
         <ul style="padding-left: 20px; margin-bottom: 0;">
           <li><strong>📝 Os 12 verbos</strong> – um mapa diário para reconhecer a presença em cada ação.</li>
           <li><strong>🧘 Ancoragem sensorial</strong> – treina sua atenção para o aqui e agora.</li>
-          <li><strong>🌬️ Respiração guiada</strong> – reduz a ansiedade em minutos.</li>
+          <li><strong>🌬️ Respiração guiada</strong> – reduz a ansiedade em minutos, com 4 segundos para inspirar e 4 para expirar.</li>
           <li><strong>❓ Pergunta de Frankl</strong> – desloca o foco do futuro para o presente.</li>
         </ul>
       </div>
@@ -971,7 +987,7 @@
 
 <script>
 // =====================================================================
-// DIÁRIO FQ10C – APLICAÇÃO COMPLETA (12 VERBOS, PERGUNTAS CORRIGIDAS)
+// DIÁRIO FQ10C – APLICAÇÃO COMPLETA (12 VERBOS, RESPIRAÇÃO 4s)
 // =====================================================================
 
 const STORAGE_KEY = 'fq10c_v1';
@@ -1254,12 +1270,10 @@ const installBtn = document.getElementById('installBtn');
 const installBtnTop = document.getElementById('installBtnTop');
 const installHintText = document.getElementById('installHintText');
 
-// Verifica se já está instalado como app
 function isAppInstalled() {
   return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
 }
 
-// Atualiza o texto de instalação
 function updateInstallHint() {
   if (isAppInstalled()) {
     installHintText.textContent = '✅ App já instalado!';
@@ -1268,7 +1282,6 @@ function updateInstallHint() {
     return;
   }
 
-  // Verifica se o navegador suporta PWA
   const isSecure = window.location.protocol === 'https:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
   const isSupported = 'serviceWorker' in navigator && 'fetch' in window;
 
@@ -1281,13 +1294,11 @@ function updateInstallHint() {
     if (installBtn) installBtn.style.display = 'none';
     if (installBtnTop) installBtnTop.style.display = 'none';
   } else {
-    // iOS: mostrar instrução manual
     if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
       installHintText.textContent = '📱 Toque em Compartilhar → "Adicionar à Tela de Início"';
       if (installBtn) installBtn.style.display = 'none';
       if (installBtnTop) installBtnTop.style.display = 'none';
     } else {
-      // Android/Chrome: mostrar botão de instalação (se houver evento)
       if (deferredPrompt) {
         installHintText.textContent = '📲 Toque no botão para instalar';
         if (installBtn) installBtn.style.display = 'inline-block';
@@ -1296,7 +1307,6 @@ function updateInstallHint() {
         installHintText.textContent = '📲 Aguarde, o app está pronto para instalar.';
         if (installBtn) installBtn.style.display = 'none';
         if (installBtnTop) installBtnTop.style.display = 'none';
-        // Tenta forçar o evento afterinstallprompt
         setTimeout(() => {
           if (deferredPrompt) {
             installHintText.textContent = '📲 Toque no botão para instalar';
@@ -1320,7 +1330,6 @@ window.addEventListener('appinstalled', () => {
   updateInstallHint();
 });
 
-// Botão de instalação (Android)
 function handleInstallClick() {
   if (deferredPrompt) {
     deferredPrompt.prompt();
@@ -1334,7 +1343,6 @@ function handleInstallClick() {
       updateInstallHint();
     });
   } else {
-    // Fallback: instrução manual
     if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
       showMsg('📱 Toque em Compartilhar → "Adicionar à Tela de Início"', 'info');
     } else {
@@ -1346,7 +1354,6 @@ function handleInstallClick() {
 if (installBtn) installBtn.addEventListener('click', handleInstallClick);
 if (installBtnTop) installBtnTop.addEventListener('click', handleInstallClick);
 
-// Verifica a instalação periodicamente
 setInterval(updateInstallHint, 5000);
 
 // =====================================================================
@@ -1644,6 +1651,57 @@ function renderAll() {
 }
 
 // =====================================================================
+// RESPIRAÇÃO GUIADA (AGORA COM 4 SEGUNDOS)
+// =====================================================================
+let breathTimerInterval = null;
+let breathSeconds = 0;
+let breathRunning = false;
+
+document.getElementById('breathStartBtn')?.addEventListener('click', function() {
+  const circle = document.getElementById('breathCircle');
+  const timer = document.getElementById('breathTimer');
+  if (breathRunning) {
+    clearInterval(breathTimerInterval);
+    breathRunning = false;
+    this.textContent = 'Iniciar';
+    circle.style.transform = 'scale(1)';
+    circle.textContent = 'Inspire';
+    timer.textContent = '00:00';
+    return;
+  }
+  breathRunning = true;
+  this.textContent = 'Parar';
+  breathSeconds = 0;
+  timer.textContent = '00:00';
+  let phase = 'in';
+  // Transição mais lenta para 4 segundos
+  circle.style.transition = 'transform 2s ease-in-out';
+  breathTimerInterval = setInterval(() => {
+    breathSeconds++;
+    const mins = String(Math.floor(breathSeconds / 60)).padStart(2, '0');
+    const secs = String(breathSeconds % 60).padStart(2, '0');
+    timer.textContent = `${mins}:${secs}`;
+    if (phase === 'in') {
+      circle.style.transform = 'scale(1.4)';
+      circle.textContent = 'Inspire (4s)';
+      phase = 'out';
+    } else {
+      circle.style.transform = 'scale(1)';
+      circle.textContent = 'Expire (4s)';
+      phase = 'in';
+    }
+    if (breathSeconds >= 60) {
+      clearInterval(breathTimerInterval);
+      breathRunning = false;
+      document.getElementById('breathStartBtn').textContent = 'Concluído!';
+      circle.style.transform = 'scale(1)';
+      circle.textContent = '🧘';
+      showMsg('Respiração concluída!', 'success');
+    }
+  }, 4000); // 4 segundos entre cada mudança
+});
+
+// =====================================================================
 // EVENTOS DO APP
 // =====================================================================
 function setupAppEvents() {
@@ -1694,43 +1752,6 @@ function setupAppEvents() {
     renderPresence();
     showMsg('Ancoragem salva!', 'success');
     ['sense1','sense2','sense3','sense4','sense5'].forEach(id => document.getElementById(id).value = '');
-  });
-
-  let breathTimerInterval = null, breathSeconds = 0, breathRunning = false;
-  document.getElementById('breathStartBtn')?.addEventListener('click', function() {
-    const circle = document.getElementById('breathCircle');
-    const timer = document.getElementById('breathTimer');
-    if (breathRunning) {
-      clearInterval(breathTimerInterval);
-      breathRunning = false;
-      this.textContent = 'Iniciar';
-      circle.style.transform = 'scale(1)';
-      circle.textContent = 'Inspire';
-      timer.textContent = '00:00';
-      return;
-    }
-    breathRunning = true;
-    this.textContent = 'Parar';
-    breathSeconds = 0;
-    timer.textContent = '00:00';
-    let phase = 'in';
-    circle.style.transition = 'transform 1.5s ease-in-out';
-    breathTimerInterval = setInterval(() => {
-      breathSeconds++;
-      const mins = String(Math.floor(breathSeconds / 60)).padStart(2, '0');
-      const secs = String(breathSeconds % 60).padStart(2, '0');
-      timer.textContent = `${mins}:${secs}`;
-      if (phase === 'in') { circle.style.transform = 'scale(1.4)'; circle.textContent = 'Inspire'; phase = 'out'; }
-      else { circle.style.transform = 'scale(1)'; circle.textContent = 'Expire'; phase = 'in'; }
-      if (breathSeconds >= 60) {
-        clearInterval(breathTimerInterval);
-        breathRunning = false;
-        document.getElementById('breathStartBtn').textContent = 'Concluído!';
-        circle.style.transform = 'scale(1)';
-        circle.textContent = '🧘';
-        showMsg('Respiração concluída!', 'success');
-      }
-    }, 3000);
   });
 
   document.getElementById('saveFranklBtn')?.addEventListener('click', function() {
@@ -1911,7 +1932,6 @@ document.getElementById('signupBtn')?.addEventListener('click', function() {
   setupAppEvents();
   showMsg(`Conta criada! Seu PIN é ${pin}. Anote em lugar seguro.`, 'success');
 
-  // Atualiza dica de instalação
   setTimeout(updateInstallHint, 1000);
 
   if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.matchMedia('(display-mode: standalone)').matches) {
@@ -1971,7 +1991,6 @@ if ('serviceWorker' in navigator) {
 // =====================================================================
 document.addEventListener('DOMContentLoaded', function() {
   initAuth();
-  // Atualiza dica de instalação após carregar
   setTimeout(updateInstallHint, 1500);
 });
 </script>
