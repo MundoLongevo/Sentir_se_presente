@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compliance, Ética e LGPD para Profissionais de Saúde | Rodrigo Barros</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --azul-institucional: #003366;
+            --verde-saude: #00A86B;
+            --laranja-alerta: #FF6B35;
+            --roxo-inovacao: #6B4EE6;
+            --vermelho-perigo: #D62828;
+            --cinza-claro: #F5F5F5;
+            --texto-escuro: #2C3E50;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--texto-escuro);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--azul-institucional) 0%, var(--roxo-inovacao) 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        header .author {
+            margin-top: 1.5rem;
+            font-style: italic;
+            background: rgba(255,255,255,0.1);
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 1rem 0;
+        }
+
+        nav li {
+            margin: 0 1rem;
+        }
+
+        nav a {
+            color: var(--azul-institucional);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        nav a:hover {
+            color: var(--verde-saude);
+            background: var(--cinza-claro);
+        }
+
+        /* Sections */
+        section {
+            background: white;
+            margin: 2rem 0;
+            padding: 3rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        section h2 {
+            color: var(--azul-institucional);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 4px solid var(--verde-saude);
+        }
+
+        section h3 {
+            color: var(--roxo-inovacao);
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+        }
+
+        /* Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 5px solid var(--verde-saude);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .card h4 {
+            color: var(--azul-institucional);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .card.warning {
+            border-left-color: var(--laranja-alerta);
+            background: linear-gradient(135deg, #fff5f0 0%, #ffe4d6 100%);
+        }
+
+        .card.danger {
+            border-left-color: var(--vermelho-perigo);
+            background: linear-gradient(135deg, #ffe6e6 0%, #ffcccc 100%);
+        }
+
+        .card.success {
+            border-left-color: var(--verde-saude);
+            background: linear-gradient(135deg, #e6fff0 0%, #ccffe0 100%);
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: var(--azul-institucional);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: var(--cinza-claro);
+        }
+
+        /* Quiz */
+        .quiz-container {
+            background: var(--cinza-claro);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .question {
+            background: white;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            border-left: 4px solid var(--roxo-inovacao);
+        }
+
+        .question h4 {
+            color: var(--azul-institucional);
+            margin-bottom: 1rem;
+        }
+
+        .options label {
+            display: block;
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            background: var(--cinza-claro);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .options label:hover {
+            background: #e0e0e0;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 0.5rem;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--verde-saude) 0%, #008f5a 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: inline-block;
+            margin: 1rem 0;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, var(--vermelho-perigo) 0%, #a01e1e 100%);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, var(--laranja-alerta) 0%, #e55a2a 100%);
+        }
+
+        /* Case Studies */
+        .case-study {
+            background: white;
+            border: 2px solid var(--laranja-alerta);
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .case-study::before {
+            content: "⚠️ CASO REAL";
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--laranja-alerta);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .case-study h4 {
+            color: var(--azul-institucional);
+            margin-top: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .case-study .impact {
+            background: #fff3cd;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            border-left: 4px solid var(--laranja-alerta);
+        }
+
+        .case-study .lesson {
+            background: #d4edda;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            border-left: 4px solid var(--verde-saude);
+        }
+
+        /* Decalogue */
+        .decalogue-item {
+            display: flex;
+            align-items: flex-start;
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f0f4ff 0%, #e0e8ff 100%);
+            border-radius: 10px;
+            border-left: 5px solid var(--roxo-inovacao);
+        }
+
+        .decalogue-number {
+            background: var(--roxo-inovacao);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .decalogue-content h4 {
+            color: var(--azul-institucional);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Printable Materials */
+        .printable-section {
+            background: linear-gradient(135deg, #fffef0 0%, #fff9e0 100%);
+            border: 3px dashed var(--laranja-alerta);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .printable-section h3 {
+            color: var(--laranja-alerta);
+        }
+
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist li {
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            background: white;
+            border-radius: 5px;
+            border-left: 4px solid var(--verde-saude);
+        }
+
+        .checklist li::before {
+            content: "☐ ";
+            color: var(--verde-saude);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--azul-institucional);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+        }
+
+        footer .quote {
+            font-style: italic;
+            font-size: 1.2rem;
+            margin: 1rem 0;
+            padding: 1rem;
+            border-left: 4px solid var(--verde-saude);
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            section {
+                padding: 2rem 1rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        section {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background: var(--cinza-claro);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .progress-bar {
+            height: 30px;
+            background: linear-gradient(90deg, var(--verde-saude) 0%, var(--roxo-inovacao) 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            transition: width 0.3s;
+        }
+
+        /* Interactive Elements */
+        .interactive-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .interactive-box h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        /* Statistics */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--azul-institucional) 0%, var(--roxo-inovacao) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🛡️ Compliance, Ética e LGPD para Profissionais de Saúde</h1>
+            <p class="subtitle">Programa de Integridade e Proteção de Dados na Saúde</p>
+            <div class="author">
+                <p>👨‍💼 Autor: Rodrigo Barros</p>
+                <p>Especialista em Compliance e LGPD | Auditor Certificado LEC</p>
+                <p>Ano: 2026</p>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#introducao">Introdução</a></li>
+                <li><a href="#compliance">Compliance</a></li>
+                <li><a href="#lgpd">LGPD</a></li>
+                <li><a href="#casos">Casos Reais</a></li>
+                <li><a href="#boas-praticas">Boas Práticas</a></li>
+                <li><a href="#autoteste">Autoteste</a></li>
+                <li><a href="#materiais">Materiais</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Introdução -->
+        <section id="introducao">
+            <h2>🎯 Objetivos de Aprendizagem</h2>
+            <div class="cards-grid">
+                <div class="card success">
+                    <h4>✅ Compreender Compliance</h4>
+                    <p>Entender os pilares do Compliance e sua aplicação prática na saúde</p>
+                </div>
+                <div class="card success">
+                    <h4>✅ Identificar Dados Sensíveis</h4>
+                    <p>Aplicar a LGPD no dia a dia com dados de pacientes</p>
+                </div>
+                <div class="card success">
+                    <h4>✅ Reconhecer Riscos</h4>
+                    <p>Evitar violações de segurança e proteger informações</p>
+                </div>
+                <div class="card success">
+                    <h4>✅ Agir com Ética</h4>
+                    <p>Manter sigilo e respeito no tratamento de dados</p>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">R$ 50M</span>
+                    <span class="stat-label">Multa máxima LGPD por infração</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">243M</span>
+                    <span class="stat-label">Registros vazados no MS (2020)</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">81</span>
+                    <span class="stat-label">Processos ANPD em 2025</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">3 dias</span>
+                    <span class="stat-label">Prazo para notificar incidentes</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Compliance -->
+        <section id="compliance">
+            <h2>🔐 O Que é Compliance?</h2>
+            <p><strong>Compliance</strong> vem do inglês <em>"to comply"</em> = <strong>estar em conformidade</strong></p>
+            <p>É a cultura de fazer o <strong>certo</strong>, mesmo quando <strong>ninguém está olhando</strong>.</p>
+
+            <h3>💡 Os 4 Pilares do Respeito Operacional</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pilar</th>
+                        <th>Aplicação Prática</th>
+                        <th>Impacto</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>🤝 Respeito ao Próximo</td>
+                        <td>Cordialidade com colegas e equipe</td>
+                        <td>Ambiente colaborativo e seguro</td>
+                    </tr>
+                    <tr>
+                        <td>📋 Respeito às Regras</td>
+                        <td>Cumprimento de protocolos</td>
+                        <td>Segurança jurídica e qualidade</td>
+                    </tr>
+                    <tr>
+                        <td>🏥 Respeito ao Paciente</td>
+                        <td>Sigilo absoluto e cuidado humanizado</td>
+                        <td>Confiança e fidelização</td>
+                    </tr>
+                    <tr>
+                        <td>🏥 Respeito à Instituição</td>
+                        <td>Postura profissional ética</td>
+                        <td>Credibilidade e sustentabilidade</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- LGPD -->
+        <section id="lgpd">
+            <h2>📋 LGPD e Dados de Saúde</h2>
+            
+            <div class="case-study" style="border-color: var(--vermelho-perigo);">
+                <h4>⚠️ Dados de Saúde São SENSÍVEIS</h4>
+                <p>Conforme <strong>Art. 5º, II da LGPD (Lei 13.709/2018)</strong>, dados de saúde são classificados como <strong>DADOS PESSOAIS SENSÍVEIS</strong> - nível <strong>MÁXIMO</strong> de proteção!</p>
+                
+                <h4>O que inclui:</h4>
+                <ul style="margin-left: 2rem; margin-top: 1rem;">
+                    <li>📋 Prontuários médicos e de enfermagem</li>
+                    <li>🔬 Resultados de exames laboratoriais e de imagem</li>
+                    <li>💊 Histórico de medicamentos e alergias</li>
+                    <li>🏥 Registros de internação e evolução clínica</li>
+                    <li>🦠 Diagnósticos, CIDs e laudos</li>
+                    <li>🧬 Dados genéticos, biométricos e de saúde mental</li>
+                </ul>
+            </div>
+
+            <h3>⚡ Princípios de Ouro da LGPD</h3>
+            <div class="cards-grid">
+                <div class="card">
+                    <h4>🎯 FINALIDADE</h4>
+                    <p>Motivo legítimo e específico para tratamento de dados</p>
+                </div>
+                <div class="card">
+                    <h4>⚡ NECESSIDADE</h4>
+                    <p>Apenas o essencial - mínimo necessário</p>
+                </div>
+                <div class="card">
+                    <h4>🔒 SEGURANÇA</h4>
+                    <p>Proteção máxima dos dados tratados</p>
+                </div>
+            </div>
+
+            <div class="interactive-box">
+                <h3>📊 Regra de Ouro</h3>
+                <p style="font-size: 1.3rem;">"Acesse apenas o estritamente necessário para sua função.<br><strong>Curiosidade é infração!</strong>"</p>
+            </div>
+        </section>
+
+        <!-- Casos Reais -->
+        <section id="casos">
+            <h2>📰 Casos Reais de Fiscalização</h2>
+
+            <div class="case-study">
+                <h4>CASO 1: Ministério da Saúde (2020/2024)</h4>
+                <p><strong>O que aconteceu:</strong> Credenciais de acesso expostas por 6 meses. Senhas publicadas em código-fonte (Base64). <strong>243 MILHÕES</strong> de registros de saúde acessíveis.</p>
+                
+                <div class="impact">
+                    <strong>💥 Impacto:</strong> Sanção administrativa da ANPD em 2024. Danos graves à imagem institucional.
+                </div>
+                
+                <div class="lesson">
+                    <strong>💡 Lição:</strong> Senhas fracas e credenciais mal protegidas = porta aberta para vazamentos
+                </div>
+            </div>
+
+            <div class="case-study">
+                <h4>CASO 2: Hospital Universitário da USP (Março 2023)</h4>
+                <p><strong>O que aconteceu:</strong> Ataque de <strong>RANSOMWARE</strong> comprometeu 600 computadores. Sistemas paralisados por dias.</p>
+                
+                <div class="impact">
+                    <strong>💥 Impacto:</strong> 769 consultas canceladas. Atendimentos suspensos. Prejuízo operacional e reputacional incalculável.
+                </div>
+                
+                <div class="lesson">
+                    <strong>💡 Lição:</strong> Ransomware entra por e-mails maliciosos e dispositivos infectados
+                </div>
+            </div>
+
+            <div class="case-study">
+                <h4>CASO 3: Telekall Infoservice (2023)</h4>
+                <p><strong>Marco Histórico:</strong> Primeira empresa PRIVADA multada pela ANPD. Valor: <strong>R$ 14,4 mil</strong>. Motivo: Comercializar dados pessoais sem autorização.</p>
+                
+                <div class="lesson">
+                    <strong>💡 Lição:</strong> A ANPD fiscaliza e multa empresas privadas! Reincidência agrava sanções.
+                </div>
+            </div>
+
+            <div class="case-study">
+                <h4>CASO 4: ANPD Fiscaliza 20 Empresas (Dezembro 2024)</h4>
+                <p><strong>O que aconteceu:</strong> ANPD iniciou fiscalização de 20 empresas de grande porte, incluindo setor de saúde, por falta de indicação de Encarregado (DPO).</p>
+                
+                <div class="lesson">
+                    <strong>💡 Lição:</strong> Setor de saúde está no radar da fiscalização. Conformidade não é opcional!
+                </div>
+            </div>
+        </section>
+
+        <!-- Boas Práticas -->
+        <section id="boas-praticas">
+            <h2>✅ Decálogo do Profissional de Saúde Conforme</h2>
+            <p>10 Boas Práticas Para o Dia a Dia</p>
+
+            <div class="decalogue-item">
+                <div class="decalogue-number">1</div>
+                <div class="decalogue-content">
+                    <h4>🔒 Trate Dados como Vidas</h4>
+                    <p><strong>Confidencialidade Absoluta:</strong> Cada prontuário é uma pessoa real. Trate como gostaria que tratassem seus dados. Sigilo não tem exceção.</p>
+                </div>
+            </div>
+
+            <div class="decalogue-item">
+                <div class="decalogue-number">2</div>
+                <div class="decalogue-content">
+                    <h4>📧 Canais Corporativos Exclusivos</h4>
+                    <p><strong>Proibido WhatsApp ou E-mail Pessoal:</strong> Use apenas sistemas homologados. VPN corporativa para acesso remoto.</p>
+                </div>
+            </div>
+
+            <div class="decalogue-item">
+                <div class="decalogue-number">3</div>
+                <div class="decalogue-content">
+                    <h4>🎯 Acesso por Necessidade</h4>
+                    <p><strong>Acesse Apenas o Estritamente Necessário:</strong> Curiosidade é infração grave. Mínimo necessário = menor risco.</p>
+                </div>
+            </div>
+
+            <div class="decalogue-item">
+                <div class="decalogue-number">4</div>
+                <div class="decalogue-content">
+                    <h4>📢 Comunicação Imediata de Incidentes</h4>
+                    <p><strong>Notifique Imediatamente:</strong> Errou? Comunique NA HORA. Prazo ANPD: 3 dias úteis. Não há punição por reportar de boa-fé.</p>
+                </div>
+            </div>
+
+            <div class="decalogue-item">
+                <div class="decalogue-number">5</div>
+                <div class="decalogue-content">
+                    <h4>🔐 Segurança Digital Básica</h4>
+                    <p><strong>Senhas Fortes e Autenticação:</strong> Mínimo 12 caracteres. Ative 2FA. Nunca compartilhe senhas. Bloqueie tela sempre (Win + L).</p>
+                </div>
+            </div>
+
+            <div class="decalogue-item">
+                <div class="decalogue-number">6</div>
+                <div class="decalogue-content">
+                    <h4>🛡️ Privacidade por Design</h4>
+                    <p><strong>Proteja Desde o Início:</strong> Ao criar planilhas ou relatórios, questione: "Como protejo os dados?" Anonimize quando possível.</p>
+                </div>
+            </div>
+
+            <div class="decalogue-item">
+                <div class="decalogue-number">7</div>
+                <div class="decalogue-content">
+                    <h4>📋 Documente Processos</h4>
+                    <p><strong>Registro é Proteção:</strong> Consentimentos por escrito. Autorizações documentadas. Rastreabilidade de acessos.</p>
+                </div>
+            </div>
+
+            <div class="decalogue-item">
+                <div class="decalogue-number">8</div>
+                <div class="decalogue-content">
+                    <h4>🗑️ Descarte Seguro</h4>
+                    <p><strong>Não Basta "Jogar na Lixeira":</strong> Fragmentação de documentos físicos. Exclusão segura de arquivos digitais.</p>
+                </div>
+            </div>
+
+            <div class="decalogue-item">
+                <div class="decalogue-number">9</div>
+                <div class="decalogue-content">
+                    <h4>🤝 Respeito Interno e Externo</h4>
+                    <p><strong>Ética Começa Entre Nós:</strong> Sem fofocas sobre dados de pacientes. Respeite colegas, pacientes e sistemas.</p>
+                </div>
+            </div>
+
+            <div class="decalogue-item">
+                <div class="decalogue-number">10</div>
+                <div class="decalogue-content">
+                    <h4>📚 Participação Ativa</h4>
+                    <p><strong>Treinamentos Continuados:</strong> Compliance e LGPD são dinâmicos. Mantenha-se atualizado. Participe de todos os treinamentos.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Autoteste -->
+        <section id="autoteste">
+            <h2>🎮 Autoteste Interativo</h2>
+            <p>Descubra Seu Nível de Preparo! Responda sinceramente e some seus pontos.</p>
+
+            <div class="quiz-container">
+                <form id="quizForm">
+                    <div class="question">
+                        <h4>1. Um colega pede sua senha porque esqueceu a dele. Você:</h4>
+                        <div class="options">
+                            <label><input type="radio" name="q1" value="0"> A) Empresta, são da mesma equipe (0 pts)</label>
+                            <label><input type="radio" name="q1" value="10"> B) Orienta a recuperar pelo sistema oficial (10 pts)</label>
+                            <label><input type="radio" name="q1" value="0"> C) Compartilha só por hoje (0 pts)</label>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <h4>2. Ao se ausentar da mesa por 2 minutos, você:</h4>
+                        <div class="options">
+                            <label><input type="radio" name="q2" value="0"> A) Deixa aberto, é rapidinho (0 pts)</label>
+                            <label><input type="radio" name="q2" value="10"> B) Bloqueia a tela (Win + L) (10 pts)</label>
+                            <label><input type="radio" name="q2" value="2"> C) Minimiza as janelas (2 pts)</label>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <h4>3. Precisa enviar um prontuário urgente. Você usa:</h4>
+                        <div class="options">
+                            <label><input type="radio" name="q3" value="0"> A) WhatsApp pessoal (0 pts)</label>
+                            <label><input type="radio" name="q3" value="10"> B) E-mail institucional seguro (10 pts)</label>
+                            <label><input type="radio" name="q3" value="5"> C) WhatsApp corporativo (5 pts)</label>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <h4>4. Acessa sistema e vê prontuário de pessoa famosa. Você:</h4>
+                        <div class="options">
+                            <label><input type="radio" name="q4" value="0"> A) Abre por curiosidade (0 pts)</label>
+                            <label><input type="radio" name="q4" value="10"> B) Acessa apenas se for da sua atribuição (10 pts)</label>
+                            <label><input type="radio" name="q4" value="0"> C) Abre só para ver (0 pts)</label>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <h4>5. Envia e-mail com dados para destinatário errado. Você:</h4>
+                        <div class="options">
+                            <label><input type="radio" name="q5" value="0"> A) Torce para ninguém perceber (0 pts)</label>
+                            <label><input type="radio" name="q5" value="10"> B) Comunica responsável IMEDIATAMENTE (10 pts)</label>
+                            <label><input type="radio" name="q5" value="2"> C) Tenta recuperar o e-mail (2 pts)</label>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn" onclick="calculateScore()">Calcular Resultado</button>
+                </form>
+
+                <div id="result" style="display: none; margin-top: 2rem; padding: 2rem; border-radius: 10px;">
+                    <h3>📊 Seu Resultado:</h3>
+                    <div id="scoreDisplay"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Materiais para Impressão -->
+        <section id="materiais">
+            <h2>🖨️ Materiais Conceituais para Impressão</h2>
+            
+            <div class="printable-section">
+                <h3>📄 Checklist do Profissional Conforme</h3>
+                <p><em>Imprima e cole na sua mesa!</em></p>
+                <ul class="checklist">
+                    <li>Acesso somente ao necessário para minha função</li>
+                    <li>Senha forte, pessoal e NUNCA compartilhada</li>
+                    <li>Tela bloqueada sempre que me afastar (Win + L)</li>
+                    <li>Documentos médicos apenas por canais autorizados</li>
+                    <li>E-mails suspeitos REPORTADOS ao TI</li>
+                    <li>Incidentes comunicados IMEDIATAMENTE</li>
+                    <li>Documentos físicos descartados com fragmentação</li>
+                    <li>Dados de pacientes com discrição absoluta</li>
+                    <li>Participação ativa nos treinamentos</li>
+                </ul>
+            </div>
+
+            <div class="printable-section">
+                <h3>📋 Plano de Ação Pessoal - Compromisso Individual</h3>
+                <div style="background: white; padding: 2rem; border-radius: 5px; margin-top: 1rem;">
+                    <p><strong>Eu, ___________________________________________</strong></p>
+                    <p><strong>Função: ________________________________________</strong></p>
+                    <p><strong>Matrícula: _____________________________________</strong></p>
+                    
+                    <h4 style="margin-top: 2rem;">DECLARO que:</h4>
+                    <ul class="checklist" style="margin-top: 1rem;">
+                        <li>Li e compreendi este material de treinamento</li>
+                        <li>Estou ciente das responsabilidades com dados sensíveis</li>
+                        <li>Comprometo-me a seguir o Decálogo do Profissional de Saúde Conforme</li>
+                        <li>Comunicarei imediatamente qualquer incidente</li>
+                        <li>Participarei dos treinamentos continuados</li>
+                        <li>Agirei com ética, sigilo e profissionalismo</li>
+                    </ul>
+                    
+                    <div style="margin-top: 3rem;">
+                        <p>Assinatura: _________________________________</p>
+                        <p>Data: ___/___/2026</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="printable-section">
+                <h3>📚 Folha de Consulta Rápida: LGPD em 1 Página</h3>
+                <div style="background: white; padding: 2rem; border-radius: 5px; margin-top: 1rem;">
+                    <h4>Princípios da LGPD:</h4>
+                    <ul>
+                        <li><strong>Finalidade:</strong> Motivo legítimo e específico</li>
+                        <li><strong>Necessidade:</strong> Mínimo necessário</li>
+                        <li><strong>Segurança:</strong> Proteção máxima</li>
+                        <li><strong>Transparência:</strong> Clareza nas informações</li>
+                    </ul>
+                    
+                    <h4 style="margin-top: 1.5rem;">Prazos Legais Importantes:</h4>
+                    <ul>
+                        <li>⏱️ <strong>3 dias úteis:</strong> Notificação de incidentes à ANPD</li>
+                        <li>📋 <strong>15 dias:</strong> Resposta a solicitações de titulares</li>
+                    </ul>
+                    
+                    <h4 style="margin-top: 1.5rem;">Multas:</h4>
+                    <ul>
+                        <li>💰 Até 2% do faturamento anual</li>
+                        <li>💵 Limitadas a R$ 50 MILHÕES por infração</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="interactive-box">
+                <h3>📥 Como Acessar os Materiais para Impressão</h3>
+                <p style="font-size: 1.1rem;">
+                    Acesse o repositório da instituição &gt; Compliance & LGPD &gt; Materiais de Apoio<br><br>
+                    ✅ Cartilha de Bolso (PDF)<br>
+                    ✅ Folha de Consulta Rápida (PDF)<br>
+                    ✅ Checklist Operacional (PDF)<br>
+                    ✅ Guia de Resposta a Incidentes (PDF)<br>
+                    ✅ Glossário Compliance & LGPD (PDF)
+                </p>
+            </div>
+        </section>
+
+        <!-- Referências -->
+        <section>
+            <h2>📚 Referências Bibliográficas</h2>
+            <ul style="line-height: 2;">
+                <li><strong>LGPD</strong> - Lei nº 13.709/2018</li>
+                <li><strong>Resolução CD/ANPD nº 15/2024</strong> - Incidentes de segurança</li>
+                <li><strong>Resolução CD/ANPD nº 23/2024</strong> - Agenda regulatória</li>
+                <li><strong>Acordo ANS + ANPD</strong> - Dezembro de 2024</li>
+                <li><strong>Estatuto do Paciente</strong> - Lei nº 15.378/2026</li>
+                <li><strong>Ponemon Institute</strong> - Healthcare Data Breach Report</li>
+                <li><strong>ANAHP</strong> - Relatório de Glosas 2025</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="quote">
+                "Na saúde, um arquivo não é apenas um documento.<br>
+                É a exposição da vida e da dignidade de um paciente.<br>
+                <strong>Cuidar de dados é cuidar de pessoas.</strong>"
+            </div>
+            
+            <h3 style="margin-top: 2rem;">Sobre o Autor</h3>
+            <p><strong>Rodrigo Barros</strong></p>
+            <p>Especialista em Compliance e LGPD<br>
+            Auditor certificado pela LEC (Legal, Ethics & Compliance)</p>
+            
+            <p style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.3);">
+                <em>"Segurança, Ética e Respeito: Esse é o nosso código."</em> 🛡️
+            </p>
+            
+            <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.8;">
+                Material Técnico de Uso Interno<br>
+                Desenvolvido por Rodrigo Barros - 2026<br>
+                Programa de Integridade e Proteção de Dados na Saúde
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        function calculateScore() {
+            let score = 0;
+            const form = document.getElementById('quizForm');
+            const formData = new FormData(form);
+            
+            for (let [key, value] of formData.entries()) {
+                score += parseInt(value);
+            }
+            
+            const resultDiv = document.getElementById('result');
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            
+            let message = '';
+            let color = '';
+            
+            if (score >= 40 && score <= 50) {
+                message = '🏆 GUARDIÃO DA PROTEÇÃO DE DADOS<br><br>Excelente! Você domina Compliance e LGPD. Continue assim e seja exemplo para a equipe!';
+                color = '#d4edda';
+            } else if (score >= 28 && score < 40) {
+                message = '⚠️ EM DESENVOLVIMENTO<br><br>Bom, mas precisa reforçar alguns pontos. Revise os módulos sobre casos reais, decálogo e boas práticas.';
+                color = '#fff3cd';
+            } else if (score >= 16 && score < 28) {
+                message = '🚨 ATENÇÃO NECESSÁRIA<br><br>Risco alto de violações! Refaça TODO o treinamento urgentemente.';
+                color = '#f8d7da';
+            } else {
+                message = '💥 RISCO CRÍTICO<br><br>Pare! Você está colocando a instituição e pacientes em risco grave. Procure o responsável pela proteção de dados imediatamente.';
+                color = '#f5c6cb';
+            }
+            
+            scoreDisplay.innerHTML = `
+                <div style="background: ${color}; padding: 2rem; border-radius: 10px; text-align: center;">
+                    <h2 style="font-size: 3rem; margin-bottom: 1rem;">${score} pontos</h2>
+                    <p style="font-size: 1.2rem;">${message}</p>
+                </div>
+            `;
+            
+            resultDiv.style.display = 'block';
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
