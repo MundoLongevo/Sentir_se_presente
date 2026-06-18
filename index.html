@@ -10,13 +10,15 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Diário FQ10C" />
   
-  <!-- MANIFESTO (agora manifest.json) -->
   <link rel="manifest" href="./manifest.json" />
   
-  <!-- ÍCONES PNG -->
+  <!-- Ícones PNG (use seus arquivos) -->
   <link rel="apple-touch-icon" href="icon-192.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png" />
+  
+  <!-- Fallback SVG caso os PNGs não carreguem -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232c3e50'/%3E%3Ctext x='50' y='68' font-family='Arial, sans-serif' font-size='44' font-weight='bold' text-anchor='middle' fill='%23f1c40f'%3EFQ10C%3C/text%3E%3C/svg%3E" />
 
   <title>Diário FQ10C – Presença</title>
   <style>
@@ -94,8 +96,26 @@
       text-decoration: none;
       font-weight: 600;
     }
+    .banner .install-hint {
+      margin-top: 10px;
+      background: rgba(241,196,15,0.2);
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .banner .install-hint button {
+      background: #f1c40f;
+      color: #1a252f;
+      border: none;
+      padding: 4px 16px;
+      border-radius: 30px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 14px;
+    }
 
-    /* ===== MODAIS DE LOGIN/PIN ===== */
+    /* ===== MODAIS ===== */
     .modal-overlay {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
@@ -659,15 +679,18 @@
 <!-- ===== CONTEÚDO PRINCIPAL ===== -->
 <div class="container" id="appContent" style="display:none;">
 
-  <!-- BANNER -->
+  <!-- BANNER com aviso de instalação -->
   <div class="banner">
     <h1>🧘 <span>Diário FQ10C</span></h1>
     <div class="subtitle">12 verbos para ancorar o agora</div>
     <p>Mentoria 70+ ANABB – Sentir-Se Presente</p>
     <div class="tag">FQ10C</div>
     <div class="privacy-note">
-      🔒 <strong>Seus dados ficam apenas neste dispositivo.</strong> Não vão para a nuvem.<br>
-      Instale como app nativo: "Adicionar à Tela de Início"
+      🔒 <strong>Seus dados ficam apenas neste dispositivo.</strong> Não vão para a nuvem.
+    </div>
+    <div class="install-hint" id="installHint">
+      📲 <span id="installHintText">Instale como app nativo no seu celular.</span>
+      <button id="installBtnTop" style="display:none;">Instalar agora</button>
     </div>
     <div class="author-credit">
       Desenvolvido por <strong>Ricardo de Faria Barros</strong> – Psicólogo<br />
@@ -1222,6 +1245,109 @@ function generateAndDownloadIcons() {
 }
 
 document.getElementById('generateIconsBtn')?.addEventListener('click', generateAndDownloadIcons);
+
+// =====================================================================
+// INSTALAÇÃO PWA – Aprimorada
+// =====================================================================
+let deferredPrompt;
+const installBtn = document.getElementById('installBtn');
+const installBtnTop = document.getElementById('installBtnTop');
+const installHintText = document.getElementById('installHintText');
+
+// Verifica se já está instalado como app
+function isAppInstalled() {
+  return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+}
+
+// Atualiza o texto de instalação
+function updateInstallHint() {
+  if (isAppInstalled()) {
+    installHintText.textContent = '✅ App já instalado!';
+    if (installBtn) installBtn.style.display = 'none';
+    if (installBtnTop) installBtnTop.style.display = 'none';
+    return;
+  }
+
+  // Verifica se o navegador suporta PWA
+  const isSecure = window.location.protocol === 'https:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+  const isSupported = 'serviceWorker' in navigator && 'fetch' in window;
+
+  if (!isSecure) {
+    installHintText.textContent = '⚠️ Para instalar, acesse via HTTPS (ou localhost).';
+    if (installBtn) installBtn.style.display = 'none';
+    if (installBtnTop) installBtnTop.style.display = 'none';
+  } else if (!isSupported) {
+    installHintText.textContent = '⚠️ Seu navegador não suporta instalação de apps.';
+    if (installBtn) installBtn.style.display = 'none';
+    if (installBtnTop) installBtnTop.style.display = 'none';
+  } else {
+    // iOS: mostrar instrução manual
+    if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+      installHintText.textContent = '📱 Toque em Compartilhar → "Adicionar à Tela de Início"';
+      if (installBtn) installBtn.style.display = 'none';
+      if (installBtnTop) installBtnTop.style.display = 'none';
+    } else {
+      // Android/Chrome: mostrar botão de instalação (se houver evento)
+      if (deferredPrompt) {
+        installHintText.textContent = '📲 Toque no botão para instalar';
+        if (installBtn) installBtn.style.display = 'inline-block';
+        if (installBtnTop) installBtnTop.style.display = 'inline-block';
+      } else {
+        installHintText.textContent = '📲 Aguarde, o app está pronto para instalar.';
+        if (installBtn) installBtn.style.display = 'none';
+        if (installBtnTop) installBtnTop.style.display = 'none';
+        // Tenta forçar o evento afterinstallprompt
+        setTimeout(() => {
+          if (deferredPrompt) {
+            installHintText.textContent = '📲 Toque no botão para instalar';
+            if (installBtn) installBtn.style.display = 'inline-block';
+            if (installBtnTop) installBtnTop.style.display = 'inline-block';
+          }
+        }, 3000);
+      }
+    }
+  }
+}
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  updateInstallHint();
+});
+
+window.addEventListener('appinstalled', () => {
+  showMsg('🎉 App instalado com sucesso!', 'success');
+  updateInstallHint();
+});
+
+// Botão de instalação (Android)
+function handleInstallClick() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        showMsg('🎉 App instalado!', 'success');
+      } else {
+        showMsg('Instalação cancelada.', 'info');
+      }
+      deferredPrompt = null;
+      updateInstallHint();
+    });
+  } else {
+    // Fallback: instrução manual
+    if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+      showMsg('📱 Toque em Compartilhar → "Adicionar à Tela de Início"', 'info');
+    } else {
+      showMsg('Abra o menu do navegador e selecione "Adicionar à tela inicial"', 'info');
+    }
+  }
+}
+
+if (installBtn) installBtn.addEventListener('click', handleInstallClick);
+if (installBtnTop) installBtnTop.addEventListener('click', handleInstallClick);
+
+// Verifica a instalação periodicamente
+setInterval(updateInstallHint, 5000);
 
 // =====================================================================
 // RENDER: DIÁRIO FQ10C + CALENDÁRIO
@@ -1785,6 +1911,9 @@ document.getElementById('signupBtn')?.addEventListener('click', function() {
   setupAppEvents();
   showMsg(`Conta criada! Seu PIN é ${pin}. Anote em lugar seguro.`, 'success');
 
+  // Atualiza dica de instalação
+  setTimeout(updateInstallHint, 1000);
+
   if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.matchMedia('(display-mode: standalone)').matches) {
     setTimeout(() => showMsg('📱 Para instalar: Safari → Compartilhar → "Adicionar à Tela de Início"', 'info'), 2000);
   }
@@ -1805,6 +1934,7 @@ document.getElementById('loginBtn')?.addEventListener('click', function() {
     renderAll();
     setupAppEvents();
     showMsg('Bem-vindo de volta!', 'success');
+    setTimeout(updateInstallHint, 1000);
   } else {
     errorEl.textContent = 'PIN incorreto. Tente novamente.';
     pinInputs.forEach(inp => { inp.value = ''; });
@@ -1822,29 +1952,17 @@ setupPinNavigation('#signupPinGroup', () => document.getElementById('signupBtn')
 setupPinNavigation('#loginPinGroup', () => document.getElementById('loginBtn')?.click());
 
 // =====================================================================
-// PWA: INSTALAÇÃO E SERVICE WORKER
+// SERVICE WORKER REGISTRATION
 // =====================================================================
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  document.getElementById('installBtn').style.display = 'inline-block';
-});
-document.getElementById('installBtn')?.addEventListener('click', async () => {
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    const result = await deferredPrompt.userChoice;
-    if (result.outcome === 'accepted') showMsg('App instalado!', 'success');
-    deferredPrompt = null;
-    document.getElementById('installBtn').style.display = 'none';
-  } else {
-    showMsg('Abra no Safari/Chrome e use "Adicionar à Tela de Início"', 'info');
-  }
-});
-
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js').catch(console.warn);
+    navigator.serviceWorker.register('./sw.js')
+      .then(() => {
+        console.log('Service Worker registrado com sucesso.');
+      })
+      .catch((err) => {
+        console.warn('Service Worker não registrado:', err);
+      });
   });
 }
 
@@ -1853,6 +1971,8 @@ if ('serviceWorker' in navigator) {
 // =====================================================================
 document.addEventListener('DOMContentLoaded', function() {
   initAuth();
+  // Atualiza dica de instalação após carregar
+  setTimeout(updateInstallHint, 1500);
 });
 </script>
 </body>
