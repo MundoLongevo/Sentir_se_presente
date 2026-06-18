@@ -1,4 +1,4 @@
-const CACHE_NAME = 'longeviver-v3';
+const CACHE_NAME = 'fq10c-v1';
 const ASSETS = [
   './',
   './index.html',
